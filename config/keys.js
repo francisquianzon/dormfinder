@@ -1,0 +1,3 @@
+module.exports = {
+    mongoURI: 'mongodb+srv://user:admin@cluster0.vljh2.mongodb.net/dormfinder?retryWrites=true&w=majority'
+}
