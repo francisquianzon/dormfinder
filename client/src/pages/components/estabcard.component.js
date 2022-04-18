@@ -2,7 +2,7 @@ import React, {Component, useEffect, useState} from 'react';
 import Table from 'react-bootstrap/Table'
 import './components.css';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEstablishments, deleteEstablishment } from '../../actions/establishmentActions';
 import PropTypes from 'prop-types';
@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button'
 
 import Container from 'react-bootstrap/Container'
 
+import AddEstab from '../../pages/addEstablishment.page';
 
 // export default function Card(){
 class Card extends Component{
@@ -49,7 +50,7 @@ class Card extends Component{
                     <Container>
                     <br></br>
                     <h2>Establishments</h2>
-                        <Link to="/addEstablishment">
+                        <Link to="addestablishment">
                             <Button variant="primary">Add Establishment</Button>
                         </Link>
                         <Table striped bordered hover>
@@ -72,7 +73,9 @@ class Card extends Component{
                                     <td align="center">{estabs.description}</td>
                                     <td align="center">{estabs.price}</td>
                                     <td align="center">
-                                    <button type="button" className="btn btn-outline-secondary me-2 btn-sm">See more</button>
+                                        <Link to={`/browse/e/${estabs.name}`}>
+                                            <button type="button" className="btn btn-outline-secondary me-2 btn-sm">See more</button>
+                                        </Link>
                                     </td>
                                     <td align="center">
                                         <button type="button" className="btn btn-outline-danger me-2 btn-sm" onClick={this.onDeleteClick.bind(this,estabs._id)}>
@@ -94,6 +97,9 @@ class Card extends Component{
                         </tbody>
                         </Table>
                     </Container>
+                    {/* <Routes>
+                        <Route path='/browse/addestablishment'><AddEstab/></Route>
+                    </Routes> */}
                 </>
             )
         }

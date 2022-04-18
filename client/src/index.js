@@ -14,13 +14,14 @@ import thunk from 'redux-thunk';
 import Homepage from './pages/homepage.page';
 import Browse from './pages/browse.page';
 import AddEstab from './pages/addEstablishment.page';
+import EstavDetails from './pages/estabDetails.page';
 
 //CREATE A STORE THAT WILL HOLD THE STATE
 const initialState = {};
 const middleware = [thunk];
 const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //install 'React DevTools' in browser
 ));
 
 ReactDOM.render(
@@ -28,8 +29,11 @@ ReactDOM.render(
     <Router>
       <Routes>
         <Route path="/" exact element={<Homepage/>}/>
-        <Route path="/browse" exact element={<Browse/>}/>
-        <Route path='/addEstablishment' exact element={<AddEstab/>} />
+        <Route path="browse" exact element={<Browse/>}/>
+           {/* <Route path="addestablishment" exact element={<AddEstab/>}/> */}
+        {/* </Route> */}
+        <Route path='/browse/addestablishment' exact element={<AddEstab/>} />
+        <Route path='/browse/e/:id' exact element={<EstavDetails/>}/>
       </Routes>
     </Router>
   </Provider>,

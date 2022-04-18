@@ -8,7 +8,7 @@ export default class Navbar extends Component{
             // <div class="container">
                 <header className="d-flex flex-wrap justify-content-center py-2 border-bottom main-header">
                     <a className="navbar-brand" href="/">
-                        <img src=".././dormfinder_logo.png" alt="..." height="35"></img>
+                        <img src="../../dormfinder_logo.png" alt="..." height="35"></img>
                     </a>
                     <a href="/" className="d-flex align-items-center me-md-auto text-dark text-decoration-none">
                         {/* <span className="fs-4">DormFinder</span> */}

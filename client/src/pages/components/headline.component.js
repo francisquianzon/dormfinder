@@ -7,7 +7,6 @@ export default class Headline extends Component{
     render(){
         return(
             <div className="carousel-inner headline d-flex flex-wrap justify-content-center mb-5">
-                {/* <img className="headline-img" src=".././headline.png" alt="..."></img> */}
                 <div className="container">
                     <div className="carousel-caption text-start carousel-headline">
                         <h1>A better way to search</h1>
