@@ -6,14 +6,14 @@ import {Link} from 'react-router-dom';
 export default class Headline extends Component{
     render(){
         return(
-            <div class="carousel-inner headline d-flex flex-wrap justify-content-center mb-5">
-                {/* <img class="headline-img" src=".././headline.png" alt="..."></img> */}
-                <div class="container">
-                    <div class="carousel-caption text-start carousel-headline">
+            <div className="carousel-inner headline d-flex flex-wrap justify-content-center mb-5">
+                {/* <img className="headline-img" src=".././headline.png" alt="..."></img> */}
+                <div className="container">
+                    <div className="carousel-caption text-start carousel-headline">
                         <h1>A better way to search</h1>
                         <h1>for dorms in UPLB</h1>
                         <Link to="/browse">
-                            <p><a class="btn btn-lg btn-primary" href="#">Browse Now</a></p>
+                            <button className="btn btn-lg btn-primary" href="#">Browse Now</button>
                         </Link>
                     </div>
                 </div>

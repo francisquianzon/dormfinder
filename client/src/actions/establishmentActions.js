@@ -24,6 +24,15 @@ export const addEstablishment = estab => dispatch => {
         )
 };
 
+export const deleteEstablishment = id => dispatch => {
+    axios.delete(`/establishments/${id}`).then(res => 
+        dispatch({
+            type: DELETE_ITEM,
+            payload: id
+        })    
+    )
+};
+
 export const setItemsLoading = () => {
     return {
         type: ITEMS_LOADING

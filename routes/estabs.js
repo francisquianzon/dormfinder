@@ -36,6 +36,19 @@ router.get('/:id', (req,res) =>{
     .then(estabs => res.json(estabs))
 });
 
+//@route PUT /:id 
+//@dec find and update an establishment
+//@access public
+router.put('/:id', (req,res)=>{
+    var conditions = {_id: req.params.id};
+
+    Estab.update(conditions, req.body)
+    .then(doc =>{
+        if(!doc) { return res.status(404).end();}
+        return res.status(200).json(doc);
+    })
+    .catch(err=>next(err))
+})
 
 // @route   DELETE api/items/:id
 // @desc    delete an item
