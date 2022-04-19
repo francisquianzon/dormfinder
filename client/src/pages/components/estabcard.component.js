@@ -73,7 +73,8 @@ class Card extends Component{
                                     <td align="center">{estabs.description}</td>
                                     <td align="center">{estabs.price}</td>
                                     <td align="center">
-                                        <Link to={`/browse/e/${estabs.name}`}>
+                                        <Link to={`/browse/e/${estabs.name}`} state={{ estab_id: estabs._id}}
+                                        >
                                             <button type="button" className="btn btn-outline-secondary me-2 btn-sm">See more</button>
                                         </Link>
                                     </td>
