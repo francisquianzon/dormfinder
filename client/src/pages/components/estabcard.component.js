@@ -58,8 +58,8 @@ class Card extends Component{
                             <tr>
                             <th>Name</th>
                             <th>Location</th>
-                            <th>Description</th>
-                            <th>Price</th>
+                            {/* <th>Description</th>
+                            <th>Price</th> */}
                             <th>More</th>
                             <th>Actions</th>
                             </tr>
@@ -70,11 +70,21 @@ class Card extends Component{
                                 >
                                     <td align="left">{estabs.name}</td>
                                     <td align="center">{estabs.location}</td>
-                                    <td align="center">{estabs.description}</td>
-                                    <td align="center">{estabs.price}</td>
+                                    {/* <td align="center">{estabs.description}</td>
+                                    <td align="center">{estabs.price}</td> */}
                                     <td align="center">
-                                        <Link to={`/browse/e/${estabs.name}`} state={{ estab_id: estabs._id}}
+                                        <Link 
+                                            to={`/browse/e/${estabs.name}`} 
+                                            state={{ estab_id: estabs._id, estab_name:estabs.name, estab_deet: estabs.description, estab_price: estabs.price }}
                                         >
+                                        {/* <Link
+                                            to={{
+                                                pathname: `/browse/e/${estabs.name}`,
+                                                state: {
+                                                    fromNotifications: true
+                                                  }
+                                            }}
+                                        > */}
                                             <button type="button" className="btn btn-outline-secondary me-2 btn-sm">See more</button>
                                         </Link>
                                     </td>

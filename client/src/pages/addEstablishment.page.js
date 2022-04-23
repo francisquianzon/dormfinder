@@ -10,12 +10,18 @@ import Navbar from './components/navbar.component';
 
 class AddEstablishment extends Component{
     //initialize state attributes
-    state = {
-        name: '',
-        location: '',
-        description: '',
-        price: 0,
+    constructor(){
+        super()
+        this.state = {
+            name: '',
+            location: '',
+            description: '',
+            price: 0,
+        }
     }
+    // state = {
+        
+    // }
 
     //set values obtained from the forms to state attributes
     onChange = e =>{
