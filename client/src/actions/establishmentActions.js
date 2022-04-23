@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
+import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING, GET_ITEM } from '../actions/types';
 
 export const getEstablishments = () => dispatch => {
     dispatch(setItemsLoading());
@@ -12,6 +12,18 @@ export const getEstablishments = () => dispatch => {
             })
         )
 };
+
+export const getDetails = id => dispatch => {
+    dispatch(setItemsLoading());
+    axios
+        .get(`http://localhost:5000/establishments/${id}`)
+        .then(res => 
+            dispatch({
+                type: GET_ITEM,
+                payload: res.data
+            })
+        )
+}
 
 export const addEstablishment = estab => dispatch => {
     axios
