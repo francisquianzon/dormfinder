@@ -1,7 +1,7 @@
 .btn-primary, .btn-primary:visited {
     background-color: #DC7429 !important;
     border-color: #DC7429  !important;
-    /* border-radius:23px; */
+    border-radius:10px;
 }
 
 .btn-primary:active, .btn-primary:hover {
@@ -13,9 +13,9 @@
     box-shadow:none !important;
 }
 
-/* .btn {
-    border-radius:15px;
-} */
+.btn-login {
+    border-radius:10px;
+}
 
 .text-style-brand {
     color: #DC7429 !important;
@@ -61,3 +61,13 @@
     margin-right: .75rem;
     margin-left: .75rem;
   } */
+
+.price-text{
+    font-size:20px;
+    font-weight: normal;
+  }
+
+.location-text{
+    font-size:20px;
+    font-weight: normal;
+}

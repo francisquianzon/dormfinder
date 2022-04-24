@@ -35,7 +35,7 @@ ReactDOM.render(
            {/* <Route path="addestablishment" exact element={<AddEstab/>}/> */}
         {/* </Route> */}
         <Route path='/browse/addestablishment' exact element={<AddEstab/>} />
-        <Route path='/browse/e/:id' exact element={<EstabDetails/>}/>
+        <Route path='/browse/:id' exact element={<EstabDetails/>}/>
       </Routes>
     </Router>
   </Provider>,

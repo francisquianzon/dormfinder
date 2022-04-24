@@ -15,20 +15,6 @@ import AddEstab from '../../pages/addEstablishment.page';
 
 // export default function Card(){
 class Card extends Component{
-        // const [establishmentsList, setEstablishmentList] = useState([])
-
-        // useEffect(() =>{
-        //     axios.get('http://localhost:5000/establishments').then((allEstablishment) => {
-        //         setEstablishmentList(allEstablishment.data);
-        //     })
-        //   }, [])
-
-        // constructor() {
-        //     super();
-        //     axios.get('http://localhost:5000/establishments').then(res => {
-        //         console.log(res.data)
-        //     })
-        // }
         
         componentDidMount() {
             this.props.getEstablishments();
@@ -74,7 +60,7 @@ class Card extends Component{
                                     <td align="center">{estabs.price}</td> */}
                                     <td align="center">
                                         <Link 
-                                            to={`/browse/e/${estabs.name}`} 
+                                            to={`/browse/${estabs.name}`} 
                                             state={{ estab_id: estabs._id, estab_name:estabs.name, estab_deet: estabs.description, estab_price: estabs.price }}
                                         >
                                         {/* <Link

@@ -1,6 +1,5 @@
-import React, {Component, useEffect, useState} from 'react';
-// import axios from 'axios';
-import {BrowserRouter as Router, Route, Routes, Link, useParams, useLocation, withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEstablishments, deleteEstablishment, getDetails } from '../actions/establishmentActions';
 import PropTypes from 'prop-types';
@@ -9,6 +8,8 @@ import PropTypes from 'prop-types';
 
 import Container from 'react-bootstrap/Container'
 import Navbar from './components/navbar.component';
+import Gallery from './components/gallery.component';
+import Details from './components/details.component';
 
 function locationHook(Component) {
     return function WrappedComponent(props) {
@@ -21,6 +22,9 @@ function locationHook(Component) {
 
 class EstabDetails extends Component{
 // function EstabDetails(){
+    state = {
+      loading: true
+    }
 
     getEstablishmentDetails(id){
       this.props.getDetails(id);
@@ -28,34 +32,41 @@ class EstabDetails extends Component{
 
     componentDidMount() {
       this.getEstablishmentDetails(this.props.estab.state.estab_id)
+
+      this.fakeRequest().then(() => {
+        this.setState({ loading: false }); // showing the app
+        
+      });
     }
+
+    fakeRequest = () => {
+      return new Promise(resolve => setTimeout(() => resolve(), 200));
+    };
 
 
     render(){
+      //creats a delay for the info to load
+      if (this.state.loading) {
+        return null; //app is not ready (fake request is in process)
+      }
+
         // this.getEstablishmentDetails(this.props.estab.state.estab_id)
         const establishments  = this.props.establishment.item;
-        console.log("HERE")
-        console.log(establishments)
-
+        
         const name = establishments.name
         const id = establishments._id
+        const loc = establishments.location
         const desc = establishments.description
         const price = establishments.price
-
-        // const name = this.props.estab.state.estab_name
-        // const id = this.props.estab.state.estab_id
-        // const desc = this.props.estab.state.estab_deet
-        // const price = this.props.estab.state.price
         
+        const item = [name, id, loc, desc, price]
+
         return(
             <>
             <Navbar/>
             <Container>
-                <h1>{name}</h1> 
-                <h3>ID: {id}</h3>
-                <h3>Price: {price}</h3>
-                <h3>Description:</h3>
-                <p>{desc}</p>
+              <Gallery/>
+                <Details establishment={item}/>
             </Container>
             </>
         )
