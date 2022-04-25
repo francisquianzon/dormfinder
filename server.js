@@ -1,19 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const config = require('config');
 
 const users = require('./routes/users.js')
 const estabs = require('./routes/estabs.js')
+const auth = require('./routes/auth.js')
 const app = express();
 
 const cors = require("cors");
 app.use(cors());
 
 //BodyParser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //DB Config
-const db = require('./config/keys.js').mongoURI;
+// const db = require('./config/keys.js').mongoURI;
+const db = config.get('mongoURI');
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
@@ -27,4 +30,5 @@ mongoose.connect(db, {
 
 //Use Routes
 app.use('/users', users)
+app.use('/auth', auth)
 app.use('/establishments', estabs)

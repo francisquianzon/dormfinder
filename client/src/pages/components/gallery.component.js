@@ -32,11 +32,11 @@ class Gallery extends Component{
                             </Row>
                         </Stack>
                     </Col>
-                    <Col>
+                    {/* <Col>
                         <div>
                             <img src="https://via.placeholder.com/200x350" alt="" />
                         </div>
-                    </Col>
+                    </Col> */}
                 </Row>
             </div>
             {/* </Container> */}

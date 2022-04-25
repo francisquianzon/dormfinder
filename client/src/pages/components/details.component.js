@@ -29,7 +29,7 @@ class Details extends Component{
                         <p>{this.props.establishment[3]}</p>
                     </Col>
                     <Col xs={6} md={4}>
-                    <h3>Contact card</h3>
+                    <h3>Contact card placeholder</h3>
                     </Col>
                 </Row>
             </Container>

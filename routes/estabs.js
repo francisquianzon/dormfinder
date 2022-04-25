@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth')
 
 //estabs Model 
 const User = require('../models/Estabs.js');
@@ -16,7 +17,7 @@ router.get('/', (req,res) =>{
 // @route   POST /
 // @desc    create an establishment
 // @access  Public
-router.post('/', (req,res) =>{
+router.post('/', auth, (req,res) =>{
     const newEstab = new Estab({
         name: req.body.name,
         location: req.body.location,
@@ -53,7 +54,7 @@ router.put('/:id', (req,res)=>{
 // @route   DELETE api/items/:id
 // @desc    delete an item
 // @access  Public
-router.delete('/:id', (req,res) =>{
+router.delete('/:id', auth, (req,res) =>{
     Estab.findById(req.params.id)
     .then(estabs => estabs.remove().then(() => res.json({success: true})))
     .catch(err => res.status(404).json({success:false}))
