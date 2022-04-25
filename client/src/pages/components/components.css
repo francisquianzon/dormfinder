@@ -1,3 +1,7 @@
+/* * {
+    font-family: 'Roboto', sans-serif;
+} */
+
 .btn-primary, .btn-primary:visited {
     background-color: #DC7429 !important;
     border-color: #DC7429  !important;
@@ -17,8 +21,19 @@
     border-radius:10px;
 }
 
+.btn-seemore{
+    min-width: 100%;
+    width: 100%;
+}
+
+/* Dormfinder heading in navbar */
+.text-style{
+    font-weight: 500;
+}
+
 .text-style-brand {
     color: #DC7429 !important;
+    font-weight: bold;
 }
 
 .nav-link {
@@ -62,12 +77,18 @@
     margin-left: .75rem;
   } */
 
+/* Establishment details font styles */
+.title-text{
+    font-size:40px;
+    font-weight: bold;
+}
+
 .price-text{
-    font-size:20px;
+    font-size:18px;
     font-weight: normal;
   }
 
 .location-text{
-    font-size:20px;
+    font-size:18px;
     font-weight: normal;
 }

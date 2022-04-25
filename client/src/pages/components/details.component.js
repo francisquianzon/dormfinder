@@ -20,7 +20,7 @@ class Details extends Component{
             {/* Stack the columns on mobile by making one full-width and the other half-width */}
                 <Row>
                     <Col xs={12} md={8}>
-                        <h1>{this.props.establishment[0]}</h1>
+                        <h1 className="title-text">{this.props.establishment[0]}</h1>
                         <h1 className="location-text">Located {this.props.establishment[2]}</h1>
                         <h1 className="price-text">Rent starts at {this.props.establishment[4]}</h1>
 

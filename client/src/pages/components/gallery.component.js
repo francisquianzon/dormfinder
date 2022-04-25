@@ -16,6 +16,7 @@ class Gallery extends Component{
                     <Col>
                         <div>
                             <img src="https://via.placeholder.com/600x350" alt="" />
+                            {/* <img src="holder.js/100px180" alt="" /> */}
                         </div>
                     </Col>
                     <Col>

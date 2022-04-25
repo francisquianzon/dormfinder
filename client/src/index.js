@@ -15,6 +15,7 @@ import Homepage from './pages/homepage.page';
 import Browse from './pages/browse.page';
 import AddEstab from './pages/addEstablishment.page';
 import EstabDetails from './pages/estabDetails.page';
+import EstabTable from './pages/components/estabtables.component';
 
 
 //CREATE A STORE THAT WILL HOLD THE STATE
@@ -36,6 +37,7 @@ ReactDOM.render(
         {/* </Route> */}
         <Route path='/browse/addestablishment' exact element={<AddEstab/>} />
         <Route path='/browse/:id' exact element={<EstabDetails/>}/>
+        <Route path='/browse.admin' exact element={<EstabTable/>}/>
       </Routes>
     </Router>
   </Provider>,
