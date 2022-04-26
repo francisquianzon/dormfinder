@@ -42,8 +42,8 @@ class EstabTable extends Component{
                                 <tr>
                                 <th>Name</th>
                                 <th>Location</th>
-                                <th>Description</th>
-                                <th>Price</th>
+                                {/* <th>Description</th>
+                                <th>Price</th> */}
                                 <th>More</th>
                                 <th>Actions</th>
                                 </tr>
@@ -54,8 +54,8 @@ class EstabTable extends Component{
                                     >
                                         <td align="left">{estabs.name}</td>
                                         <td align="center">{estabs.location}</td>
-                                        <td align="center">{estabs.description}</td>
-                                        <td align="center">{estabs.price}</td>
+                                        {/* <td align="center">{estabs.description}</td> */}
+                                        {/* <td align="center">{estabs.price}</td> */}
                                         <td align="center">
                                             <Link 
                                                 to={`/browse/${estabs.name}`} 

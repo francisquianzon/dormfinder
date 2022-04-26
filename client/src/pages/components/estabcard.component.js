@@ -39,7 +39,16 @@ class EstabCard extends Component{
                             {establishments.map((estabs)=>(
                                 <Col>
                                 <Card className="rounded-top">
-                                    <Card.Img variant="top" src="https://via.placeholder.com/700x350" className="rounded-top"/>
+                                    <Card.Img variant="top" src="https://via.placeholder.com/700x350" className="rounded-top card-establishment-img"/>
+                                    {/* <Card.Img 
+                                        variant="top" 
+                                        src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                                        src="https://via.placeholder.com/700x350"
+                                        width="700" 
+                                        height="150"
+                                        // width="100%"
+                                    > */}
+                                    {/* </Card.Img> */}
                                     <Card.Body>
                                     
                                     <Card.Title>{estabs.name}</Card.Title>
@@ -57,9 +66,6 @@ class EstabCard extends Component{
                                             <Button className="btn-seemore" variant="outline-secondary" size="sm">See more</Button>
                                         </Link>
                                     </Card.Body>
-                                    <Card.Footer>
-                                        <small className="text-muted">by User</small>
-                                    </Card.Footer>
                                 </Card>
                                 </Col>
                             ))}

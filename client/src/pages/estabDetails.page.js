@@ -32,23 +32,11 @@ class EstabDetails extends Component{
 
     componentDidMount() {
       this.getEstablishmentDetails(this.props.estab.state.estab_id)
-
-      this.fakeRequest().then(() => {
-        this.setState({ loading: false }); // showing the app
-        
-      });
     }
 
-    fakeRequest = () => {
-      return new Promise(resolve => setTimeout(() => resolve(), 200));
-    };
 
 
     render(){
-      //creats a delay for the info to load
-      if (this.state.loading) {
-        return null; //app is not ready (fake request is in process)
-      }
 
         // this.getEstablishmentDetails(this.props.estab.state.estab_id)
         const establishments  = this.props.establishment.item;

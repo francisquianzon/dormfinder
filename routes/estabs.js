@@ -53,8 +53,8 @@ router.put('/:id', (req,res)=>{
 
 // @route   DELETE api/items/:id
 // @desc    delete an item
-// @access  Public
-router.delete('/:id', auth, (req,res) =>{
+// @access  Private
+router.delete('/:id', (req,res) =>{
     Estab.findById(req.params.id)
     .then(estabs => estabs.remove().then(() => res.json({success: true})))
     .catch(err => res.status(404).json({success:false}))

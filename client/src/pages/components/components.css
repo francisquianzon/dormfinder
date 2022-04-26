@@ -92,3 +92,20 @@
     font-size:18px;
     font-weight: normal;
 }
+
+.gallery-div{
+    /* width: 700; */
+    height: 250; 
+}
+
+.carousel-placeholder{
+    width: 600px;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* .card-establishment-img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+} */
