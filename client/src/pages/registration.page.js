@@ -4,6 +4,7 @@ import Navbar from './components/navbar.component';
 import RegisterCard from './components/registercard.component';
 
 export default class Registration extends Component{
+    
     render(){
         return(
             <>

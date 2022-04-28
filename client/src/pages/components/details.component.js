@@ -8,11 +8,8 @@ import {
 } from 'react-bootstrap';
 
 class Details extends Component{
-    render(){
-        console.log("HERE PROPS")
-        
+    render(){      
         const {establishment} = this.props.establishment
-        console.log(this.props.establishment[2])
 
         return(
             <>

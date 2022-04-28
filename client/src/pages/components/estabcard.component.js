@@ -1,17 +1,15 @@
-import React, {Component, useEffect, useState} from 'react';
-import Table from 'react-bootstrap/Table'
+import React, {Component} from 'react';
 import './components.css';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEstablishments, deleteEstablishment } from '../../actions/establishmentActions';
-import PropTypes from 'prop-types';
 
 import { 
     Container, 
-    Stack,
+    // Stack,
     Card,
     Button,
-    CardGroup,
+    // CardGroup,
     Row,
     Col
 } from 'react-bootstrap'
@@ -37,7 +35,7 @@ class EstabCard extends Component{
                     <br></br>
                         <Row xs={1} md={3} className="g-5">
                             {establishments.map((estabs)=>(
-                                <Col>
+                                <Col key={estabs._id}>
                                 <Card className="rounded-top">
                                     <Card.Img variant="top" src="https://via.placeholder.com/700x350" className="rounded-top card-establishment-img"/>
                                     {/* <Card.Img 
@@ -76,11 +74,6 @@ class EstabCard extends Component{
         }
 }
 
-
-Card.propTypes = {
-    getEstablishments: PropTypes.func.isRequired,
-    establishment: PropTypes.object.isRequired
-}
 
 const mapStateToProps = (state) => ({
     establishment: state.establishment

@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
 import './components.css'
 import {Link} from 'react-router-dom';
+import {
+    NavLink,
+    Fragment
+} from 'react-bootstrap';
+import { logout } from '../../actions/authActions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export default class Navbar extends Component{
+class Navbar extends Component{
+    static propTypes = {
+        logout: PropTypes.func.isRequired
+    };
+
     render(){
         return(
             // <div class="container">
@@ -23,13 +34,15 @@ export default class Navbar extends Component{
                         <button type="button" className="btn btn-login btn-outline-secondary me-2">Login</button>
                     </div>
                     <ul className="nav nav-pills">
-                        {/* <Link to="/browse"> */}
-                            <li className="nav-item"><a href="/browse" className="nav-link">Browse</a></li>
-                        {/* </Link> */}
+                        <li className="nav-item"><a href="/browse" className="nav-link">Browse</a></li>
                         <li className="nav-item"><a href="#" className="nav-link">Learn More</a></li>
+                        <NavLink onClick={this.props.logout}>Logout</NavLink>
                     </ul>
                 </header>
             // </div>
         )
     }
 }
+
+
+export default connect(null, { logout })(Navbar);

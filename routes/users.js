@@ -36,7 +36,7 @@ router.post('/', (req,res) =>{
     .then(user => {
         if(user) {
             return res.status(400).json({
-                msg:'User already exists'
+                msg:'User already exists huhu'
             })
         }
 

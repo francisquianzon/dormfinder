@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEstablishments, deleteEstablishment, getDetails } from '../actions/establishmentActions';
-import PropTypes from 'prop-types';
+import {  getDetails } from '../actions/establishmentActions';
+// import PropTypes from 'prop-types';
 // import { useSelector } from 'react-redux';
 // import Button from 'react-bootstrap/Button'
 
@@ -14,8 +14,6 @@ import Details from './components/details.component';
 function locationHook(Component) {
     return function WrappedComponent(props) {
       const estab = useLocation();
-      console.log(estab)
-    //   const estabName = useParams();
       return <Component {...props} estab={estab}/>;
     }
   }
@@ -39,13 +37,13 @@ class EstabDetails extends Component{
     render(){
 
         // this.getEstablishmentDetails(this.props.estab.state.estab_id)
-        const establishments  = this.props.establishment.item;
+        const establishmentitem  = this.props.item;
         
-        const name = establishments.name
-        const id = establishments._id
-        const loc = establishments.location
-        const desc = establishments.description
-        const price = establishments.price
+        const name = establishmentitem.name
+        const id = establishmentitem._id
+        const loc = establishmentitem.location
+        const desc = establishmentitem.description
+        const price = establishmentitem.price
         
         const item = [name, id, loc, desc, price]
 
@@ -61,13 +59,8 @@ class EstabDetails extends Component{
     }
 }
 
-EstabDetails.propTypes = {
-  getEstablishmentDetails: PropTypes.func.isRequired,
-  establishment: PropTypes.object.isRequired
-}
-
 const mapStateToProps = (state) => ({
-  establishment: state.establishment
+  item: state.establishment.item
 });
 
 // export default locationHook(EstabDetails);

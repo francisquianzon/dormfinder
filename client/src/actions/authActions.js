@@ -34,6 +34,40 @@ export const loadUser = () => (dispatch, getState) => {
     });
 }
 
+//Register User
+export const register = ({ name, username, email, password }) => dispatch => {
+    //Headers
+    const config = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }   
+    }
+
+    //Request Body 
+    const body = JSON.stringify({ name, username, email, password });
+
+    axios.post('/users', body, config)
+    .then(res => dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+        })
+    )
+    .catch(err=>{
+        dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
+        dispatch({
+            type: REGISTER_FAIL
+        })
+    })
+}
+
+//Logout User
+export const logout = () => {
+    console.log("LOGGING OUT...")
+    return {
+        type: LOGOUT_SUCCESS
+    }
+}
+
 export const tokenConfig = getState => {
     //Get token from local storage
     const token = getState().authentication.token;
