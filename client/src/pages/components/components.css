@@ -46,11 +46,11 @@
 }
 
 .headline {
-    background-image: url(./headline.png);
+    background-image: url(./resources/headline.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     width:100vw;
-    height:450px;
+    height:600px;
     /* background:#ccc; */
     margin:0 auto;
 }

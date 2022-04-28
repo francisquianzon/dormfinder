@@ -61,6 +61,8 @@ class LoginCard extends Component{
         
         //attempt to login
         this.props.login(user);
+
+        
     }
     
     render(){

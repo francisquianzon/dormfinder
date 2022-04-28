@@ -4,10 +4,11 @@ import App from './App';
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
-import './App.css';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+// import './App.css';
+// import 'bootstrap';
+// import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/js/bootstrap.js';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 //IMPORT REDUX FOR STATE MANAGEMENT
 import rootReducer from './reducers';
