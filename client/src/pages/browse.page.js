@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 
 import Navbar from './components/navbar.component';
-import Card from './components/estabcard.component';
+import Cards from './components/estabcard.component';
 
 export default class Test extends Component{
     render(){
@@ -15,8 +15,8 @@ export default class Test extends Component{
                 <Navbar/>
                 <Container>
                     <br></br>
-                    <h2>Establishments</h2>
-                    <Card/>
+                    <h2>Dorms</h2>
+                    <Cards/>
                 </Container>
             </>
         )

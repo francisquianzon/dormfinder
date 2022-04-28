@@ -28,10 +28,12 @@ class Navbar extends Component{
                     </a>
 
                     <div className="text-end">
-                        <Link to="/register">
+                        <Link to="/register" state={{ type: true}}>
                             <button type="button" className="btn btn-primary me-2">Sign-up</button>
                         </Link>
-                        <button type="button" className="btn btn-login btn-outline-secondary me-2">Login</button>
+                        <Link to="/login" state={{ type: false}}>
+                            <button type="button" className="btn btn-login btn-outline-secondary me-2">Login</button>
+                        </Link>
                     </div>
                     <ul className="nav nav-pills">
                         <li className="nav-item"><a href="/browse" className="nav-link">Browse</a></li>

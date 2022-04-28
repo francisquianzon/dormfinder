@@ -10,16 +10,14 @@ import {
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { register } from '../../actions/authActions';
+import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 
 
-class RegisterCard extends Component{
+class LoginCard extends Component{
     constructor(){
         super()
         this.state = {
-            name: '',
-            username: '',
             email: '',
             password: '',
             msg: null
@@ -29,7 +27,8 @@ class RegisterCard extends Component{
     static propTypes = {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
-        register: PropTypes.func.isRequired,
+        login: PropTypes.func.isRequired,
+        clearErrors: PropTypes.func.isRequired
     }
 
     //check for errors using previous props
@@ -37,7 +36,7 @@ class RegisterCard extends Component{
         const { error } = this.props;
         if(error !== prevProps.error){
             //Check for register error
-            if(error.id == 'REGISTER_FAIL'){
+            if(error.id == 'LOGIN_FAIL'){
                 this.setState({ msg: error.msg.msg });
             }else{
                 this.setState({ msg: null })
@@ -53,22 +52,18 @@ class RegisterCard extends Component{
     onSubmit = e => {
         e.preventDefault();
 
-        const { name, username, email, password } = this.state;
+        const { email, password } = this.state;
 
-        //Create a user object
-        const newUser = {
-            name,
-            username,
+        const user = {
             email,
             password
         }
-
-        this.props.register(newUser);
-        // window.location.reload(false);
+        
+        //attempt to login
+        this.props.login(user);
     }
     
     render(){
-        console.log(this.props.isAuthenticated)
         return(
             <>
             <br></br>
@@ -79,19 +74,9 @@ class RegisterCard extends Component{
                     <Card >
                     <Card.Header></Card.Header>
                     <Card.Body>
-                        <Card.Title><h3>Sign up</h3></Card.Title>
+                        <Card.Title><h3>Login</h3></Card.Title>
                         <br></br>
                         <Form onSubmit={this.onSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control name="name" type="Text" placeholder="Enter name" onChange={this.onChange} />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control name="username" type="Text" placeholder="Enter your username" onChange={this.onChange}/>
-                            </Form.Group>
-
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control name="email" type="email" placeholder="Enter your email" onChange={this.onChange}/>
@@ -103,7 +88,7 @@ class RegisterCard extends Component{
                             </Form.Group>
 
                             <Button variant="primary" type="submit">
-                                Submit
+                                Login
                             </Button>
                         </Form>
                     </Card.Body>
@@ -123,4 +108,4 @@ const mapStateToProps = state => ({
     error: state.error
 });
 
-export default connect(mapStateToProps,{ register, clearErrors })(RegisterCard);
+export default connect(mapStateToProps,{ login, clearErrors })(LoginCard);

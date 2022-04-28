@@ -46,6 +46,7 @@ ReactDOM.render(
         <Route path='/browse/:id' exact element={<EstabDetails/>}/>
         <Route path='/browse.admin' exact element={<EstabTable/>}/>
         <Route path='/register' exact element={<Register/>}/>
+        <Route path='/login' exact element={<Register/>}/>
       </Routes>
     </Router>
   </Provider>,

@@ -33,7 +33,6 @@ class EstabDetails extends Component{
     }
 
 
-
     render(){
 
         // this.getEstablishmentDetails(this.props.estab.state.estab_id)

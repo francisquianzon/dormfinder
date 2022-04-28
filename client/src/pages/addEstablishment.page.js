@@ -19,9 +19,6 @@ class AddEstablishment extends Component{
             price: 0,
         }
     }
-    // state = {
-        
-    // }
 
     //set values obtained from the forms to state attributes
     onChange = e =>{
@@ -47,7 +44,7 @@ class AddEstablishment extends Component{
         // add item via addEstablishment action
         this.props.addEstablishment(newItem);
         //reloads the window
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     render(){

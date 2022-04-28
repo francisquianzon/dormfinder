@@ -46,16 +46,16 @@ router.post('/', (req,res) =>{
         });
 
         //Validate password
-        bcrypt.compare(password, newUser.password)
+        bcrypt.compare(password, user.password)
         .then(isMatch => {
-            if(isMatch) return res.status(400).json({ msg:"Invalid Credentials"});
+            if(!isMatch) return res.status(400).json({ msg:"Invalid Credentials"});
 
             jwt.sign(
                 { id: user.id },
                 config.get('jwtSecret'),
                 { expiresIn: 36000 },
                 (err, token) => {
-                    // if(err) throw err;
+                    if(err) throw err;
 
                     res.json({
                         token,

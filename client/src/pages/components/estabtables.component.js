@@ -12,6 +12,8 @@ import {
     Stack 
 } from 'react-bootstrap'
 
+import Navbar from './navbar.component';
+
 
 // export default function Card(){
 class EstabTable extends Component{
@@ -28,7 +30,8 @@ class EstabTable extends Component{
         render(){
             const { establishments } = this.props.establishment;
             return(
-                <>
+                <> 
+                    <Navbar/>
                     <Container>
                     <br></br>
                     <h2>Establishments</h2>                        

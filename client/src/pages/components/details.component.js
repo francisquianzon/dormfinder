@@ -4,7 +4,7 @@ import {
     Container,
     Row,
     Col,
-    Stack
+    // Stack
 } from 'react-bootstrap';
 
 class Details extends Component{
