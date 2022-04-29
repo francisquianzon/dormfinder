@@ -22,20 +22,86 @@ import {
     MDBDropdownToggle,
     MDBDropdownItem,
     MDBDropdownLink,
-    MDBNavbarBrand
+    MDBNavbarBrand,
+    MDBBtn 
 } from 'mdb-react-ui-kit';
 
 import { logout } from '../../actions/authActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+function LoggedIn(props){
+  console.log(props.state.user)
+  return(
+    <>
+    <MDBNavbarItem>
+      <MDBDropdown>
+      <MDBDropdownToggle tag='a' className='nav-link'>
+        Signed in as: {props.state.user.name}
+      </MDBDropdownToggle>
+      <MDBDropdownMenu>
+        <MDBDropdownItem>
+          <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
+        </MDBDropdownItem>
+      </MDBDropdownMenu>
+    </MDBDropdown>
+    </MDBNavbarItem>
+    <MDBNavbarItem>
+      <Link to="/browse">
+          <MDBNavbarLink active aria-current='page' href='#'>
+          Browse
+          </MDBNavbarLink>
+      </Link>
+    </MDBNavbarItem>
+    <MDBNavbarItem>
+      <MDBNavbarLink >Learn more</MDBNavbarLink>
+    </MDBNavbarItem>
+    </>
+  )
+}
+
+function NotLogged(){
+  return(
+    <>
+      <MDBNavbarItem>
+        <Link to="/register" state={{ type: true}}>
+          <MDBBtn rounded className='me-2' color='primary'>Sign-up</MDBBtn>
+        </Link>
+      </MDBNavbarItem>
+      <MDBNavbarItem>
+        <Link to="/login" state={{ type: false}}>
+            <MDBBtn rounded className='me-2' color='light'>Login</MDBBtn>
+        </Link> 
+      </MDBNavbarItem>
+      <MDBNavbarItem>
+        <Link to="/browse">
+            <MDBNavbarLink active aria-current='page' href='#'>
+            Browse
+            </MDBNavbarLink>
+        </Link>
+      </MDBNavbarItem>
+      <MDBNavbarItem>
+        <MDBNavbarLink href='#'>Learn more</MDBNavbarLink>
+      </MDBNavbarItem>
+    </>
+  )
+}
+
 function Navbar1(props) {
     const [showNavRight, setShowNavRight] = useState(false);
-    
+    // console.log("Checking logged in status...");
+    // console.log(props.state.auth);
+    let showStatus;
+    if(props.state.auth){
+      showStatus = <LoggedIn state={{user : props.state.user, logout : props.state.logout}}/>
+    }else{
+      showStatus = <NotLogged/>
+    }
+
     return (
       <MDBNavbar expand='lg' light bgColor='light'>
         <MDBContainer>
-            <MDBNavbarBrand href='#'>
+            <MDBNavbarBrand href='/'>
                 <img src="../../dormfinder_logo3.png" alt="..." height="40"></img>
             </MDBNavbarBrand>
           <MDBNavbarToggler
@@ -48,21 +114,15 @@ function Navbar1(props) {
           >
             <MDBIcon icon='bars' fas />
           </MDBNavbarToggler>
-  
-          <MDBCollapse navbar show={showNavRight}>
+          <MDBNavbarNav right fullWidth={false} className='mb-2 mb-lg-0'>
+              
+          </MDBNavbarNav>
+
+            <MDBCollapse navbar show={showNavRight}>
             <MDBNavbarNav right fullWidth={false} className='mb-2 mb-lg-0'>
-              <MDBNavbarItem>
-                <Link to="/browse">
-                    <MDBNavbarLink active aria-current='page' href='#'>
-                    Browse
-                    </MDBNavbarLink>
-                </Link>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink href='#'>Learn more</MDBNavbarLink>
-              </MDBNavbarItem>
+              {showStatus}
             </MDBNavbarNav>
-          </MDBCollapse>
+            </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
     );
@@ -80,7 +140,6 @@ class Navbar extends Component{
 
     static propTypes = {
         logout: PropTypes.func.isRequired,
-        isAuthenticated: PropTypes.bool
     };
 
     showNavbarText(){
@@ -88,11 +147,13 @@ class Navbar extends Component{
     }
 
     render(){
-        console.log(this.state.showNavRight);
-
+        console.log("Logged in?");
+        const auth = this.props.isAuthenticated
+        const user = this.props.user
+        
         return(
             <>
-                <Navbar1 test={"this is a test"}/>
+                <Navbar1 state={{auth: auth, user:user, logout: this.props.logout}}/>
             </>
         )
         //     </> 
@@ -127,7 +188,8 @@ class Navbar extends Component{
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authentication.isAuthenticated
+    isAuthenticated: state.authentication.isAuthenticated,
+    user: state.authentication.user
 });
 
 

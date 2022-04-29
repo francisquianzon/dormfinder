@@ -8,11 +8,18 @@ import {
     Row,
     Col
 } from 'react-bootstrap';
+import { useNavigate, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 
+function LoggedInNavigateHook(Component){
+    return function WrappedComponent(props) {
+        const navigate = useNavigate()
+        return <Component {...props} navigate={navigate}/>;
+    }
+}
 
 class LoginCard extends Component{
     constructor(){
@@ -61,8 +68,13 @@ class LoginCard extends Component{
         
         //attempt to login
         this.props.login(user);
+        console.log("logging in yay...")
+        console.log(this.state.msg)
 
-        
+        if(this.state.msg == null){
+            console.log("logged in yay!!...")
+            this.props.navigate('/')
+        }
     }
     
     render(){
@@ -110,4 +122,4 @@ const mapStateToProps = state => ({
     error: state.error
 });
 
-export default connect(mapStateToProps,{ login, clearErrors })(LoginCard);
+export default connect(mapStateToProps,{ login, clearErrors })(LoggedInNavigateHook(LoginCard));
