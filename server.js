@@ -28,12 +28,6 @@ mongoose.connect(db, {
     console.log(`MongoDB Connected...`)
 )).catch((err) => console.log(err.message));
 
-
-//Use Routes
-app.use('/users', users)
-app.use('/auth', auth)
-app.use('/establishments', estabs)
-
 //Serve static assets in production
 if(process.env.NODE_ENV === 'production'){
     //set a static folder
@@ -42,3 +36,8 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile(path.resolve(_dirname, 'client', 'build', 'index'));
     });
 }
+
+//Use Routes
+app.use('/users', users)
+app.use('/auth', auth)
+app.use('/establishments', estabs)
