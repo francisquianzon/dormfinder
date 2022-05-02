@@ -13,6 +13,12 @@ import PropTypes from 'prop-types';
 import { register } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 
+// function LoggedInNavigateHook(Component){
+//     return function WrappedComponent(props) {
+//         const navigate = useNavigate()
+//         return <Component {...props} navigate={navigate}/>;
+//     }
+// }
 
 class RegisterCard extends Component{
     constructor(){
@@ -64,11 +70,10 @@ class RegisterCard extends Component{
         }
 
         this.props.register(newUser);
-        // window.location.reload(false);
+        window.location.reload(false);
     }
     
     render(){
-        console.log(this.props.isAuthenticated)
         return(
             <>
             <br></br>

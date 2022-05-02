@@ -46,7 +46,8 @@ class LoginCard extends Component{
             if(error.id == 'LOGIN_FAIL'){
                 this.setState({ msg: error.msg.msg });
             }else{
-                this.setState({ msg: null })
+                this.setState({ msg: null });
+                this.props.navigate('/');
             }
         }
     }
@@ -73,7 +74,6 @@ class LoginCard extends Component{
 
         if(this.state.msg == null){
             console.log("logged in yay!!...")
-            this.props.navigate('/')
         }
     }
     

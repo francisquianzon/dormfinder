@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import Navbar from './components/navbar.component';
 import Headline from './components/headline.component';
 import Marketing from './components/marketing.component';
+import Footer from './components/footer.component';
 
 export default class Homepage extends Component{
     render(){
@@ -12,7 +13,8 @@ export default class Homepage extends Component{
             <>
             <Navbar/>
             <Headline/>
-            <Marketing/>            
+            <Marketing/>
+            <Footer/>    
             </>
         )
     }
