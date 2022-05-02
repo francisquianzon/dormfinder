@@ -20,7 +20,7 @@ export const getEstablishments = () => dispatch => {
 export const getDetails = id => dispatch => {
     dispatch(setItemsLoading());
     axios
-        .get(`http://localhost:5000/establishments/${id}`)
+        .get(`/establishments/${id}`)
         .then(res => 
             dispatch({
                 type: GET_ITEM,
