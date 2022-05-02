@@ -61,7 +61,7 @@ class EstabCard extends Component{
                                             state={{ estab_id: estabs._id, estab_name:estabs.name, estab_deet: estabs.description, estab_price: estabs.price }}
                                         >
 
-                                            <Button className="btn-seemore" variant="outline-secondary" size="sm">See more</Button>
+                                            <Button className="btn-wide" variant="outline-secondary" size="sm">See more</Button>
                                         </Link>
                                     </Card.Body>
                                 </Card>

@@ -21,7 +21,7 @@
     border-radius:10px;
 }
 
-.btn-seemore{
+.btn-wide{
     min-width: 100%;
     width: 100%;
 }
@@ -109,3 +109,11 @@
     height: 100%;
     object-fit: fill;
 } */
+
+/* .row-bottom-margin { 
+    margin-bottom:0px; 
+} */
+
+.login-title-text{
+    font-weight: normal;
+}

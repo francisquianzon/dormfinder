@@ -35,18 +35,6 @@ function LoggedIn(props){
   return(
     <>
     <MDBNavbarItem>
-      <MDBDropdown>
-      <MDBDropdownToggle tag='a' className='nav-link'>
-        Signed in as: {props.state.user.name}
-      </MDBDropdownToggle>
-      <MDBDropdownMenu>
-        <MDBDropdownItem>
-          <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
-        </MDBDropdownItem>
-      </MDBDropdownMenu>
-    </MDBDropdown>
-    </MDBNavbarItem>
-    <MDBNavbarItem>
       <Link to="/browse">
           <MDBNavbarLink active aria-current='page' href='#'>
           Browse
@@ -55,6 +43,18 @@ function LoggedIn(props){
     </MDBNavbarItem>
     <MDBNavbarItem>
       <MDBNavbarLink >Learn more</MDBNavbarLink>
+    </MDBNavbarItem>
+    <MDBNavbarItem>
+      <MDBDropdown>
+      <MDBDropdownToggle tag='a' className='nav-link'>
+        {props.state.user.name}
+      </MDBDropdownToggle>
+      <MDBDropdownMenu>
+        <MDBDropdownItem>
+          <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
+        </MDBDropdownItem>
+      </MDBDropdownMenu>
+      </MDBDropdown>
     </MDBNavbarItem>
     </>
   )
@@ -147,7 +147,7 @@ class Navbar extends Component{
     }
 
     render(){
-        console.log("Logged in?");
+        // console.log("Logged in?");
         const auth = this.props.isAuthenticated
         const user = this.props.user
         

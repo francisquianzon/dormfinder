@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './components.css';
 import {
     Container,
     Card,
@@ -8,7 +9,17 @@ import {
     Row,
     Col
 } from 'react-bootstrap';
-import { useNavigate, Route } from "react-router-dom";
+import { MDBCard, 
+        MDBCardBody, 
+        MDBCardTitle, 
+        MDBCardText, 
+        MDBBtn,
+        MDBRow, 
+        MDBCol,
+        MDBContainer,
+} from 'mdb-react-ui-kit';
+
+import { useNavigate, Route, Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/authActions';
@@ -47,7 +58,6 @@ class LoginCard extends Component{
                 this.setState({ msg: error.msg.msg });
             }else{
                 this.setState({ msg: null });
-                this.props.navigate('/');
             }
         }
     }
@@ -59,6 +69,8 @@ class LoginCard extends Component{
 
     onSubmit = e => {
         e.preventDefault();
+        //clear errors
+        this.props.clearErrors();
 
         const { email, password } = this.state;
 
@@ -69,47 +81,61 @@ class LoginCard extends Component{
         
         //attempt to login
         this.props.login(user);
-        console.log("logging in yay...")
-        console.log(this.state.msg)
 
-        if(this.state.msg == null){
-            console.log("logged in yay!!...")
-        }
+        //if there are no errors, redirect to homepage
+        setTimeout(() =>{
+            if(this.state.msg == null && this.props.isAuthenticated){
+                this.props.navigate('/');
+            }
+        }, 500);
+
+        
     }
     
     render(){
         return(
             <>
             <br></br>
-            <Row>
-                <Col></Col>
-                <Col>
-                    { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
-                    <Card >
-                    <Card.Header></Card.Header>
-                    <Card.Body>
-                        <Card.Title><h3>Login</h3></Card.Title>
-                        <br></br>
-                        <Form onSubmit={this.onSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control name="email" type="email" placeholder="Enter your email" onChange={this.onChange}/>
-                            </Form.Group>
+            <br></br>
+            <MDBContainer>
+                <MDBRow className="row-bottom-margin">
+                    {/* <MDBCol></MDBCol> */}
+                    <MDBCol className="d-flex justify-content-center"><h4 className="login-title-text">Login to DormFinder</h4></MDBCol>
+                    {/* <MDBCol></MDBCol> */}
+                </MDBRow>
+                <MDBRow>
+                    {/* <MDBCol></MDBCol> */}
+                    <MDBCol className="d-flex justify-content-center">
+                        <MDBCard style={{ width: '25rem' }}>
+                            <MDBCardBody>
+                                {/* <MDBCardTitle>Login</MDBCardTitle> */}
+                                <br></br>
+                                { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
+                                <Form onSubmit={this.onSubmit}>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Label size="sm">Email</Form.Label>
+                                        <Form.Control name="email" type="email" onChange={this.onChange}/>
+                                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control name="password" type="password" placeholder="Enter your password" onChange={this.onChange}/>
-                            </Form.Group>
-
-                            <Button variant="primary" type="submit">
-                                Login
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card> 
-                </Col>
-                <Col></Col>
-            </Row>
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label size="sm">Password</Form.Label>
+                                        <Form.Control name="password" type="password" onChange={this.onChange}/>
+                                    </Form.Group>
+                                    <br></br>
+                                    <MDBBtn className="btn-wide" variant="primary" type="submit">Login</MDBBtn>
+                                    <p className="mt-2 text-center">
+                                        Not a user?
+                                        <Link to="/register" state={{ type: true}}>
+                                            <a href=''> Register</a>
+                                        </Link> 
+                                        </p>
+                                </Form>
+                            </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                    {/* <MDBCol></MDBCol> */}
+                </MDBRow>
+            </MDBContainer>
             </>
         )
     }
