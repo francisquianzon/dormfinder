@@ -26,6 +26,7 @@
     width: 100%;
 }
 
+
 /* Dormfinder heading in navbar */
 .text-style{
     font-weight: 500;
@@ -104,11 +105,11 @@
     object-fit: cover;
 }
 
-/* .card-establishment-img{
+.card-establishment-img{
     width: 100%;
-    height: 100%;
-    object-fit: fill;
-} */
+    height: 200px;
+    object-fit: cover;
+}
 
 /* .row-bottom-margin { 
     margin-bottom:0px; 
@@ -119,5 +120,13 @@
 }
 
 .marketing-text{
+    font-size:15px;
+}
+
+.dormcard{
+    min-width: 30rem;
+}
+
+.card-text{
     font-size:15px;
 }
