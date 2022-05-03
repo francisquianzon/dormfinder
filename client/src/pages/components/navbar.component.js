@@ -102,7 +102,9 @@ function Navbar1(props) {
       <MDBNavbar expand='lg' light bgColor='light'>
         <MDBContainer>
             <MDBNavbarBrand href='/'>
-                <img src="../../dormfinder_logo3.png" alt="..." height="40"></img>
+                {/* <svg height="40"> */}
+                  <img src="../../dormfinder_logo.svg" alt="..." height="45"></img>
+                {/* </svg> */}
             </MDBNavbarBrand>
           <MDBNavbarToggler
             type='button'

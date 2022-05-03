@@ -18,7 +18,7 @@ app.use(express.json());
 //DB Config
 // const db = require('./config/keys.js').mongoURI;
 const db = config.get('mongoURI');
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 //Connect to MongoDB Database using mongoose

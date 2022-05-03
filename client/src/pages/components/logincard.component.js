@@ -100,7 +100,10 @@ class LoginCard extends Component{
             <MDBContainer>
                 <MDBRow className="row-bottom-margin">
                     {/* <MDBCol></MDBCol> */}
-                    <MDBCol className="d-flex justify-content-center"><h4 className="login-title-text">Login to DormFinder</h4></MDBCol>
+                    <MDBCol className="d-flex justify-content-center">
+                        <h3 className="login-title-text">Login to </h3>
+                        <img className="mt-1 mx-2" src="../../dormfinder_logo_text.svg" alt="..." height="22"></img>
+                        </MDBCol>
                     {/* <MDBCol></MDBCol> */}
                 </MDBRow>
                 <MDBRow>

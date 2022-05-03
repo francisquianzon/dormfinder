@@ -106,15 +106,18 @@ class RegisterCard extends Component{
         return(
             <>
             <br></br>
-            <br></br>
             <MDBContainer>
-                <MDBRow className="row-bottom-margin">
-                    <MDBCol className="d-flex justify-content-center"><h4 className="login-title-text">Sign Up</h4></MDBCol>
-                </MDBRow>
                 <MDBRow>
                     <MDBCol className="d-flex justify-content-center">
-                        <MDBCard style={{ width: '35rem' }}>
+                        <MDBCard style={{ width: '33rem' }}>
                             <MDBCardBody>
+                                <br></br>
+                                <MDBRow className="row-bottom-margin">
+                                    <MDBCol className="d-flex">
+                                        <h3>Sign Up. </h3>
+                                        <p className="text-muted mt-2 mx-2"> Its quick and easy.</p>
+                                        </MDBCol>
+                                </MDBRow>
                                 <br></br>
                                 { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
                                 <Form onSubmit={this.onSubmit}>
@@ -126,6 +129,9 @@ class RegisterCard extends Component{
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label size="sm">Username</Form.Label>
                                         <Form.Control name="username" type="Text"  onChange={this.onChange}/>
+                                        <Form.Text className="text-muted">
+                                        This will serve as your display name in postings and reviews.
+                                        </Form.Text>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -145,16 +151,16 @@ class RegisterCard extends Component{
                                         <Form.Label size="sm">Confirm Password</Form.Label>
                                         <Form.Control name="confirm_password" type="password" onChange={this.onChange}/>
                                         <Form.Text className="text-muted">
-                                        Confirm your password.
+                                        Please confirm your password.
                                         </Form.Text>
                                     </Form.Group>
 
                                     <br></br>
                                     <MDBBtn className="btn-wide" variant="primary" type="submit">Sign Up</MDBBtn>
                                     <p className="mt-2 text-center">
-                                        Already registered 
+                                        Already registered? 
                                         <Link to="/login" state={{ type: false}}>
-                                            <a href=''> sign in?</a>
+                                            <a href=''> Sign in</a>
                                         </Link> 
                                         </p>
                                     <br></br>

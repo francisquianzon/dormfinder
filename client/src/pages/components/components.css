@@ -50,7 +50,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     width:100vw;
-    height:600px;
+    height:580px;
     /* background:#ccc; */
     margin:0 auto;
 }
@@ -116,4 +116,8 @@
 
 .login-title-text{
     font-weight: normal;
+}
+
+.marketing-text{
+    font-size:15px;
 }

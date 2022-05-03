@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import './components.css';
 import {Link} from 'react-router-dom';
+import {
+    MDBBtn
+} from 'mdb-react-ui-kit';
 
 
 export default class Headline extends Component{
@@ -12,7 +15,7 @@ export default class Headline extends Component{
                         <h1>A better way to search</h1>
                         <h1>for dorms in UPLB</h1>
                         <Link to="/browse">
-                            <button className="btn btn-lg btn-primary" href="#">Browse Now</button>
+                            <MDBBtn rounded className="btn btn-lg btn-primary" href="#">Browse Now</MDBBtn>
                         </Link>
                     </div>
                 </div>
