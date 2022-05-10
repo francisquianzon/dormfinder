@@ -5,7 +5,7 @@ export default class Footer extends Component{
   render(){
 
     return (
-        <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
+        <MDBFooter bgColor='light' className='text-center text-lg-start text-muted page-footer'>
         <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
             <div className='me-5 d-none d-lg-block'>
             <span>Developed by Francis Quianzon</span>

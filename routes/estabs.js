@@ -22,7 +22,11 @@ router.post('/', auth, (req,res) =>{
         name: req.body.name,
         location: req.body.location,
         description: req.body.description,
-        price: req.body.price
+        price_min: req.body.price_min,
+        price_max: req.body.price_max,
+        mobile_info: req.body.mobile_info,
+        email_info: req.body.email_info,
+        original_poster: req.body.original_poster
     });
 
     newEstab.save().then(estab => res.json(estab));

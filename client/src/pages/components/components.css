@@ -79,29 +79,33 @@
   } */
 
 /* Establishment details font styles */
-.title-text{
+.detail-title-text{
     font-size:40px;
     font-weight: bold;
 }
 
-.price-text{
-    font-size:18px;
-    font-weight: normal;
-  }
-
-.location-text{
+.detail-sub-text{
     font-size:18px;
     font-weight: normal;
 }
 
 .gallery-div{
-    /* width: 700; */
+    min-width: 400px;
     height: 250; 
+    object-fit: cover;
+    border-radius: 25px;
 }
 
-.carousel-placeholder{
-    width: 600px;
-    height: 300px;
+.gallery-img1{
+    width: 700px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 25px 0 0px 25px;
+}
+
+.gallery-img2{
+    width: 300px;
+    max-height: 163px;
     object-fit: cover;
 }
 
@@ -124,9 +128,34 @@
 }
 
 .dormcard{
-    min-width: 30rem;
+    min-width: 15rem;
 }
 
-.card-text{
+.dorm-card-text{
+    white-space: nowrap; 
     font-size:15px;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.page-footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: "100%";
+}
+
+.display-linebreak {
+    white-space: pre-line;
+  }
+
+.nav-links {
+    height: 100%;
+}
+
+.nav-links:hover {
+    background-color:rgb(238, 238, 238); /*will change background-color of element on hover */
+    color: white; /*will change color of text within the element on hover */
+    border-radius: 5px;
 }

@@ -31,9 +31,6 @@ export const getDetails = id => dispatch => {
 }
 
 export const addEstablishment = estab => (dispatch, getState) => {
-    console.log("ADDING ITEM...");
-    console.log(tokenConfig(getState));
-    console.log(estab);
     
     axios
         .post('/establishments', estab, tokenConfig(getState))

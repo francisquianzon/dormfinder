@@ -11,10 +11,10 @@ const User = require('../models/Users.js');
 // @desc    Get all users
 // @access  Public
 router.get('/', (req,res) =>{
-    // User.find()
-    // .sort({date: -1})
-    // .then(users => res.json(users))
-    res.send('register')
+    User.find()
+    .sort({date: -1})
+    .then(users => res.json(users))
+    // res.send('register')
 });
 
 // @route   POST api/items

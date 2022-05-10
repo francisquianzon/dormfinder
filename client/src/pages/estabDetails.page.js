@@ -10,6 +10,7 @@ import Container from 'react-bootstrap/Container'
 import Navbar from './components/navbar.component';
 import Gallery from './components/gallery.component';
 import Details from './components/details.component';
+import Footer from './components/footer.component';
 
 function locationHook(Component) {
     return function WrappedComponent(props) {
@@ -34,24 +35,28 @@ class EstabDetails extends Component{
 
 
     render(){
-
         // this.getEstablishmentDetails(this.props.estab.state.estab_id)
         const establishmentitem  = this.props.item;
-        
-        const name = establishmentitem.name
-        const id = establishmentitem._id
-        const loc = establishmentitem.location
-        const desc = establishmentitem.description
-        const price = establishmentitem.price
-        
-        const item = [name, id, loc, desc, price]
+         
+        const item = [
+          establishmentitem.name,
+          establishmentitem._id,
+          establishmentitem.location,
+          establishmentitem.description,
+          establishmentitem.price_min,
+          establishmentitem.mobile_info,
+          establishmentitem.email_info,
+          establishmentitem.original_poster
+        ]
 
         return(
             <>
             <Navbar/>
-            <Container>
+            <Container
+            >
               <Gallery/>
                 <Details establishment={item}/>
+                <br></br>
             </Container>
             </>
         )

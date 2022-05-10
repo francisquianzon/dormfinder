@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import {
-    Container,
-    Card,
     Form,
-    Button,
+
     Alert,
-    Row,
-    Col,
-    Feedback
 } from 'react-bootstrap';
 
 import { MDBCard, 
@@ -99,7 +94,7 @@ class RegisterCard extends Component{
             if(this.state.msg == null && this.props.isAuthenticated){
                 this.props.navigate('/');
             }
-        }, 500);
+        }, 1000);
     }
     
     render(){

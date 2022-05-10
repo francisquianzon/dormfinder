@@ -87,7 +87,7 @@ class LoginCard extends Component{
             if(this.state.msg == null && this.props.isAuthenticated){
                 this.props.navigate('/');
             }
-        }, 500);
+        }, 1000);
 
         
     }

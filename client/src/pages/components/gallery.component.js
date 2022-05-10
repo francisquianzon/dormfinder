@@ -7,54 +7,46 @@ import {
     Carousel
 } from 'react-bootstrap';
 
+import {
+    MDBRow,
+    MDBCol,
+} from 'mdb-react-ui-kit';
+
 class Gallery extends Component{
     render(){
         return(
             <>
-            {/* <Container> */}
-            <div className="my-5 gallery-div">
-                <Carousel>
-                    <Carousel.Item>
-                        <img
-                        className="d-block w-100 carousel-placeholder"
-                        src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        // src="https://via.placeholder.com/600x200"
+            <div className="my-5">
+            <MDBRow>
+                <MDBCol className='col-md-8'>
+                    <img
+                        className="w-100 gallery-img1"
+                        // src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        src="../../building_placeholder.jpg"
                         alt="First slide"
                         />
-                        <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
-                {/* <Row>
-                    <Col>
-                        <div>
-                            <img src="https://via.placeholder.com/600x350" alt="" />
-                        </div>
-                    </Col>
-                    <Col>
-                        <Stack gap={3}>
-                            <Row>
-                                <div>
-                                    <img src="https://via.placeholder.com/400x167" alt="" />
-                                </div>
-                            </Row>
-                            <Row>
-                                <div>
-                                    <img src="https://via.placeholder.com/400x167" alt="" />
-                                </div>
-                            </Row>
-                        </Stack>
-                    </Col>
-                    <Col>
-                        <div>
-                            <img src="https://via.placeholder.com/200x350" alt="" />
-                        </div>
-                    </Col>
-                </Row> */}
+                </MDBCol>
+                <MDBCol className='col-md-4'>
+                    <MDBRow className="mb-4">
+                        <img
+                            className=" gallery-img2"
+                            src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            // src="../../building_placeholder.jpg"
+                            alt="First slide"
+                            />
+                    </MDBRow>
+                    <MDBRow>
+                        <img
+                            className=" gallery-img2"
+                            // src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            src="../../building_placeholder2.jpg"
+                            alt="First slide"
+                            />
+                    </MDBRow>
+                </MDBCol>
+            </MDBRow>
             </div>
-            {/* </Container> */}
+
             </>
         )
     }

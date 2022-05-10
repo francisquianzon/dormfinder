@@ -7,6 +7,7 @@ import {
 
 import Navbar from './components/navbar.component';
 import DormCards from './components/dormCards.component';
+import Footer from './components/footer.component';
 
 export default class Test extends Component{
     render(){

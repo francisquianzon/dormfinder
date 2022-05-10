@@ -39,24 +39,30 @@ class EstabCard extends Component{
                 <>
                     {/* <Container> */}
                     <br></br>
-                        <Row xs={1} md={3} className="g-3">
+                        <Row xs={1} md={4} className="g-3">
                             {establishments.map((estabs)=>(
-                                <Col key={estabs._id}>
-                                    <MDBCard className="dormcard">
+                                <Col key={estabs._id} className="dormcard">
+                                    <MDBCard >
                                         <MDBCardImage position="top" src="../../building_placeholder.jpg" className="card-establishment-img"/>
                                         <MDBCardBody>
                                         
                                         <MDBCardTitle>{estabs.name}</MDBCardTitle>
-                                        <MDBCardText className="card-text">
-                                            Located {estabs.location}
-                                            <br></br>
-                                            Rent starts at P{estabs.price}
+                                        <MDBCardText>
+                                            <div className="dorm-card-text">
+                                                {estabs.location}
+                                                <br></br>
+                                                Rent starts at P{estabs.price_min}
+                                                </div>
                                         </MDBCardText>
-                                            <br></br>
 
                                             <Link 
                                                 to={`/browse/${estabs.name}`} 
-                                                state={{ estab_id: estabs._id, estab_name:estabs.name, estab_deet: estabs.description, estab_price: estabs.price }}
+                                                state={{ 
+                                                    estab_id: estabs._id, 
+                                                    estab_name: estabs.name, 
+                                                    estab_deet: estabs.description, 
+                                                    estab_price: estabs.price_min 
+                                                }}
                                             >
                                             
                                                 <Button size="sm">See more</Button>

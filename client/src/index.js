@@ -43,7 +43,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" exact element={<Homepage/>}/>
         <Route path="browse" exact element={<Browse/>}/>
-        <Route path='/browse.admin/addestablishment' exact element={<AddEstab/>} />
+        <Route path='/addestablishment' exact element={<AddEstab/>} />
         <Route path='/browse/:id' exact element={<EstabDetails/>}/>
         <Route path='/browse.admin' exact element={<EstabTable/>}/>
         <Route path='/register' exact element={<Register/>}/>

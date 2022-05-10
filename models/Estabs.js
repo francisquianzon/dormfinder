@@ -6,7 +6,12 @@ const EstabSchema = new Schema({
     name: String,
     location: String,
     description: String,
-    price: Number,
+    price_min: Number,
+    price_max: Number,
+    original_poster: String,
+    mobile_info: String,
+    email_info: String,
+    review_ids: []
 }, {timestamps:true});
 
 module.exports = Estab = mongoose.model('estab', EstabSchema);
