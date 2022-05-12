@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 //Create Schema
 const ReviewSchema = new Schema({
     user_id: String,
+    dorm_id: String,
     review: String,
     score: Number,
     
