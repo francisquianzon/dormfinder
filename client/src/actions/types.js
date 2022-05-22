@@ -6,6 +6,9 @@ export const ITEMS_LOADING = 'ITEMS_LOADING';
 
 export const GET_USERS = 'GET_USERS';
 
+export const GET_REVIEWS = 'GET_REVIEWS';
+export const ADD_REVIEWS = 'ADD_REVIEWS';
+
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";

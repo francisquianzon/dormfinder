@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './components.css'
+import { connect } from 'react-redux';
+import {  getDetails } from '../../actions/establishmentActions';
+
 import {
     Container,
     Row,
@@ -14,13 +17,25 @@ import {
     MDBCardText
 } from 'mdb-react-ui-kit';
 
+
 import { ImMobile2 } from 'react-icons/im';
 import { HiOutlineMail } from 'react-icons/hi';
 
 class Details extends Component{
-    render(){      
-        const {establishment} = this.props.establishment
-        console.log(this.props.establishment);
+    state = {
+    loading: true
+    }
+
+    getEstablishmentDetails(id){
+        this.props.getDetails(id);
+    }
+
+    componentDidMount() {
+        this.getEstablishmentDetails(this.props.establishment_id)
+    }
+
+    render(){
+
         return(
             <>
             <Container>
@@ -29,16 +44,16 @@ class Details extends Component{
                     <MDBCard>
                         <MDBCardBody>
                             <div className="border-bottom">
-                                <h1 className="detail-title-text">{this.props.establishment[0]}</h1>
-                                <h1 className="detail-sub-text">Located {this.props.establishment[2]}</h1>
-                                <h1 className="detail-sub-text">Rent starts at {this.props.establishment[4]}</h1>
+                                <h1 className="detail-title-text">{this.props.item.name}</h1>
+                                <h1 className="detail-sub-text">Located {this.props.item.location}</h1>
+                                <h1 className="detail-sub-text">Rent starts at {this.props.item.price_min}</h1>
                                 <br></br>
                             </div>
 
                             <br></br>
                             <h3>Description </h3>
                             <div className="display-linebreak">
-                                <p>{this.props.establishment[3]}</p>
+                                <p>{this.props.item.description}</p>
                             </div>
                         </MDBCardBody>
                     </MDBCard>
@@ -46,13 +61,11 @@ class Details extends Component{
                     <Col xs={6} md={4}>
                         <MDBCard>
                             <MDBCardBody>
-                                <MDBCardTitle>Posted by {this.props.establishment[7]}</MDBCardTitle>
+                                <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
                                 <br></br>
-                                {/* <h1 className="detail-sub-text">Mobile</h1> */}
-                                <h6><ImMobile2/> {this.props.establishment[5]}</h6>
+                                <h6><ImMobile2/> {this.props.item.mobile_info}</h6>
 
-                                {/* <h1 className="detail-sub-text">Email</h1> */}
-                                <h6><HiOutlineMail/> {this.props.establishment[6]}</h6>
+                                <h6><HiOutlineMail/> {this.props.item.email_info}</h6>
                             </MDBCardBody>
                         </MDBCard>
                     </Col>
@@ -63,4 +76,9 @@ class Details extends Component{
     }
 }
 
-export default Details;
+const mapStateToProps = (state) => ({
+    item: state.establishment.item
+}); 
+
+
+export default connect(mapStateToProps, { getDetails })(Details);

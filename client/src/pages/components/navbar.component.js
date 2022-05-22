@@ -25,34 +25,53 @@ import { FaUserCircle } from 'react-icons/fa';
 
 import { logout } from '../../actions/authActions';
 import { connect } from 'react-redux';
+import Delayed from './delayed';
 import PropTypes from 'prop-types';
 
 function LoggedIn(props){
+  let access = false;
+
+  if(props.state.user.id == null){
+    // console.log("id is null, use _id");
+    if(props.state.user._id == '6288dccb3da6ef408e07cbd1'){
+      access = true;
+    }
+  }else{
+    if(props.state.user.id == '6288dccb3da6ef408e07cbd1'){
+      access = true;
+    }
+  }
+
+
   return(
     <>
-    <MDBNavbarItem>
-      <Link to="/browse">
-          <MDBNavbarLink active aria-current='page' className="nav-links">
-          Browse
-          </MDBNavbarLink>
-      </Link>
-    </MDBNavbarItem>
-    <MDBNavbarItem>
-      <MDBNavbarLink className="nav-links">Learn more</MDBNavbarLink>
-    </MDBNavbarItem>
-    <MDBNavbarItem>
-      <MDBDropdown>
-      <MDBDropdownToggle tag='a' className='nav-link nav-links'>
-        <FaUserCircle size={30}/>  {props.state.user.name}
-      </MDBDropdownToggle>
-      <MDBDropdownMenu>
-        <MDBDropdownItem>
-          <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink>
-          <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
-        </MDBDropdownItem>
-      </MDBDropdownMenu>
-      </MDBDropdown>
-    </MDBNavbarItem>
+      <MDBNavbarItem>
+        <Link to="/browse">
+            <MDBNavbarLink active aria-current='page' className="nav-links">
+            Browse
+            </MDBNavbarLink>
+        </Link>
+      </MDBNavbarItem>
+      <MDBNavbarItem>
+        <MDBNavbarLink className="nav-links">Learn more</MDBNavbarLink>
+      </MDBNavbarItem>
+      <MDBNavbarItem>
+        <MDBDropdown>
+        <MDBDropdownToggle tag='a' className='nav-link nav-links'>
+          <FaUserCircle size={30}/>  {props.state.user.name}
+        </MDBDropdownToggle>
+        <MDBDropdownMenu>
+          <MDBDropdownItem>
+            {access == true
+              ? <MDBDropdownLink href='/browse.admin' >Admin</MDBDropdownLink>
+              : <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink>
+            }
+            {/* <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink> */}
+            <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
+          </MDBDropdownItem>
+        </MDBDropdownMenu>
+        </MDBDropdown>
+      </MDBNavbarItem>
     </>
   )
 }
@@ -86,8 +105,6 @@ function NotLogged(){
 
 function Navbar1(props) {
     const [showNavRight, setShowNavRight] = useState(false);
-    // console.log("Checking logged in status...");
-    // console.log(props.state.auth);
     let showStatus;
     if(props.state.auth){
       showStatus = <LoggedIn state={{user : props.state.user, logout : props.state.logout}}/>

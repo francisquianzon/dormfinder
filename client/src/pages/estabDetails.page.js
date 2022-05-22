@@ -11,6 +11,7 @@ import Navbar from './components/navbar.component';
 import Gallery from './components/gallery.component';
 import Details from './components/details.component';
 import Footer from './components/footer.component';
+import Reviews from './components/reviews.component';
 
 function locationHook(Component) {
     return function WrappedComponent(props) {
@@ -55,7 +56,10 @@ class EstabDetails extends Component{
             <Container
             >
               <Gallery/>
-                <Details establishment={item}/>
+                {/* <Details establishment={item}/> */}
+                <Details establishment_id={this.props.estab.state.estab_id}/>
+                <br></br>
+                <Reviews establishment_id={this.props.estab.state.estab_id}/>
                 <br></br>
             </Container>
             </>
