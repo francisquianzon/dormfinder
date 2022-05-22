@@ -19,14 +19,30 @@ router.get('/:dorm_id', (req, res) => {
 router.post('/', auth, (req,res) =>{
 
     const newReview = new Review({
-        user_id: req.body.user_id,
+        username: req.body.username,
         dorm_id: req.body.dorm_id,
         review: req.body.review,
-        score: req.body.score 
+        score: req.body.score
     });
 
+    newReview.likes.push(req.body.likes);
     newReview.save().then(review => res.json(review));
 
+});
+
+//@route    POST /:id
+//@desc     add a like to the review
+//@access   Private
+router.post('/:id', auth, (req,res) =>{
+    var conditions = {_id: req.params.id};
+
+    Review.findOneAndUpdate(
+        { _id: req.params.id},
+        { $push: {
+            likes: req.body.likes
+        }},
+    )
+    .then(review => res.json(review));
 });
 
 module.exports = router;

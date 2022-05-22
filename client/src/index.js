@@ -22,7 +22,7 @@ import Homepage from './pages/homepage.page';
 import Browse from './pages/browse.page';
 import AddEstab from './pages/addEstablishment.page';
 import EstabDetails from './pages/estabDetails.page';
-import EstabTable from './pages/components/estabtables.component';
+import AdminView from './pages/components/adminview.component';
 import Register from './pages/registration.page';
 
 
@@ -45,7 +45,7 @@ ReactDOM.render(
         <Route path="browse" exact element={<Browse/>}/>
         <Route path='/addestablishment' exact element={<AddEstab/>} />
         <Route path='/browse/:id' exact element={<EstabDetails/>}/>
-        <Route path='/browse.admin' exact element={<EstabTable/>}/>
+        <Route path='/browse.admin' exact element={<AdminView/>}/>
         <Route path='/register' exact element={<Register/>}/>
         <Route path='/login' exact element={<Register/>}/>
       </Routes>

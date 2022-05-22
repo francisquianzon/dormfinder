@@ -41,9 +41,25 @@ router.get('/:id', (req,res) =>{
     .then(estabs => res.json(estabs))
 });
 
-//@route PUT /:id 
-//@dec find and update an establishment
-//@access public
+//@route    POST /r/:id
+//@desc     add a review to an establishment
+//@access   Public
+router.put('/r/:id', (req,res)=>{
+    var conditions = {_id: req.params.id};
+
+    Estab.findOneAndUpdate(
+        { _id: req.params.id},
+        { $push: {
+            review_ids: req.body.review_ids
+        }},
+    )
+    .then(estab => res.json(estab));
+});
+
+
+//@route    PUT /:id 
+//@dec      find and update an establishment
+//@access   Private
 router.put('/:id', (req,res)=>{
     var conditions = {_id: req.params.id};
 

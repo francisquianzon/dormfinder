@@ -14,7 +14,7 @@ import Homepage from './pages/homepage.page';
 import Browse from './pages/browse.page';
 import AddEstab from './pages/addEstablishment.page';
 import EstabDetails from './pages/estabDetails.page';
-import EstabTable from './pages/components/estabtables.component';
+import EstabTable from './pages/components/adminview.component';
 
 
 //CREATE A STORE THAT WILL HOLD THE STATE

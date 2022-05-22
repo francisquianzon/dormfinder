@@ -3,10 +3,11 @@ const Schema = mongoose.Schema;
 
 //Create Schema
 const ReviewSchema = new Schema({
-    user_id: String,
+    username: String,
     dorm_id: String,
     review: String,
     score: Number,
+    likes: []
     
 }, {timestamps:true});
 
