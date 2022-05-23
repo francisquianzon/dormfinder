@@ -41,28 +41,26 @@ class Details extends Component{
             <Container>
                 <Row>
                     <Col xs={12} md={8}>
-                    <MDBCard>
-                        <MDBCardBody>
-                            <div className="border-bottom">
-                                <h1 className="detail-title-text">{this.props.item.name}</h1>
-                                <h1 className="detail-sub-text">Located {this.props.item.location}</h1>
-                                <h1 className="detail-sub-text">Rent starts at {this.props.item.price_min}</h1>
-                                <br></br>
-                            </div>
-
+                        <div className="border-bottom">
+                            <h1 className="detail-title-text">{this.props.item.name}</h1>
+                            <h1 className="detail-sub-text">Located {this.props.item.location}</h1>
+                            <h1 className="detail-sub-text">Rent starts at P{this.props.item.price_min}</h1>
                             <br></br>
-                            <h3>Description </h3>
-                            <div className="display-linebreak">
-                                <p>{this.props.item.description}</p>
-                            </div>
-                        </MDBCardBody>
-                    </MDBCard>
+                        </div>
+
+                        <br></br>
+                        <h3>Description </h3>
+                        <div className="display-linebreak">
+                            <p>{this.props.item.description}</p>
+                        </div>
                     </Col>
+                    <br></br>
                     <Col xs={6} md={4}>
                         <MDBCard>
                             <MDBCardBody>
                                 <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
                                 <br></br>
+                                <h4>Contact Information</h4>
                                 <h6><ImMobile2/> {this.props.item.mobile_info}</h6>
 
                                 <h6><HiOutlineMail/> {this.props.item.email_info}</h6>

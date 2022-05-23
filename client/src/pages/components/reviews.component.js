@@ -59,34 +59,37 @@ class Details extends Component{
                 <Container>
                     <Row>
                         <Col xs={12} md={8}>
-                        <MDBCard>
-                            <MDBCardBody>
-                                <MDBCol className="d-flex mb-2">
-                                    <h3>Reviews</h3>
-                                    <h4 className="review-score">{average_score}</h4>
-                                    <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score} precision={0.5} readOnly />
-                                </MDBCol>
-                                <br></br>
-                                {reviews?.map((revs)=>(
-                                    <div key={revs._id}>
-                                        <MDBRow className="border-bottom mb-4">
-                                            <MDBCol className="d-flex mb-4">
-                                                <FaUserCircle size={50} />
-                                                <MDBRow>
-                                                    <h6 className="mx-2 row-bottom-margin-review">{revs.username}</h6>
-                                                    {/* <p className="mx-2 review-date-text">May 2022</p> */}
-                                                    <Rating size="small" className="mx-1" defaultValue={revs.score} readOnly />
-                                                </MDBRow>
-                                                <MDBRow>
-                                                </MDBRow>
-                                            </MDBCol>
-                                            <p>{revs.review}</p>
-                                        </MDBRow>
-                                        <br></br>
-                                    </div>
-                                ))}
-                            </MDBCardBody>
-                        </MDBCard>
+                        {/* <MDBCard>
+                            <MDBCardBody> */}
+                            <MDBCol className="d-flex mb-2">
+                                <h3>{reviews.length} Reviews</h3>
+                                <h4 className="review-score">{average_score}</h4>
+                                <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score} precision={0.5} readOnly />
+                                {/* <h6>Write a Review</h6> */}
+                            </MDBCol>
+                            <br></br>
+                            {reviews?.map((revs)=>(
+                                <div key={revs._id}>
+                                    <MDBRow className="border-bottom mb-4">
+                                        <MDBCol className="d-flex mb-2">
+                                            <FaUserCircle size={40} />
+                                            <MDBRow>
+                                                <h6 className="mx-3 review-name">{revs.username}</h6>
+                                                {/* <p className="mx-2 review-date-text">May 2022</p> */}
+                                                <Rating size="small" className="star-ratings" defaultValue={revs.score} readOnly />
+                                            </MDBRow>
+                                            <MDBRow>
+                                            </MDBRow>
+                                        </MDBCol>
+                                        <div className="reviews-text">
+                                            <p >{revs.review}</p> 
+                                        </div>
+                                    </MDBRow>
+                                    <br></br>
+                                </div>
+                            ))}
+                            {/* </MDBCardBody>
+                        </MDBCard> */}
                         </Col>
                     </Row>
                 </Container>

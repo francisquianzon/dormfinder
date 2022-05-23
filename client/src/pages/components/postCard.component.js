@@ -80,7 +80,7 @@ class PostCard extends Component{
             landlord_check: ''
         });
         //reloads the window
-        // window.location.reload(false);
+        window.location.reload(false);
     }
 
     render(){
@@ -104,18 +104,18 @@ class PostCard extends Component{
                                 <Form onSubmit={this.onSubmit}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Name</Form.Label>
-                                        <Form.Control name="name" type="Text" onChange={this.onChange} />
+                                        <Form.Control name="name" type="Text" onChange={this.onChange} className="form-background"/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Location</Form.Label>
-                                        <Form.Control name="location" type="Text" placeholder="e.g. along F.O. Santos Rd." onChange={this.onChange}/>
+                                        <Form.Control name="location" type="Text" placeholder="e.g. along F.O. Santos Rd." onChange={this.onChange} className="form-background"/>
                                         <Form.Text>Add a brief description of the establshiment's location or address</Form.Text>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Description</Form.Label>
-                                        <Form.Control name="description" as="textarea" rows="5" type="Text" onChange={this.onChange}/>
+                                        <Form.Control name="description" as="textarea" rows="5" type="Text" onChange={this.onChange} className="form-background"/>
                                         <Form.Text>Add the establishment's description e.g. no. of bedrooms, amenaties, etc.</Form.Text>
                                     </Form.Group>
 
@@ -123,14 +123,14 @@ class PostCard extends Component{
                                         <MDBCol>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label>Min. Price</Form.Label>
-                                                <Form.Control name="price_min" type="Number" onChange={this.onChange}/>
+                                                <Form.Control name="price_min" type="Number" onChange={this.onChange} className="form-background"/>
                                             </Form.Group>
 
                                         </MDBCol>
                                         <MDBCol>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label>Max. Price</Form.Label>
-                                                <Form.Control name="price_max" type="Number" onChange={this.onChange}/>
+                                                <Form.Control name="price_max" type="Number" onChange={this.onChange} className="form-background"/>
                                             </Form.Group>
                                         </MDBCol>
                                         <Form.Text>If the establishment has a fixed price, just input the same price on both fields</Form.Text>
@@ -141,14 +141,14 @@ class PostCard extends Component{
                                             <MDBCol>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Mobile Number</Form.Label>
-                                                    <Form.Control name="mobile_info" type="Text" onChange={this.onChange}/>
+                                                    <Form.Control name="mobile_info" type="Text" onChange={this.onChange} className="form-background"/>
                                                 </Form.Group>
 
                                             </MDBCol>
                                             <MDBCol>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Email</Form.Label>
-                                                    <Form.Control name="email_info" type="Text" onChange={this.onChange}/>
+                                                    <Form.Control name="email_info" type="Text" onChange={this.onChange} className="form-background"/>
                                                 </Form.Group>
                                             </MDBCol>
                                         <Form.Text>For additional contact information, add them in the description field</Form.Text>

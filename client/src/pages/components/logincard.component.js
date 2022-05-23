@@ -117,12 +117,12 @@ class LoginCard extends Component{
                                 <Form onSubmit={this.onSubmit}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label size="sm">Email</Form.Label>
-                                        <Form.Control name="email" type="email" onChange={this.onChange}/>
+                                        <Form.Control name="email" type="email" onChange={this.onChange} className="form-background"/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label size="sm">Password</Form.Label>
-                                        <Form.Control name="password" type="password" onChange={this.onChange}/>
+                                        <Form.Control name="password" type="password" onChange={this.onChange} className="form-background"/>
                                     </Form.Group>
                                     <br></br>
                                     <MDBBtn className="btn-wide" variant="primary" type="submit">Login</MDBBtn>

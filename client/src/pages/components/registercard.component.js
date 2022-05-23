@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import './components.css'
 import {
     Form,
-
     Alert,
 } from 'react-bootstrap';
 
@@ -101,109 +101,73 @@ class RegisterCard extends Component{
         return(
             <>
             <br></br>
-            <MDBContainer>
-                <MDBRow>
-                    <MDBCol className="d-flex justify-content-center">
-                        <MDBCard style={{ width: '33rem' }}>
-                            <MDBCardBody>
-                                <br></br>
-                                <MDBRow className="row-bottom-margin">
-                                    <MDBCol className="d-flex">
-                                        <h3>Sign Up. </h3>
-                                        <p className="text-muted mt-2 mx-2"> Its quick and easy.</p>
-                                        </MDBCol>
-                                </MDBRow>
-                                <br></br>
-                                { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
-                                <Form onSubmit={this.onSubmit}>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label size="sm">Name</Form.Label>
-                                        <Form.Control name="name" type="Text" onChange={this.onChange} />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label size="sm">Username</Form.Label>
-                                        <Form.Control name="username" type="Text"  onChange={this.onChange}/>
-                                        <Form.Text className="text-muted">
-                                        This will serve as your display name in postings and reviews.
-                                        </Form.Text>
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label size="sm">Email</Form.Label>
-                                        <Form.Control name="email" type="email" onChange={this.onChange}/>
-                                        <Form.Text className="text-muted">
-                                        We'll never share your email with anyone else.
-                                        </Form.Text>
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label size="sm">Password</Form.Label>
-                                        <Form.Control name="password" type="password" onChange={this.onChange}/>
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label size="sm">Confirm Password</Form.Label>
-                                        <Form.Control name="confirm_password" type="password" onChange={this.onChange}/>
-                                        <Form.Text className="text-muted">
-                                        Please confirm your password.
-                                        </Form.Text>
-                                    </Form.Group>
-
+            <div className="sign-up-page">
+                <MDBContainer>
+                    <MDBRow>
+                        <MDBCol className="d-flex justify-content-center">
+                            <MDBCard style={{ width: '33rem' }}>
+                                <MDBCardBody>
                                     <br></br>
-                                    <MDBBtn className="btn-wide" variant="primary" type="submit">Sign Up</MDBBtn>
-                                    <p className="mt-2 text-center">
-                                        Already registered? 
-                                        <Link to="/login" state={{ type: false}}>
-                                            <a href=''> Sign in</a>
-                                        </Link> 
-                                        </p>
+                                    <MDBRow className="row-bottom-margin">
+                                        <MDBCol className="d-flex">
+                                            <h3>Sign Up. </h3>
+                                            <p className="text-muted mt-2 mx-2"> Its quick and easy.</p>
+                                            </MDBCol>
+                                    </MDBRow>
                                     <br></br>
-                                </Form>
-                            </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
-            {/* <Row>
-                <Col></Col>
-                <Col>
-                    { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
-                    <Card >
-                    <Card.Header></Card.Header>
-                    <Card.Body>
-                        <Card.Title><h3>Sign up</h3></Card.Title>
-                        <br></br>
-                        <Form onSubmit={this.onSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control name="name" type="Text" placeholder="Enter name" onChange={this.onChange} />
-                            </Form.Group>
+                                    { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
+                                    <Form onSubmit={this.onSubmit}>
+                                        <Form.Group className="form-margins" controlId="formBasicEmail">
+                                            {/* <Form.Label size="sm">Name</Form.Label> */}
+                                            <Form.Control size="lg" name="name" placeholder='Name' type="Text" onChange={this.onChange} className="sg-form-background" />
+                                        </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control name="username" type="Text" placeholder="Enter your username" onChange={this.onChange}/>
-                            </Form.Group>
+                                        <Form.Group className="form-margins" controlId="formBasicEmail">
+                                            {/* <Form.Label size="sm">Username</Form.Label> */}
+                                            <Form.Control size="lg" name="username" placeholder='Username' type="Text"  onChange={this.onChange} className="sg-form-background"/>
+                                            <Form.Text className="text-muted">
+                                            This will serve as your display name in postings and reviews.
+                                            </Form.Text>
+                                        </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control name="email" type="email" placeholder="Enter your email" onChange={this.onChange}/>
-                            </Form.Group>
+                                        <Form.Group className="form-margins" controlId="formBasicEmail">
+                                            {/* <Form.Label size="sm">Email</Form.Label> */}
+                                            <Form.Control size="lg" name="email" type="email" placeholder='Email'onChange={this.onChange} className="sg-form-background"/>
+                                            <Form.Text className="text-muted">
+                                            We'll never share your email with anyone else.
+                                            </Form.Text>
+                                        </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control name="password" type="password" placeholder="Enter your password" onChange={this.onChange}/>
-                            </Form.Group>
+                                        <Form.Group className="form-margins" controlId="formBasicEmail">
+                                            {/* <Form.Label size="sm">Password</Form.Label> */}
+                                            <Form.Control size="lg" name="password" type="password" placeholder='Password' onChange={this.onChange} className="sg-form-background"/>
+                                        </Form.Group>
 
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card> 
-                </Col>
-                <Col></Col>
-            </Row> */}
+                                        <Form.Group className="form-margins" controlId="formBasicEmail">
+                                            {/* <Form.Label size="sm">Confirm Password</Form.Label> */}
+                                            <Form.Control size="lg" name="confirm_password" type="password" placeholder='Confirm Password' onChange={this.onChange} className="sg-form-background"/>
+                                            <Form.Text className="text-muted">
+                                            Please confirm your password.
+                                            </Form.Text>
+                                        </Form.Group>
+
+                                        <br></br>
+                                        <MDBBtn className="btn-wide" variant="primary" type="submit">Sign Up</MDBBtn>
+                                        <p className="mt-2 text-center">
+                                            Already registered? 
+                                            <Link to="/login" state={{ type: false}}>
+                                                <a href=''> Sign in</a>
+                                            </Link> 
+                                            </p>
+                                        <br></br>
+                                    </Form>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                    <br></br>
+                </MDBContainer>
+            </div>
             </>
         )
     }

@@ -1,6 +1,6 @@
-/* * {
-    font-family: 'Roboto', sans-serif;
-} */
+* {
+    font-family: 'Raleway', 'Roboto', sans-serif;
+}
 
 .btn-primary, .btn-primary:visited {
     background-color: #DC7429 !important;
@@ -115,10 +115,6 @@
     object-fit: cover;
 }
 
-.row-bottom-margin-review { 
-    margin-bottom:5px; 
-}
-
 .login-title-text{
     font-weight: normal;
 }
@@ -174,4 +170,41 @@
     margin-top: 3px;
     margin-left: 30px;
     margin-right: 10px;
+}
+
+.sg-form-background{
+    background-color: #e6e6e6 !important;
+    border-color: #e6e6e6 !important;
+    /* border: 0; */
+}
+
+.sg-form-background:active , .sg-form-background:focus{
+    border-color: none !important;
+    box-shadow: none !important;
+}
+
+.form-margins{
+    margin-bottom: 30px;
+}
+
+.form-background:active, .form-background:focus{
+    border-color: #DC7429 !important;
+    box-shadow: 0 0 8px #DC7429 !important;
+    outline: 0 none !important;
+}
+
+.reviews-text{
+    margin-left: 55px;
+    /* max-width: 950px !important; */
+    font-size: 15px;
+}
+
+.star-ratings{
+    margin-left: 13px;
+    size: 1px !important;
+}
+
+.review-name { 
+    font-size: 15px;
+    margin-bottom:px; 
 }
