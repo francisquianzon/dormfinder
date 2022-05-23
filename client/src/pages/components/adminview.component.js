@@ -10,7 +10,8 @@ import Button from 'react-bootstrap/Button'
 
 import { 
     Container, 
-    Stack 
+    Stack,
+    Nav
 } from 'react-bootstrap'
 
 import {
@@ -63,7 +64,7 @@ function RenderTables(props){
                                             state={{ estab_id: estabs._id, estab_name:estabs.name, estab_deet: estabs.description, estab_price: estabs.price }}
                                         >
 
-                                            <button type="button" className="btn btn-secondary me-2 btn-sm">See more</button>
+                                            <button type="button" className="btn btn-warning me-2 btn-sm">See more</button>
                                         </Link>
                                     </td>
                                     <td>

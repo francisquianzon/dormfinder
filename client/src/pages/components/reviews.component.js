@@ -7,14 +7,9 @@ import {
     Container,
     Row,
     Col,
-
 } from 'react-bootstrap';
 
 import {
-    MDBCard,
-    MDBCardBody,
-    MDBCardTitle,
-    MDBCardText,
     MDBRow,
     MDBCol
 } from 'mdb-react-ui-kit';
@@ -24,14 +19,12 @@ import {
 } from '@mui/material';
 
 import { FaUserCircle } from 'react-icons/fa';
-import { ImMobile2 } from 'react-icons/im';
-import { HiOutlineMail } from 'react-icons/hi';
-
 import Delayed from './delayed';
+import AddReview from './addReviewModal.component';
 
-class Details extends Component{
+class Reviews extends Component{
     state = {
-    loading: true
+        loading: true
     }
 
     getReviewDetails(id){
@@ -45,6 +38,11 @@ class Details extends Component{
     render(){
         const { reviews } = this.props.reviews
         let average_score = 0;
+
+        // const userDetails = [
+        //     this.props.user.username,
+        //     this.props.establishment_id
+        // ]
 
         reviews?.map((review)=>(
             average_score += review.score
@@ -65,7 +63,10 @@ class Details extends Component{
                                 <h3>{reviews.length} Reviews</h3>
                                 <h4 className="review-score">{average_score}</h4>
                                 <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score} precision={0.5} readOnly />
-                                {/* <h6>Write a Review</h6> */}
+                                <AddReview state={{
+                                    user: this.props.user,
+                                    establishment_id: this.props.establishment_id
+                                }}/>
                             </MDBCol>
                             <br></br>
                             {reviews?.map((revs)=>(
@@ -100,8 +101,9 @@ class Details extends Component{
 }
 
 const mapStateToProps = (state) => ({
-    reviews: state.reviews
+    reviews: state.reviews,
+    user: state.authentication.user
 }); 
 
 
-export default connect(mapStateToProps, { getReviews })(Details);
+export default connect(mapStateToProps, { getReviews })(Reviews);

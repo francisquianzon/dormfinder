@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_REVIEWS, ITEMS_LOADING } from '../actions/types';
+import { GET_REVIEWS, ITEMS_LOADING, ADD_REVIEWS } from '../actions/types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
@@ -15,6 +15,19 @@ export const getReviews = id => dispatch => {
             
         )
         // .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+};
+
+export const addReview = review => (dispatch, getState) => {
+    
+    axios
+        .post('/reviews', review, tokenConfig(getState))
+        .then(res => 
+            dispatch({
+                type: ADD_REVIEWS,
+                payload: res.data
+            })
+        )
+        // .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
 
