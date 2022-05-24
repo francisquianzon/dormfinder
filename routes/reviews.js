@@ -10,6 +10,7 @@ const Review = require('../models/Reviews.js');
 //@access   Public
 router.get('/:dorm_id', (req, res) => {
     Review.find({dorm_id:req.params.dorm_id})
+    .sort({date:-1})
     .then(reviews => res.json(reviews))
 });
 

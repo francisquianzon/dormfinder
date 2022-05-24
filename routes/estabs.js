@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
+const multer = require('multer');
 
 //estabs Model 
 const User = require('../models/Estabs.js');
@@ -14,6 +15,51 @@ router.get('/', (req,res) =>{
     .then(estabs => res.json(estabs))
 });
 
+// @route   POST /image
+// @desc    route for uploading an image
+// @access  Public
+
+var storage = multer.diskStorage({   
+    destination: function(req, file, cb) { 
+       cb(null, './client/public/uploads');    
+    }, 
+    filename: function (req, file, cb) { 
+       cb(null , file.originalname);   
+    }
+ });
+
+// var upload = multer({ storage: storage }).single("demo_image");
+// const upload = multer({dest:'client/src/uploads/'});
+const upload = multer({storage:storage});
+
+// var upload = multer({ storage: storage }).array("demo_images", 4);
+// var upload = multer({
+//     storage: storage,
+//     fileFilter: (req, file, cb) => {
+//         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+//             cb(null, true);
+//         } else {
+//             cb(null, false);
+//             return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+//         }
+//     }
+// });
+
+router.post("/image", upload.array("demo_images",10), (req,res) => {
+    // upload(req,res,(err) => {
+    //     if(err){
+    //         res.status(400).send("Something went wrong!");
+    //     }
+    //     res.send(req.file);
+    // })
+    try{
+        res.send(req.files);
+    }catch (error){
+        console.log(error);
+        res.send(400);
+    }
+})
+
 // @route   POST /
 // @desc    create an establishment
 // @access  Private
@@ -26,8 +72,10 @@ router.post('/', auth, (req,res) =>{
         price_max: req.body.price_max,
         mobile_info: req.body.mobile_info,
         email_info: req.body.email_info,
-        original_poster: req.body.original_poster
+        original_poster: req.body.original_poster,
+        pictures: req.body.pictures
     });
+
 
     newEstab.save().then(estab => res.json(estab));
 
