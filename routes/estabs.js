@@ -45,7 +45,7 @@ const upload = multer({storage:storage});
 //     }
 // });
 
-router.post("/image", upload.array("demo_images",10), (req,res) => {
+router.post("/image", upload.array("demo_images", 15), (req,res) => {
     // upload(req,res,(err) => {
     //     if(err){
     //         res.status(400).send("Something went wrong!");
