@@ -7,8 +7,6 @@ import {
 
 import { MDBCard, 
     MDBCardBody, 
-    MDBCardTitle, 
-    MDBCardText, 
     MDBBtn,
     MDBRow, 
     MDBCol,

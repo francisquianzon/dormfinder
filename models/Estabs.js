@@ -11,7 +11,8 @@ const EstabSchema = new Schema({
     original_poster: String,
     mobile_info: String,
     email_info: String,
-    review_ids: []
+    review_ids: [],
+    pictures: []
 }, {timestamps:true});
 
 module.exports = Estab = mongoose.model('estab', EstabSchema);

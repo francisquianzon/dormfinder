@@ -17,20 +17,6 @@ export const getUsers = () => dispatch => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 };
 
-// export const addEstablishment = estab => (dispatch, getState) => {
-    
-//     axios
-//         .post('/users', estab, tokenConfig(getState))
-//         .then(res => 
-//             dispatch({
-//                 type: ADD_ITEMS,
-//                 payload: res.data
-//             })
-//         )
-//         .catch(err => dispatch(returnErrors(err.response.data, err.response.status))
-//         );
-// };
-
 // export const deleteEstablishment = id => (dispatch, getState) => {
 //     axios.delete(`/establishments/${id}`, tokenConfig(getState)).then(res => 
 //         dispatch({

@@ -14,7 +14,8 @@ const cors = require("cors");
 app.use(cors());
 
 //BodyParser Middleware
-app.use(express.json());
+// app.use(express.bodyParser({limit: '50mb'}))
+app.use(express.json({limit: '50mb'}));
 
 //DB Config
 // const db = require('./config/keys.js').mongoURI;

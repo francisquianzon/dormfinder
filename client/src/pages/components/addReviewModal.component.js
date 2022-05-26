@@ -70,9 +70,10 @@ class AddReview extends Component{
 
 
     render(){
+
         return(
-            <>
-                <Nav.Link onClick={this.toggle}>Write a Review</Nav.Link>
+            <>  
+                { this.props.isAuthenticated && <Nav.Link onClick={this.toggle}><p className="write-a-review">Write a Review</p></Nav.Link>}
                 <MDBModal staticBackdrop show={this.state.modal} setShow={this.state.modal}>
                     <MDBModalDialog centered size="lg">
                         <MDBModalContent>
@@ -110,6 +111,7 @@ class AddReview extends Component{
 }
 
 const mapStateToProps = state => ({
+    isAuthenticated: state.authentication.isAuthenticated,
     user: state.authentication.user
 })
 

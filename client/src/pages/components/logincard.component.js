@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import './components.css';
 import {
-    Container,
-    Card,
     Form,
-    Button,
     Alert,
-    Row,
-    Col
 } from 'react-bootstrap';
 import { MDBCard, 
         MDBCardBody, 
-        MDBCardTitle, 
-        MDBCardText, 
         MDBBtn,
         MDBRow, 
         MDBCol,
@@ -87,7 +80,7 @@ class LoginCard extends Component{
             if(this.state.msg == null && this.props.isAuthenticated){
                 this.props.navigate('/');
             }
-        }, 2000);
+        }, 1000);
 
         
     }

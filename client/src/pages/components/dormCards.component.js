@@ -3,50 +3,137 @@ import './components.css';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEstablishments, deleteEstablishment } from '../../actions/establishmentActions';
+import Delayed from './delayed';
 
 import { 
-    Container, 
-    // Stack,
-    Card,
     Button,
-    CardGroup,
     Row,
-    Col
+    Col,
+    Placeholder,
+    Card
 } from 'react-bootstrap'
 
 import {
-    MDBRow,
-    MDBCol,
     MDBCard, 
     MDBCardBody, 
     MDBCardTitle,
     MDBCardText, 
     MDBCardImage, 
-    MDBBtn
 } from 'mdb-react-ui-kit';
 
 
-// export default function Card(){
 class EstabCard extends Component{
-        
-        componentDidMount() {
-            this.props.getEstablishments();
+        state = {
+            pageNumber: 0,
+            remainder: 0,
+            currentPage: 0,
+            placeholder: true,
+            breakpoints: [],
+            breakpoints_loading: true
         }
+        
+        updatePageNumber(contentLength){
+            let pages = 0;
+            let page_remainder = 0;
+
+            if(contentLength > 8){
+                pages = Math.floor(contentLength/8)
+                page_remainder = contentLength % 8
+            }
+
+            if(page_remainder > 0){
+                pages += 1
+            }
+
+            this.setState({
+                pageNumber: pages,
+                remainder: page_remainder
+            })
+        }
+
+        showPlaceholder(){
+            this.setState({
+                placeholder: false
+            })
+        }
+
+        componentDidMount() {
+            this.updatePageNumber(this.props.establishment.establishments.length)
+            // this.createBreakPoints();
+        }
+        
 
         render(){
             const { establishments } = this.props.establishment;
+            let page_breakpoints = []
+
             return(
                 <>
-                    {/* <Container> */}
                     <br></br>
+                    {/* <SpliceCards state={{
+                        establishments: this.props.establishment,
+                        currentPage: this.state.currentPage,
+                        pageNumber: this.state.pageNumber,
+                        remainder: this.state.remainder
+                    }}/> */}
+
+                    {/* <Delayed waitBeforeShow={2000}>
+                        <DisplayCard state={{
+                            establishments: page_breakpoints[this.state.currentPage]
+                        }}/>
+                    </Delayed> */}
+                    {/* {this.state.placeholder ? <CardPlaceholder/> : 
+                    <Row xs={1} md={4} className="g-3">
+                        {this.state.breakpoints[this.state.currentPage].map((estabs) => (
+                            <Col className="dormcard">
+                                <MDBCard >
+                                    {estabs.pictures.length > 0 ? 
+                                    <MDBCardImage position="top" src={`../../uploads/${estabs.pictures[0]}`} className="card-establishment-img"/>
+                                    :
+                                    <MDBCardImage position="top" src="../../building_placeholder2.jpg" className="card-establishment-img"/>
+                                    }
+                                    <MDBCardBody>
+                                    
+                                    <MDBCardTitle><p className="dormcard-title">{estabs.name}</p></MDBCardTitle>
+                                    <MDBCardText>
+                                        <div className="dorm-card-text">
+                                            {estabs.location}
+                                            <br></br>
+                                            Rent starts at P{estabs.price_min}
+                                            </div>
+                                    </MDBCardText>
+
+                                        <Link 
+                                            to={`/browse/${estabs.name}`} 
+                                            state={{ 
+                                                estab_id: estabs._id, 
+                                                estab_name: estabs.name, 
+                                                estab_deet: estabs.description, 
+                                                estab_price: estabs.price_min 
+                                            }}
+                                            >
+                                        
+                                            <Button size="sm">See more</Button>
+                                        </Link>
+
+                                    </MDBCardBody>
+                                </MDBCard>
+                            </Col>
+                        ))}
+                    </Row>
+                    } */}
                         <Row xs={1} md={4} className="g-3">
                             {establishments.map((estabs)=>(
                                 <Col key={estabs._id} className="dormcard">
                                     <MDBCard >
-                                        <MDBCardImage position="top" src="../../building_placeholder.jpg" className="card-establishment-img"/>
+                                        {estabs.pictures.length > 0 ? 
+                                        <MDBCardImage position="top" src={`../../uploads/${estabs.pictures[0]}`} className="card-establishment-img"/>
+                                        :
+                                        <MDBCardImage position="top" src="../../building_placeholder2.jpg" className="card-establishment-img"/>
+                                        }
                                         <MDBCardBody>
                                         
-                                        <MDBCardTitle>{estabs.name}</MDBCardTitle>
+                                        <MDBCardTitle><p className="dormcard-title">{estabs.name}</p></MDBCardTitle>
                                         <MDBCardText>
                                             <div className="dorm-card-text">
                                                 {estabs.location}
@@ -73,9 +160,6 @@ class EstabCard extends Component{
                                 </Col>
                             ))}
                         </Row>
-
-
-                    {/* </Container> */}
                 </>
             )
         }

@@ -7,14 +7,12 @@ import {
     Container,
     Row,
     Col,
-    // Stack
 } from 'react-bootstrap';
 
 import {
     MDBCard,
     MDBCardBody,
     MDBCardTitle,
-    MDBCardText
 } from 'mdb-react-ui-kit';
 
 
@@ -26,16 +24,7 @@ class Details extends Component{
     loading: true
     }
 
-    getEstablishmentDetails(id){
-        this.props.getDetails(id);
-    }
-
-    componentDidMount() {
-        this.getEstablishmentDetails(this.props.establishment_id)
-    }
-
     render(){
-
         return(
             <>
             <Container>
@@ -56,7 +45,7 @@ class Details extends Component{
                     </Col>
                     <br></br>
                     <Col xs={6} md={4}>
-                        <MDBCard>
+                        <MDBCard className="d-flex justify-content-center">
                             <MDBCardBody>
                                 <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
                                 <br></br>

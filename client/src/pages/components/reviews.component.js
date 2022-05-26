@@ -27,70 +27,60 @@ class Reviews extends Component{
         loading: true
     }
 
-    getReviewDetails(id){
-        this.props.getReviews(id);
-    }
-
-    componentDidMount() {
-        this.getReviewDetails(this.props.establishment_id)
-    }
-
     render(){
         const { reviews } = this.props.reviews
         let average_score = 0;
+        let hasReviews = false;
 
-        // const userDetails = [
-        //     this.props.user.username,
-        //     this.props.establishment_id
-        // ]
-
-        reviews?.map((review)=>(
-            average_score += review.score
-        ))
+        if(reviews.length > 0){
+            hasReviews = true;
+            reviews.map((review)=>(
+                average_score += review.score
+            ))
+            
+            average_score = Math.round((average_score/reviews.length) * 10) / 10
+        }
         
-        average_score = Math.round((average_score/reviews.length) * 10) / 10
-        console.log(average_score)
-
         return(
             <>
             <Delayed waitBeforeShow={1000}>
                 <Container>
                     <Row>
                         <Col xs={12} md={8}>
-                        {/* <MDBCard>
-                            <MDBCardBody> */}
-                            <MDBCol className="d-flex mb-2">
-                                <h3>{reviews.length} Reviews</h3>
-                                <h4 className="review-score">{average_score}</h4>
-                                <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score} precision={0.5} readOnly />
-                                <AddReview state={{
-                                    user: this.props.user,
-                                    establishment_id: this.props.establishment_id
-                                }}/>
-                            </MDBCol>
-                            <br></br>
-                            {reviews?.map((revs)=>(
-                                <div key={revs._id}>
-                                    <MDBRow className="border-bottom mb-4">
-                                        <MDBCol className="d-flex mb-2">
-                                            <FaUserCircle size={40} />
-                                            <MDBRow>
-                                                <h6 className="mx-3 review-name">{revs.username}</h6>
-                                                {/* <p className="mx-2 review-date-text">May 2022</p> */}
-                                                <Rating size="small" className="star-ratings" defaultValue={revs.score} readOnly />
-                                            </MDBRow>
-                                            <MDBRow>
-                                            </MDBRow>
-                                        </MDBCol>
-                                        <div className="reviews-text">
-                                            <p >{revs.review}</p> 
-                                        </div>
-                                    </MDBRow>
-                                    <br></br>
-                                </div>
-                            ))}
-                            {/* </MDBCardBody>
-                        </MDBCard> */}
+                            <Col className="d-flex">
+                                <Col className="d-flex mb-2">
+                                    <h3>{reviews.length} Reviews</h3>
+                                    { hasReviews && <h4 className="review-score">{average_score}</h4>}
+                                    { hasReviews && <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score} precision={0.5} readOnly />}
+                                </Col>
+                                <Col className="d-flex">
+                                    <AddReview state={{
+                                        user: this.props.user,
+                                        establishment_id: this.props.establishment_id
+                                    }}/>
+                                </Col>
+                            </Col>
+                        <br></br>
+                        {reviews?.map((revs)=>(
+                            <div key={revs._id}>
+                                <Row className="border-bottom mb-4">
+                                    <Col className="d-flex mb-2">
+                                        <FaUserCircle size={40} />
+                                        <Row>
+                                            <h6 className="mx-3 review-name">{revs.username}</h6>
+                                            {/* <p className="mx-2 review-date-text">May 2022</p> */}
+                                            <Rating size="small" className="star-ratings" defaultValue={revs.score} readOnly />
+                                        </Row>
+                                        <Row>
+                                        </Row>
+                                    </Col>
+                                    <div className="reviews-text">
+                                        <p >{revs.review}</p> 
+                                    </div>
+                                </Row>
+                                <br></br>
+                            </div>
+                        ))}
                         </Col>
                     </Row>
                 </Container>

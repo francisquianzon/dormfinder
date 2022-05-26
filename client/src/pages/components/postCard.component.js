@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import Button from 'react-bootstrap/Button'
 import {
     Form,
-    Alert,
+    Alert
 } from 'react-bootstrap';
 
 import { MDBCard, 
     MDBCardBody, 
-    MDBCardTitle,
     MDBCardHeader,
     MDBCardText, 
     MDBBtn,
@@ -18,8 +16,7 @@ import { MDBCard,
 } from 'mdb-react-ui-kit';
 
 import { connect } from 'react-redux';
-import Card from 'react-bootstrap/Card'
-import { addEstablishment } from '../../actions/establishmentActions';
+import { addEstablishment, uploadImage } from '../../actions/establishmentActions';
 
 class PostCard extends Component{
     //initialize state attributes
@@ -34,7 +31,10 @@ class PostCard extends Component{
             original_poster: {},
             mobile_info: '',
             email_info: '',
-            landlord_check: ''
+            landlord_check: null,
+            pictures: '',
+            error_msg: null,
+            alert_type: ''
         }
     }
 
@@ -43,15 +43,67 @@ class PostCard extends Component{
         this.setState({[e.target.name]: e.target.value});
     }
 
+    handleFileUpload = async (e) => {
+        //retrieives the uploaded files
+        const file = e.target.files;
+        let file_base64 = [];
+
+        //converts the uploaded files to base64 and puts in an array
+        // for(let i=0;i<file.length;i++){
+        //     file_base64.push(await this.convertToBase64(file[i]))
+        // }
+
+        // console.log(file_base64);
+        this.setState({
+            pictures:file
+        })
+        // setPostImage({ ...postImage, myFile: base64 });
+    };
+
+    convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+            resolve(fileReader.result);
+            };
+            fileReader.onerror = (error) => {
+            reject(error);
+            };
+        });
+    };
+
 
     onSubmit = e => {
         e.preventDefault();
         
-        if(this.state.name == '' || this.state.location == '' || this.state.description == '' || this.state.price_min == 0){
-            alert("All fields are required");
+        if(this.state.name == '' 
+        || this.state.location == '' 
+        || this.state.description == '' 
+        || this.state.price_min == 0
+        || this.state.price_max == 0
+        || this.state.mobile_info == ''
+        ){
+            // alert("All fields are required");
+            this.setState({
+                error_msg: "Please enter required fields",
+                alert_type: "danger"
+            })
             return false
         }
-        console.log(this.state);
+        let pictures = []
+
+        //creates a formData for file upload
+        const formData = new FormData();
+        for(let j=0;j<this.state.pictures.length;j++){
+            //renames the pictures first
+            const newName = new Date().getTime() + this.state.pictures[j].name; 
+            formData.append('demo_images', this.state.pictures[j], newName)
+            pictures.push(newName);
+        }
+
+        this.props.uploadImage(formData);
+
         //creates a json item
         const newItem = {
             name: this.state.name,
@@ -61,9 +113,12 @@ class PostCard extends Component{
             price_max: this.state.price_max,
             mobile_info: this.state.mobile_info,
             email_info: this.state.email_info,
-            original_poster: this.props.user.username
-
+            original_poster: this.props.user.username,
+            pictures
         }
+
+        // console.log("newItem")
+        // console.log(newItem)
 
         // add item via addEstablishment action
         this.props.addEstablishment(newItem);
@@ -74,13 +129,15 @@ class PostCard extends Component{
             description: '',
             price_min: 0,
             price_max: 0,
-            original_poster: {},
             mobile_info: '',
             email_info: '',
-            landlord_check: ''
+            landlord_check: null,
+            error_msg: "Successfully added!",
+            alert_type: "success"
         });
+
         //reloads the window
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     render(){
@@ -96,41 +153,45 @@ class PostCard extends Component{
                 </MDBRow>
                 <MDBRow>
                     <MDBCol></MDBCol>
-                    <MDBCol>
+                    <MDBCol className="d-flex justify-content-center">
                         <MDBCard className="d-flex justify-content-center" style={{ width: '50rem' }}>
                             <MDBCardHeader><h3>Create a post</h3></MDBCardHeader>
                             <MDBCardBody>
                                 <MDBCardText><h4>Establishment details</h4></MDBCardText>
                                 <Form onSubmit={this.onSubmit}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control name="name" type="Text" onChange={this.onChange} className="form-background"/>
+                                        <Form.Label><h5>Name</h5></Form.Label>
+                                        <Form.Control value={this.state.name} name="name" type="Text" onChange={this.onChange} className="form-background"/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Location</Form.Label>
-                                        <Form.Control name="location" type="Text" placeholder="e.g. along F.O. Santos Rd." onChange={this.onChange} className="form-background"/>
+                                        <Form.Label><h5>Location</h5></Form.Label>
+                                        <Form.Control value={this.state.location} name="location" type="Text" placeholder="e.g. along F.O. Santos Rd." onChange={this.onChange} className="form-background"/>
                                         <Form.Text>Add a brief description of the establshiment's location or address</Form.Text>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label>Description</Form.Label>
-                                        <Form.Control name="description" as="textarea" rows="5" type="Text" onChange={this.onChange} className="form-background"/>
+                                        <Form.Label><h5>Description</h5></Form.Label>
+                                        <Form.Control value={this.state.description} name="description" as="textarea" rows="5" type="Text" onChange={this.onChange} className="form-background"/>
                                         <Form.Text>Add the establishment's description e.g. no. of bedrooms, amenaties, etc.</Form.Text>
                                     </Form.Group>
-
+                                    <Form.Group controlId="formFileMultiple" className="mb-3">
+                                        <Form.Label><h5>Images</h5></Form.Label>
+                                        <Form.Control name="pictures" type="file" onChange={(e) => this.handleFileUpload(e)} multiple className="form-background"/>
+                                        <Form.Text>Add pictures to your establishment</Form.Text>
+                                    </Form.Group>
                                     <MDBRow>
                                         <MDBCol>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Min. Price</Form.Label>
-                                                <Form.Control name="price_min" type="Number" onChange={this.onChange} className="form-background"/>
+                                                <Form.Label><h5>Min. Price</h5></Form.Label>
+                                                <Form.Control value={this.state.price_min} name="price_min" type="Number" onChange={this.onChange} className="form-background"/>
                                             </Form.Group>
 
                                         </MDBCol>
                                         <MDBCol>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <Form.Label>Max. Price</Form.Label>
-                                                <Form.Control name="price_max" type="Number" onChange={this.onChange} className="form-background"/>
+                                                <Form.Label><h5>Max Price</h5></Form.Label>
+                                                <Form.Control value={this.state.price_max} name="price_max" type="Number" onChange={this.onChange} className="form-background"/>
                                             </Form.Group>
                                         </MDBCol>
                                         <Form.Text>If the establishment has a fixed price, just input the same price on both fields</Form.Text>
@@ -141,14 +202,14 @@ class PostCard extends Component{
                                             <MDBCol>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Mobile Number</Form.Label>
-                                                    <Form.Control name="mobile_info" type="Text" onChange={this.onChange} className="form-background"/>
+                                                    <Form.Control value={this.state.mobile_info} name="mobile_info" type="Text" onChange={this.onChange} className="form-background"/>
                                                 </Form.Group>
 
                                             </MDBCol>
                                             <MDBCol>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Email</Form.Label>
-                                                    <Form.Control name="email_info" type="Text" onChange={this.onChange} className="form-background"/>
+                                                    <Form.Control value={this.state.email_info} name="email_info" type="Text" onChange={this.onChange} className="form-background"/>
                                                 </Form.Group>
                                             </MDBCol>
                                         <Form.Text>For additional contact information, add them in the description field</Form.Text>
@@ -156,9 +217,11 @@ class PostCard extends Component{
                                         <br></br>
                                         <MDBCardText><h5>Are you posting as the Landlord?</h5></MDBCardText>
                                         <div>
-                                            <MDBRadio name='landlord_check' id='landlord_true' label='Yes, I am the Landlord' />
-                                            <MDBRadio name='landlord_check' id='landlord_false' label='No, I am posting on behalf of the Landlord' />
+                                            <MDBRadio checked={this.state.landlord_check} name='landlord_check' id='landlord_true' label='Yes, I am the Landlord' />
+                                            <MDBRadio checked={this.state.landlord_check} name='landlord_check' id='landlord_false' label='No, I am posting on behalf of the Landlord' />
                                         </div>
+                                    <br></br>
+                                    { this.state.error_msg ? <Alert variant={this.state.alert_type}>{this.state.error_msg}</Alert> : null }
                                     <br></br>
                                     <MDBBtn variant="primary" type="submit">
                                         Post
@@ -183,4 +246,4 @@ const mapStateToProps = state => ({
     error: state.error
 })
 
-export default connect(mapStateToProps, { addEstablishment })(PostCard);
+export default connect(mapStateToProps, { addEstablishment, uploadImage })(PostCard);

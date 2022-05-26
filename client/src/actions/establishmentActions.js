@@ -44,6 +44,12 @@ export const addEstablishment = estab => (dispatch, getState) => {
         );
 };
 
+export const uploadImage = imageForm => (dispatch, getState) => {
+    axios
+        .post('/establishments/image', imageForm, {})
+
+}
+
 export const deleteEstablishment = id => (dispatch, getState) => {
     axios.delete(`/establishments/${id}`, tokenConfig(getState)).then(res => 
         dispatch({
