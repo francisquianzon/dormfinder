@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, Redirect } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 // import './App.css';
@@ -43,6 +43,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" exact element={<Homepage/>}/>
         <Route path="browse" exact element={<Browse/>}/>
+        <Route path="/browse/search" exact element={<Browse/>}/>
         <Route path='/addestablishment' exact element={<AddEstab/>} />
         <Route path='/browse/:id' exact element={<EstabDetails/>}/>
         <Route path='/browse.admin' exact element={<AdminView/>}/>

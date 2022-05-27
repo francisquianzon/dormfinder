@@ -3,7 +3,7 @@ import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING, GET_ITEM } from '../a
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
-export const getEstablishments = () => dispatch => {
+export const getEstablishments = () => async dispatch => {
     dispatch(setItemsLoading());
     axios
         .get('/establishments')
@@ -16,6 +16,17 @@ export const getEstablishments = () => dispatch => {
         )
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 };
+
+export const getEstablishmentBySearch = (searchQuery) => async dispatch => {
+    axios
+        .get(`/establishments/search?searchQuery=${searchQuery.search}`)
+        .then(res => 
+            dispatch({
+                type: GET_ITEMS,
+                payload: res.data
+            })
+        )
+}
 
 export const getDetails = id => dispatch => {
     dispatch(setItemsLoading());

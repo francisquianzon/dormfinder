@@ -11,8 +11,15 @@ import {
     MDBCardImage, 
 } from 'mdb-react-ui-kit';
 
+import {
+    Paper
+} from '@mui/material';
+
+import { useLocation, useHistory } from 'react-router-dom';
 import Navbar from './components/navbar.component';
 import DormCards from './components/dormCards.component';
+import Pagination from './components/pagination.component';
+
 import { getEstablishments, deleteEstablishment } from '../actions/establishmentActions';
 import { connect } from 'react-redux';
 
@@ -38,6 +45,7 @@ function CardPlaceholder(){
 }
 
 class BrowsePage extends Component{
+
     state = {
         placeholder: true
     }
@@ -64,9 +72,10 @@ class BrowsePage extends Component{
                 <Container>
                     <br></br>
                     <h2>Dorms</h2>
-                    {/* {this.state.placeholder ? <CardPlaceholder/> : <DormCards/>} */}
-                    <DormCards/>
-                    
+                    {this.state.placeholder ? <CardPlaceholder/> : <DormCards/>}
+                    {/* <Paper elevation={6}> */}
+                    {/* <Pagination/> */}
+                    {/* </Paper> */}
                 </Container>
             </>
         )
