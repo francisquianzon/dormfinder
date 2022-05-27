@@ -19,7 +19,7 @@ import { loadUser } from './actions/authActions';
 
 //IMPORT PAGES
 import Homepage from './pages/homepage.page';
-import Browse from './pages/browse.page';
+import Browse from './pages/browsepage';
 import AddEstab from './pages/addEstablishment.page';
 import EstabDetails from './pages/estabDetails.page';
 import AdminView from './pages/components/adminview.component';

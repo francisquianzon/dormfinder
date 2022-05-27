@@ -41,6 +41,7 @@ const Browse = () =>{
     const [currentId, setCurrentId] = useState(0);
     const navigate = useNavigate();
     const loaded = false;
+
     const { establishments } = useSelector((state) => state.establishment)
 
     const submitQuery = () => {
@@ -48,26 +49,33 @@ const Browse = () =>{
             console.log("Submitting Query...");
             console.log(search)
             dispatch(getEstablishmentBySearch({search}));
-            // navigate(`/posts/search?searchQuery=${search}`)
+            navigate(`/browse/search?searchQuery=${search}`)
             // loaded = true
         }
     }
+
+    // const handleKeyPress = (e) => {
+    //     if (e.keyCode === 13) {
+    //       searchPost();
+    //     }
+    // };
     
     useEffect(() => {
         if(loaded){
             navigate(`/posts/search?searchQuery=${search}`)
         }
     })
-
     console.log("Printing establishments...")
     console.log(establishments)
+
+    console.log(search)
     return(
         <>
             <Navbar/>
             <Container>
                 <br></br>
                 <TextField name="search" variant="outlined" label="Search Memories" value={search} onChange={(e) => setSearch(e.target.value)} />
-                <MDBBtn onClick={submitQuery()}>Search</MDBBtn>
+                <MDBBtn onClick={submitQuery}>Search</MDBBtn>
                 <br></br>
                 <h2>Dorms</h2>
                 {/* {this.state.placeholder ? <CardPlaceholder/> : <DormCards/>} */}

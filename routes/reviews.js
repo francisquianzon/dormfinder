@@ -8,7 +8,7 @@ const Review = require('../models/Reviews.js');
 //@route    GET /
 //@desc     Get all reviews for an establishment
 //@access   Public
-router.get('/:dorm_id', (req, res) => {
+router.get('/:dorm_id', async (req, res) => {
     Review.find({dorm_id:req.params.dorm_id})
     .sort({date:-1})
     .then(reviews => res.json(reviews))
@@ -17,7 +17,7 @@ router.get('/:dorm_id', (req, res) => {
 // @route   POST /
 // @desc    post a review
 // @access  Private
-router.post('/', auth, (req,res) =>{
+router.post('/', auth, async (req,res) =>{
 
     const newReview = new Review({
         username: req.body.username,
@@ -34,7 +34,7 @@ router.post('/', auth, (req,res) =>{
 //@route    POST /:id
 //@desc     add a like to the review
 //@access   Private
-router.post('/:id', auth, (req,res) =>{
+router.post('/:id', auth, async (req,res) =>{
     var conditions = {_id: req.params.id};
 
     Review.findOneAndUpdate(

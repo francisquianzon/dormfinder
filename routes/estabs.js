@@ -4,15 +4,47 @@ const auth = require('../middleware/auth');
 const multer = require('multer');
 
 //estabs Model 
-const User = require('../models/Estabs.js');
+const Estab = require('../models/Estabs.js');
 
 // @route   GET /
 // @desc    Get all establishments
 // @access  Public
-router.get('/', (req,res) =>{
-    Estab.find()
-    .sort({date: -1})
-    .then(estabs => res.json(estabs))
+router.get('/', async (req,res) =>{
+    const { page } = req.query;
+
+    // Estab.find()
+    // .sort({date: -1})
+    // .then(estabs => res.json(estabs))
+    try{
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT;
+
+        const total = await Estab.countDocuments({});
+        const establishments = await Estab.find().limit(LIMIT).skip(startIndex);
+
+        res.json(establishments);
+    }catch(error){
+        res.status(404).json({message: error.message});
+    }
+
+});
+
+// @route   GET /
+// @desc    Get posts by search
+// @access  Public
+router.get('/search', async (req,res) => {
+    const { searchQuery } = req.query;
+
+    try{
+        const posts = await Estab.find({
+            name: { $regex: searchQuery, $options: 'i' }
+        });
+
+        res.json(posts)
+    }catch (error){
+        res.status(404).json({message: error.message})
+    }
+
 });
 
 // @route   POST /image
@@ -28,30 +60,9 @@ var storage = multer.diskStorage({
     }
  });
 
-// var upload = multer({ storage: storage }).single("demo_image");
-// const upload = multer({dest:'client/src/uploads/'});
 const upload = multer({storage:storage});
 
-// var upload = multer({ storage: storage }).array("demo_images", 4);
-// var upload = multer({
-//     storage: storage,
-//     fileFilter: (req, file, cb) => {
-//         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-//             cb(null, true);
-//         } else {
-//             cb(null, false);
-//             return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-//         }
-//     }
-// });
-
 router.post("/image", upload.array("demo_images", 15), (req,res) => {
-    // upload(req,res,(err) => {
-    //     if(err){
-    //         res.status(400).send("Something went wrong!");
-    //     }
-    //     res.send(req.file);
-    // })
     try{
         res.send(req.files);
     }catch (error){
@@ -63,7 +74,7 @@ router.post("/image", upload.array("demo_images", 15), (req,res) => {
 // @route   POST /
 // @desc    create an establishment
 // @access  Private
-router.post('/', auth, (req,res) =>{
+router.post('/', auth, async (req,res) =>{
     const newEstab = new Estab({
         name: req.body.name,
         location: req.body.location,
@@ -84,7 +95,7 @@ router.post('/', auth, (req,res) =>{
 // @route   GET /:id
 // @desc    find a specific establishment
 // @access  Public
-router.get('/:id', (req,res) =>{
+router.get('/:id', async (req,res) =>{
     Estab.findById(req.params.id)
     .then(estabs => res.json(estabs))
 });

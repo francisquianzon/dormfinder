@@ -1,4 +1,4 @@
-import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING, GET_ITEM } from '../actions/types';
+import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING, GET_ITEM, CLEAR_ITEMS } from '../actions/types';
 
 const initialState = {
     establishments: [],
@@ -24,6 +24,11 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 establishments: [action.payload, ...state.establishments]
+            }
+        case CLEAR_ITEMS:
+            return{
+                ...state,
+                establishments: []
             }
         case DELETE_ITEM:
             return {
