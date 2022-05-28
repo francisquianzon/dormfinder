@@ -3,6 +3,8 @@ import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING, GET_ITEM, CLEAR_ITEMS
 const initialState = {
     establishments: [],
     item: [],
+    currentPage: '',
+    numberOfPages: '',
     loading: false
 }
 
@@ -11,7 +13,9 @@ export default function(state = initialState, action){
         case GET_ITEMS:
             return {
                 ...state,
-                establishments: action.payload,
+                establishments: action.payload.data,
+                currentPage: action.payload.currentPage,
+                numberOfPages: action.payload.numberOfPages,
                 loading: false
             }
         case GET_ITEM:

@@ -22,7 +22,8 @@ router.get('/', async (req,res) =>{
         const total = await Estab.countDocuments({});
         const establishments = await Estab.find().limit(LIMIT).skip(startIndex);
 
-        res.json(establishments);
+        // res.json(establishments);
+        res.json({ data: establishments, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     }catch(error){
         res.status(404).json({message: error.message});
     }
@@ -36,11 +37,11 @@ router.get('/search', async (req,res) => {
     const { searchQuery } = req.query;
 
     try{
-        const posts = await Estab.find({
+        const establishments = await Estab.find({
             name: { $regex: searchQuery, $options: 'i' }
         });
 
-        res.json(posts)
+        res.json({ data: establishments})
     }catch (error){
         res.status(404).json({message: error.message})
     }

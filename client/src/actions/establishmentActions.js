@@ -3,16 +3,15 @@ import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING, GET_ITEM } from '../a
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
-export const getEstablishments = () => async dispatch => {
+export const getEstablishments = (page) => async dispatch => {
     dispatch(setItemsLoading());
     axios
-        .get('/establishments')
+        .get(`/establishments?page=${page}`)
         .then(res => 
             dispatch({
                 type: GET_ITEMS,
                 payload: res.data
             })
-            
         )
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 };

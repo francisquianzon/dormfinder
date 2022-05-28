@@ -230,3 +230,7 @@
 .gallery-img{
     object-fit: cover !important;
 }
+
+.search-bar{
+    border-radius: 25px !important;
+}

@@ -3,13 +3,18 @@ import {
     Container,
     Placeholder,
     Card,
+    Form,
+    InputGroup,
+    Button,
+    Row,
+    Col
 } from 'react-bootstrap';
 
 import {
     MDBCard, 
     MDBCardBody, 
     MDBCardImage,
-    MDBBtn 
+    MDBBtn,
 } from 'mdb-react-ui-kit';
 
 import {
@@ -31,18 +36,41 @@ function useQuery(){
     return new URLSearchParams(useLocation().search)
 }
 
+function CardPlaceholder(){
+    return(
+        <>
+        <MDBCard show={false} style={{ minWidth: '15rem', width: "20rem" }}>
+            <MDBCardImage position="top" variant="top" src="../../building_placeholder.jpg" className="card-establishment-img" />
+            <MDBCardBody>
+            <Placeholder as={Card.Title} animation="glow">
+                <Placeholder xs={6} />
+            </Placeholder>
+            <Placeholder as={Card.Text} animation="glow">
+                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                <Placeholder xs={6} /> <Placeholder xs={8} />
+            </Placeholder>
+            <Placeholder.Button variant="primary" xs={6} />
+            </MDBCardBody>
+        </MDBCard>
+
+        </>
+    )
+}
+
 const Browse = () =>{
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const query = useQuery();
+    
     const page = query.get('page') || 1;
     const searchQuery = query.get('searchQuery');
-
-    const dispatch = useDispatch();
+    const loaded = false;
+    
+    const { establishments } = useSelector((state) => state.establishment)
     const [search, setSearch] = useState('');
     const [currentId, setCurrentId] = useState(0);
-    const navigate = useNavigate();
-    const loaded = false;
+    const [ placeholder, setPlaceholder] = useState(true);
 
-    const { establishments } = useSelector((state) => state.establishment)
 
     const submitQuery = () => {
         if(search.trim()){
@@ -53,35 +81,54 @@ const Browse = () =>{
             // loaded = true
         }
     }
-
-    // const handleKeyPress = (e) => {
-    //     if (e.keyCode === 13) {
-    //       searchPost();
-    //     }
-    // };
     
     useEffect(() => {
-        if(loaded){
-            navigate(`/posts/search?searchQuery=${search}`)
-        }
-    })
+        dispatch(getEstablishments());
+
+        const timer = setTimeout(() => setPlaceholder(false), 2000);
+        return () => clearTimeout(timer);
+      }, []);
+    
+
     console.log("Printing establishments...")
     console.log(establishments)
 
     console.log(search)
+
     return(
         <>
             <Navbar/>
             <Container>
                 <br></br>
-                <TextField name="search" variant="outlined" label="Search Memories" value={search} onChange={(e) => setSearch(e.target.value)} />
-                <MDBBtn onClick={submitQuery}>Search</MDBBtn>
+                <Row>
+                    <Col></Col>
+                    <Col xs={6} className="d-flex justify-content-center">
+                        <InputGroup size="lg">
+                        <Form.Control
+                            name="search"
+                            placeholder="Search"
+                            className="sg-form-background search-bar"
+                            onChange={(e) => setSearch(e.target.value)}
+                            
+                            />
+                        {/* <MDBBtn variant="outline-secondary" id="button-addon2">
+                            Button
+                            </MDBBtn> */}
+
+                        <MDBBtn onClick={submitQuery}>Search</MDBBtn>
+                        </InputGroup>
+                    </Col>
+                    <Col></Col>
+                </Row>
+                {/* <TextField name="search" variant="outlined" label="Search Memories" value={search} onChange={(e) => setSearch(e.target.value)} /> */}
+
                 <br></br>
+
                 <h2>Dorms</h2>
-                {/* {this.state.placeholder ? <CardPlaceholder/> : <DormCards/>} */}
-                {/* <Paper elevation={6}> */}
-                    <Pagination/>
-                {/* </Paper> */}
+                {placeholder ? <CardPlaceholder/> : <DormCards/>}
+                <br></br>
+                <Pagination page={page}/>
+                <br></br>
             </Container>
         </>
     )
