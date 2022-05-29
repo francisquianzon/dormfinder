@@ -15,12 +15,13 @@ router.get('/', async (req,res) =>{
     // Estab.find()
     // .sort({date: -1})
     // .then(estabs => res.json(estabs))
+
     try{
         const LIMIT = 8;
         const startIndex = (Number(page) - 1) * LIMIT;
 
         const total = await Estab.countDocuments({});
-        const establishments = await Estab.find().limit(LIMIT).skip(startIndex);
+        const establishments = await Estab.find().sort({name:1}).limit(LIMIT).skip(startIndex);
 
         // res.json(establishments);
         res.json({ data: establishments, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});

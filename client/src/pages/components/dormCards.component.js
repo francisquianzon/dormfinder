@@ -49,19 +49,27 @@ class EstabCard extends Component{
                                                 Rent starts at P{estabs.price_min}
                                                 </div>
                                         </MDBCardText>
-
-                                            <Link 
-                                                to={`/browse/${estabs.name}`} 
-                                                state={{ 
-                                                    estab_id: estabs._id, 
-                                                    estab_name: estabs.name, 
-                                                    estab_deet: estabs.description, 
-                                                    estab_price: estabs.price_min 
-                                                }}
-                                            >
-                                            
-                                                <Button size="sm">See more</Button>
-                                            </Link>
+                                            <Row>
+                                                <Col>
+                                                    <Link 
+                                                        to={`/browse/${estabs.name}`} 
+                                                        state={{ 
+                                                            estab_id: estabs._id, 
+                                                            estab_name: estabs.name, 
+                                                            estab_deet: estabs.description, 
+                                                            estab_price: estabs.price_min 
+                                                        }}
+                                                    >
+                                                    
+                                                        <Button size="sm">See more</Button>
+                                                    </Link>
+                                                </Col>
+                                                <Col className="d-flex justify-content-end">
+                                                {/* <div className="dorm-card-text">
+                                                    {estabs.reviews.length} Reviews
+                                                </div> */}
+                                                </Col>
+                                            </Row>
 
                                         </MDBCardBody>
                                     </MDBCard>

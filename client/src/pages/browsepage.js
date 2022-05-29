@@ -81,6 +81,8 @@ const Browse = () =>{
             console.log(search)
             dispatch(getEstablishmentBySearch({search}));
             navigate(`/browse/search?searchQuery=${search}`)
+        }else{
+            dispatch(getEstablishments());
         }
     }
 
@@ -93,10 +95,11 @@ const Browse = () =>{
     useEffect(() => {
         dispatch(getEstablishments());
 
+        
         const timer = setTimeout(() => setPlaceholder(false), 1500);
         return () => clearTimeout(timer);
-      }, []);
-
+    }, []);
+    
     return(
         <>
             <Navbar/>

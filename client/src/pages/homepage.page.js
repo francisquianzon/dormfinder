@@ -64,6 +64,7 @@ export default class Homepage extends Component{
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
+            <br></br>
             <Footer/>    
             </>
         )

@@ -5,7 +5,7 @@
 .btn-primary, .btn-primary:visited {
     background-color: #DC7429 !important;
     border-color: #DC7429  !important;
-    border-radius:25px;
+    /* border-radius: 5px; */
 }
 
 .btn-primary:active, .btn-primary:hover {
