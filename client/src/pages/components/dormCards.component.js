@@ -22,46 +22,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 
-class EstabCard extends Component{
-        // state = {
-        //     pageNumber: 0,
-        //     remainder: 0,
-        //     currentPage: 0,
-        //     placeholder: true,
-        //     breakpoints: [],
-        //     breakpoints_loading: true
-        // }
-        
-        // updatePageNumber(contentLength){
-        //     let pages = 0;
-        //     let page_remainder = 0;
-
-        //     if(contentLength > 8){
-        //         pages = Math.floor(contentLength/8)
-        //         page_remainder = contentLength % 8
-        //     }
-
-        //     if(page_remainder > 0){
-        //         pages += 1
-        //     }
-
-        //     this.setState({
-        //         pageNumber: pages,
-        //         remainder: page_remainder
-        //     })
-        // }
-
-        // showPlaceholder(){
-        //     this.setState({
-        //         placeholder: false
-        //     })
-        // }
-
-        // componentDidMount() {
-        //     // this.updatePageNumber(this.props.establishment.establishments.length)
-        //     // this.createBreakPoints();
-        // }
-        
+class EstabCard extends Component{     
 
         render(){
             const { establishments } = this.props.establishment;

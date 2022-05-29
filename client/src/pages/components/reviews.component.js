@@ -21,6 +21,7 @@ import {
 import { FaUserCircle } from 'react-icons/fa';
 import Delayed from './delayed';
 import AddReview from './addReviewModal.component';
+import SeeAllReviews from './seeAllReviews.component';
 
 class Reviews extends Component{
     state = {
@@ -29,6 +30,7 @@ class Reviews extends Component{
 
     render(){
         const { reviews } = this.props.reviews
+        const show_reviews = reviews.slice(0,3)
         let average_score = 0;
         let hasReviews = false;
 
@@ -53,7 +55,7 @@ class Reviews extends Component{
                                     { hasReviews && <h4 className="review-score">{average_score}</h4>}
                                     { hasReviews && <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score} precision={0.5} readOnly />}
                                 </Col>
-                                <Col className="d-flex">
+                                <Col className="d-flex justify-content-end">
                                     <AddReview state={{
                                         user: this.props.user,
                                         establishment_id: this.props.establishment_id
@@ -61,7 +63,7 @@ class Reviews extends Component{
                                 </Col>
                             </Col>
                         <br></br>
-                        {reviews?.map((revs)=>(
+                        {show_reviews?.map((revs)=>(
                             <div key={revs._id}>
                                 <Row className="border-bottom mb-4">
                                     <Col className="d-flex mb-2">
@@ -81,8 +83,16 @@ class Reviews extends Component{
                                 <br></br>
                             </div>
                         ))}
+                        <Row>
+                            <Col></Col>
+                            <Col className="d-flex justify-content-center">
+                            <SeeAllReviews/>
+                            </Col>
+                            <Col></Col>
+                        </Row>
                         </Col>
                     </Row>
+                    <br></br>
                 </Container>
             </Delayed>
             </>

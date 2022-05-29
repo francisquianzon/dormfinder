@@ -56,6 +56,11 @@ class AddReview extends Component{
             review: this.state.review
         }
 
+        this.setState({
+            score: 0,
+            review:''
+        })
+
         // add review via addreview action
         this.props.addReview(newReview);
         //close modal
@@ -73,7 +78,7 @@ class AddReview extends Component{
 
         return(
             <>  
-                { this.props.isAuthenticated && <Nav.Link onClick={this.toggle}><p className="write-a-review">Write a Review</p></Nav.Link>}
+                { this.props.isAuthenticated && <Nav.Link onClick={this.toggle} className="write-a-review nav-links">Write a Review</Nav.Link>}
                 <MDBModal staticBackdrop show={this.state.modal} setShow={this.state.modal}>
                     <MDBModalDialog centered size="lg">
                         <MDBModalContent>

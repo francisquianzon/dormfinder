@@ -7,7 +7,8 @@ import {
     InputGroup,
     Button,
     Row,
-    Col
+    Col,
+    CloseButton
 } from 'react-bootstrap';
 
 import {
@@ -21,6 +22,8 @@ import {
     Paper,
     TextField
 } from '@mui/material';
+import { BiSearch } from 'react-icons/bi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -78,22 +81,21 @@ const Browse = () =>{
             console.log(search)
             dispatch(getEstablishmentBySearch({search}));
             navigate(`/browse/search?searchQuery=${search}`)
-            // loaded = true
         }
     }
+
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+          submitQuery();
+        }
+      };
     
     useEffect(() => {
         dispatch(getEstablishments());
 
-        const timer = setTimeout(() => setPlaceholder(false), 2000);
+        const timer = setTimeout(() => setPlaceholder(false), 1500);
         return () => clearTimeout(timer);
       }, []);
-    
-
-    console.log("Printing establishments...")
-    console.log(establishments)
-
-    console.log(search)
 
     return(
         <>
@@ -101,34 +103,36 @@ const Browse = () =>{
             <Container>
                 <br></br>
                 <Row>
-                    <Col></Col>
-                    <Col xs={6} className="d-flex justify-content-center">
+                    <Col><h2>Dorms</h2></Col>
+                    <Col xs={6} className="d-flex justify-content-center float-end">
                         <InputGroup size="lg">
                         <Form.Control
                             name="search"
                             placeholder="Search"
-                            className="sg-form-background search-bar"
+                            className="search-bar"
+                            onKeyDown={handleKeyPress}
                             onChange={(e) => setSearch(e.target.value)}
                             
                             />
-                        {/* <MDBBtn variant="outline-secondary" id="button-addon2">
-                            Button
-                            </MDBBtn> */}
-
-                        <MDBBtn onClick={submitQuery}>Search</MDBBtn>
+                        {/* <MDBBtn onClick={submitQuery}>Search</MDBBtn> */}
                         </InputGroup>
                     </Col>
-                    <Col></Col>
                 </Row>
-                {/* <TextField name="search" variant="outlined" label="Search Memories" value={search} onChange={(e) => setSearch(e.target.value)} /> */}
-
-                <br></br>
-
-                <h2>Dorms</h2>
-                {placeholder ? <CardPlaceholder/> : <DormCards/>}
-                <br></br>
-                <Pagination page={page}/>
-                <br></br>
+                {/* <br></br> */}
+                {placeholder ? <CardPlaceholder/> :
+                <div>
+                    <DormCards/>
+                    <br></br>
+                    <Row>
+                        <Col></Col>
+                        <Col className="d-flex justify-content-center">
+                            <Pagination page={page}/>
+                        </Col>
+                        <Col></Col>
+                    </Row>
+                    <br></br>
+                </div>
+                }
             </Container>
         </>
     )

@@ -1,17 +1,14 @@
-import React, {Component, useEffect, useState} from 'react';
-import Table from 'react-bootstrap/Table'
+import React, { Component } from 'react';
 import './components.css';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEstablishments, deleteEstablishment } from '../../actions/establishmentActions';
 import { getUsers } from '../../actions/userActions';
-import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button'
 
 import { 
     Container, 
     Stack,
-    Nav
 } from 'react-bootstrap'
 
 import {
@@ -122,17 +119,9 @@ function RenderTables(props){
 function ProtectedAccess(props){
     let access = false;
 
-    //rudimentary check for administrator access
-    if(props.state.user.id){
-        console.log("_id is null, use id");
-        if(props.state.user.id === '6288dccb3da6ef408e07cbd1'){
-            access = true;
-            }
-    }else{
-        if(props.state.user._id === '6288dccb3da6ef408e07cbd1'){
-            access = true;
-            }
-    }    
+    if(props.state.user.class === "admin"){
+        access = true
+    }
 
     return(
         <>
@@ -168,8 +157,6 @@ class AdminTable extends Component{
         }
 
         render(){
-            const { establishments } = this.props.establishment;
-            const { users } = this.props.users;
 
             return(
                 <> 
@@ -185,12 +172,6 @@ class AdminTable extends Component{
             )
            
         }
-}
-
-
-AdminTable.propTypes = {
-    getEstablishments: PropTypes.func.isRequired,
-    establishment: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({

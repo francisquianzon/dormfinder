@@ -20,6 +20,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+
+    class: {
+        type: String,
+        default: "user"
+    }
     
 }, {timestamps:true});
 

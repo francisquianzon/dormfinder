@@ -52,7 +52,9 @@ class Details extends Component{
                                 <h4>Contact Information</h4>
                                 <h6><ImMobile2/> {this.props.item.mobile_info}</h6>
 
+                                { this.props.item.email_info &&
                                 <h6><HiOutlineMail/> {this.props.item.email_info}</h6>
+                                }
                             </MDBCardBody>
                         </MDBCard>
                     </Col>

@@ -25,21 +25,13 @@ import { FaUserCircle } from 'react-icons/fa';
 
 import { logout } from '../../actions/authActions';
 import { connect } from 'react-redux';
-import Delayed from './delayed';
 import PropTypes from 'prop-types';
 
 function LoggedIn(props){
   let access = false;
 
-  if(props.state.user.id == null){
-    // console.log("id is null, use _id");
-    if(props.state.user._id == '6288dccb3da6ef408e07cbd1'){
-      access = true;
-    }
-  }else{
-    if(props.state.user.id == '6288dccb3da6ef408e07cbd1'){
-      access = true;
-    }
+  if(props.state.user.class === "admin"){
+    access = true
   }
 
 
@@ -62,7 +54,7 @@ function LoggedIn(props){
         </MDBDropdownToggle>
         <MDBDropdownMenu>
           <MDBDropdownItem>
-            {access == true
+            {access === true
               ? <MDBDropdownLink href='/browse.admin' >Admin</MDBDropdownLink>
               : <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink>
             }
@@ -124,6 +116,7 @@ function Navbar1(props) {
             aria-controls='navbarRightAlignExample'
             aria-expanded='false'
             aria-label='Toggle navigation'
+            className="align-left"
             onClick={() => setShowNavRight(!showNavRight)}
           >
             <MDBIcon icon='bars' fas />

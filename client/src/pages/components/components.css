@@ -5,7 +5,7 @@
 .btn-primary, .btn-primary:visited {
     background-color: #DC7429 !important;
     border-color: #DC7429  !important;
-    border-radius:10px;
+    border-radius:25px;
 }
 
 .btn-primary:active, .btn-primary:hover {
@@ -136,6 +136,7 @@
 }
 
 .page-footer{
+    margin-top: 1rem;
     position: relative;
     bottom: 0;
     left: 0;
@@ -195,7 +196,7 @@
 
 .reviews-text{
     margin-left: 55px;
-    /* max-width: 950px !important; */
+    max-width: 700px !important;
     font-size: 15px;
 }
 
@@ -217,9 +218,9 @@
 }
 
 .write-a-review{
-    font-weight:700 !important;
+    font-weight:600 !important;
     font-size: 17px;
-    margin-left: 200px;
+    /* margin-left: 200px; */
 }
 
 .image-modal{
@@ -227,10 +228,20 @@
     height: 100%;
 }
 
-.gallery-img{
-    object-fit: cover !important;
-}
 
 .search-bar{
     border-radius: 25px !important;
+    background-color: #e6e6e6 !important;
+    border-color: #e6e6e6 !important;
+}
+
+.search-bar:active , .search-bar:focus{
+    border-color: none !important;
+    box-shadow: none !important;
+}
+
+.gallery-img{
+    object-fit: cover !important;
+    width: 100% !important;
+    height: 100% !important;
 }
