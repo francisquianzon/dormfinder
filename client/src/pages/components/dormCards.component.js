@@ -28,6 +28,7 @@ class EstabCard extends Component{
             const { establishments } = this.props.establishment;
 
             return(
+                typeof establishments[0]._id !== 'undefined' ?
                 <>
                     <br></br>
                         <Row xs={1} md={4} className="g-3">
@@ -77,6 +78,7 @@ class EstabCard extends Component{
                             ))}
                         </Row>
                 </>
+                : <h1>test</h1>
             )
         }
 }

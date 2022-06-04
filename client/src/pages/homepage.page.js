@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
+import { loadUser } from '../actions/authActions';
+import { connect } from 'react-redux';
 import {
     MDBContainer,
     MDBRow,
@@ -11,7 +12,11 @@ import {
 import Navbar from './components/navbar.component';
 import Footer from './components/footer.component';
 
-export default class Homepage extends Component{
+class Homepage extends Component{
+    // componentDidMount(){
+    //     this.props.loadUser()
+    // }
+
     render(){
         return(
             <>
@@ -71,3 +76,8 @@ export default class Homepage extends Component{
     }
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.authentication
+});
+
+export default connect(mapStateToProps, { loadUser })(Homepage);
