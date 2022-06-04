@@ -7,6 +7,11 @@ const ReviewSchema = new Schema({
     dorm_id: String,
     review: String,
     score: Number,
+    score_cleanliness: Number,
+    score_price_value: Number,
+    score_location: Number,
+    score_amenaties: Number,
+    score_security: Number,
     likes: []
     
 }, {timestamps:true});

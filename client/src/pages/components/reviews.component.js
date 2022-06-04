@@ -11,7 +11,10 @@ import {
 
 import {
     MDBRow,
-    MDBCol
+    MDBCol,
+    MDBCard,
+    MDBCardTitle,
+    MDBCardBody
 } from 'mdb-react-ui-kit';
 
 import {
@@ -31,16 +34,32 @@ class Reviews extends Component{
     render(){
         const { reviews } = this.props.reviews
         const show_reviews = reviews.slice(0,3)
-        let average_score = 0;
         let hasReviews = false;
+        
+        let average_score = 0;
+        let average_score_cleanliness = 0;
+        let average_score_price_value = 0;
+        let average_score_location = 0;
+        let average_score_amenaties = 0;
+        let average_score_security = 0;
 
         if(reviews.length > 0){
             hasReviews = true;
             reviews.map((review)=>(
-                average_score += review.score
+                average_score += review.score,
+                average_score_cleanliness += review.score_cleanliness,
+                average_score_price_value += review.score_price_value,
+                average_score_location += review.score_location,
+                average_score_amenaties += review.score_amenaties,
+                average_score_security += review.score_security
             ))
             
-            average_score = Math.round((average_score/reviews.length) * 10) / 10
+            average_score = Math.round((average_score/reviews.length) * 10) / 10;
+            average_score_cleanliness = Math.round((average_score_cleanliness/reviews.length) * 10) / 10;
+            average_score_price_value = Math.round((average_score_price_value/reviews.length) * 10) / 10;
+            average_score_location = Math.round((average_score_location/reviews.length) * 10) / 10;
+            average_score_amenaties = Math.round((average_score_amenaties/reviews.length) * 10) / 10;
+            average_score_security = Math.round((average_score_security/reviews.length) * 10) / 10
         }
         
         return(
@@ -91,6 +110,58 @@ class Reviews extends Component{
                             <Col></Col>
                         </Row>
                         </Col>
+                        { hasReviews && 
+                        <Col>
+                            <MDBCard>
+                                <MDBCardBody>
+                                <MDBCardTitle>Review Overview</MDBCardTitle>
+                                <br></br>
+                                <Row>
+                                    <Row>
+                                        <Col>
+                                        Cleanliness
+                                        </Col>
+                                        <Col>
+                                        <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score_cleanliness} precision={0.5} readOnly />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                        Value for the Price
+                                        </Col>
+                                        <Col>
+                                        <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score_price_value} precision={0.5} readOnly />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                        Location
+                                        </Col>
+                                        <Col>
+                                        <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score_location} precision={0.5} readOnly />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                        Amenaties
+                                        </Col>
+                                        <Col>
+                                        <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score_amenaties} precision={0.5} readOnly />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                        Security
+                                        </Col>
+                                        <Col>
+                                        <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score_security} precision={0.5} readOnly />
+                                        </Col>
+                                    </Row>
+                                </Row>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </Col>
+                        }
                     </Row>
                     <br></br>
                 </Container>

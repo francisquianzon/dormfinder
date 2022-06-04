@@ -3,7 +3,9 @@ import './components.css';
 import { connect } from 'react-redux';
 import { 
     Nav,
-    Form 
+    Form,
+    Col,
+    Row
 } from 'react-bootstrap';
 import { MDBBtn,
     MDBModal,
@@ -28,6 +30,11 @@ class AddReview extends Component{
             username: '',
             dorm_id: '',
             score: 0,
+            score_cleanliness: 0,
+            score_price_value: 0,
+            score_location: 0,
+            score_amenaties: 0,
+            score_security: 0,
             review: '',
             value: 0
         }
@@ -53,11 +60,21 @@ class AddReview extends Component{
             username: this.props.state.user.username,
             dorm_id: this.props.state.establishment_id,
             score: this.state.score,
+            score_cleanliness: this.state.score_cleanliness,
+            score_price_value: this.state.score_price_value,
+            score_location: this.state.score_location,
+            score_amenaties: this.state.score_amenaties,
+            score_security: this.state.score_security,
             review: this.state.review
         }
 
         this.setState({
             score: 0,
+            score_cleanliness: 0,
+            score_price_value: 0,
+            score_location: 0,
+            score_amenaties: 0,
+            score_security: 0,
             review:''
         })
 
@@ -67,14 +84,15 @@ class AddReview extends Component{
         this.toggle();
     }
 
-    setValue(newValue) {
-        this.setState({
-            score: newValue
-        })
-    }
+    // setValue(newValue) {
+    //     this.setState({
+    //         score: newValue
+    //     })
+    // }
 
 
     render(){
+        console.log(this.state);
 
         return(
             <>  
@@ -91,19 +109,99 @@ class AddReview extends Component{
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Control name="review" as="textarea" rows="5" type="Text" onChange={this.onChange} className="form-background"/>
                             </Form.Group>
-                                <MDBCol className="d-flex">
-                                    <h6>Rating:</h6>
+                            <Row>
+                                <Col>
+                                    <Row>
+                                        <Col className="d-flex">
+                                            <h6>Overall Rating</h6>
+                                            {/* <h6 className="text-muted mx-2"> (Rate your overall experience with the dorm) </h6> */}
+                                        </Col>
+                                        <Rating
+                                            className='mx-2'
+                                            size="small"
+                                            name="simple-controlled"
+                                            value={this.state.score}
+                                            onChange={(event, newValue) => {
+                                                this.setState({ score: newValue });
+                                            }}
+                                            />
+                                    </Row>
+                                    <br></br>
+                                    <Row className="d-flex">
+                                        <h6>Cleanliness:</h6>
+                                        <Rating
+                                            className='mx-2'
+                                            size="small"
+                                            name="simple-controlled"
+                                            value={this.state.score_cleanliness}
+                                            onChange={(event, newValue) => {
+                                                // this.setValue(newValue);
+                                                this.setState({ score_cleanliness: newValue });
+                                            }}
+                                        />
+                                    </Row>
+                                    <br></br>
+                                    <Row className="d-flex">
+                                        <h6>Value for the Price:</h6>
+                                        <Rating
+                                            className='mx-2'
+                                            size="small"
+                                            name="simple-controlled"
+                                            value={this.state.score_price_value}
+                                            onChange={(event, newValue) => {
+                                                // this.setValue(newValue);
+                                                this.setState({ score_price_value: newValue });
+                                            }}
+                                        />
+                                    </Row>
+                                </Col>
+                                <Col>
+                                <Row className="d-flex">
+                                    <h6>Location:</h6>
                                     <Rating
                                         className='mx-2'
                                         size="small"
                                         name="simple-controlled"
-                                        value={this.state.score}
+                                        value={this.state.score_location}
                                         onChange={(event, newValue) => {
-                                            this.setValue(newValue);
+                                            // this.setValue(newValue);
+                                            this.setState({ score_location: newValue });
+                                        }}
+                                        />
+                                </Row>
+                                <br></br>
+                                <Row className="d-flex">
+                                    <h6>Amenaties:</h6> 
+                                    <Rating
+                                        className='mx-2'
+                                        size="small"
+                                        name="simple-controlled"
+                                        value={this.state.score_amenaties}
+                                        onChange={(event, newValue) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ score_amenaties: newValue });
+                                        }}
+                                        />
+                                </Row>
+                                <br></br>
+                                <Row className="d-flex">
+                                    <h6>Security:</h6>
+                                    <Rating
+                                        className='mx-2'
+                                        size="small"
+                                        name="simple-controlled"
+                                        value={this.state.score_security}
+                                        onChange={(event, newValue) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ score_security: newValue });
                                         }}
                                     />
-                                </MDBCol>
-                                <br></br>
+                                </Row>
+                                
+                                </Col>
+                            </Row>
+                                
+                            <br></br>
                             <MDBBtn>Submit</MDBBtn>
                             </Form>
                         </MDBModalBody>

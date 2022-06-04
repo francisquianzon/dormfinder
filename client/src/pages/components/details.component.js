@@ -45,18 +45,28 @@ class Details extends Component{
                     </Col>
                     <br></br>
                     <Col xs={6} md={4}>
-                        <MDBCard className="d-flex justify-content-center">
-                            <MDBCardBody>
-                                <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
-                                <br></br>
-                                <h4>Contact Information</h4>
-                                <h6><ImMobile2/> {this.props.item.mobile_info}</h6>
+                        <Row>
+                            <MDBCard className="d-flex justify-content-center">
+                                <MDBCardBody>
+                                    <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
+                                    <br></br>
+                                    <h4>Contact Information</h4>
+                                    <h6><ImMobile2/> {this.props.item.mobile_info}</h6>
 
-                                { this.props.item.email_info &&
-                                <h6><HiOutlineMail/> {this.props.item.email_info}</h6>
-                                }
-                            </MDBCardBody>
-                        </MDBCard>
+                                    { this.props.item.email_info &&
+                                    <h6><HiOutlineMail/> {this.props.item.email_info}</h6>
+                                    }
+                                </MDBCardBody>
+                            </MDBCard>
+                        </Row>
+                        <br></br>
+                        <Row>
+                            <MDBCard className="d-flex justify-content-center">
+                                <MDBCardBody>
+                                    <MDBCardTitle>Health and Safety</MDBCardTitle>
+                                </MDBCardBody>
+                            </MDBCard> 
+                        </Row>
                     </Col>
                 </Row>
             </Container>

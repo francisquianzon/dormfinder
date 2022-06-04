@@ -23,10 +23,15 @@ router.post('/', auth, async (req,res) =>{
         username: req.body.username,
         dorm_id: req.body.dorm_id,
         review: req.body.review,
-        score: req.body.score
+        score: req.body.score,
+        score_cleanliness: req.body.score_cleanliness,
+        score_price_value: req.body.score_price_value,
+        score_location: req.body.score_location,
+        score_amenaties: req.body.score_amenaties,
+        score_security: req.body.score_security,
     });
 
-    newReview.likes.push(req.body.likes);
+    // newReview.likes.push(req.body.likes);
     newReview.save().then(review => res.json(review));
 
 });
