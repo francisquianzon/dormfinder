@@ -86,7 +86,7 @@ router.post('/', auth, async (req,res) =>{
         mobile_info: req.body.mobile_info,
         email_info: req.body.email_info,
         original_poster: req.body.original_poster,
-        pictures: req.body.pictures
+        pictures: req.body.pictures,
     });
 
 

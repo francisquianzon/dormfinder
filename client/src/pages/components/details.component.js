@@ -44,9 +44,9 @@ class Details extends Component{
                         </div>
                     </Col>
                     <br></br>
-                    <Col xs={6} md={4}>
-                        <Row>
-                            <MDBCard className="d-flex justify-content-center">
+                    <Col>
+                        {/* <Row> */}
+                            <MDBCard>
                                 <MDBCardBody>
                                     <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
                                     <br></br>
@@ -58,15 +58,20 @@ class Details extends Component{
                                     }
                                 </MDBCardBody>
                             </MDBCard>
-                        </Row>
+                        {/* </Row> */}
                         <br></br>
+                        { this.props.item.protocol_approved &&
                         <Row>
                             <MDBCard className="d-flex justify-content-center">
                                 <MDBCardBody>
-                                    <MDBCardTitle>Health and Safety</MDBCardTitle>
+                                    <MDBCardTitle><h4>Health and Safety</h4></MDBCardTitle>
+                                    <h6>Certified for COVID-19 Health and Safety Practices</h6>
+                                    <p>This establishment adheres to the COVID-19 Policies and Safety Practices set by the UPLB Office of Student Housing</p>
                                 </MDBCardBody>
                             </MDBCard> 
                         </Row>
+                        
+                        }
                     </Col>
                 </Row>
             </Container>

@@ -3,14 +3,15 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 
 //Item Model 
 const User = require('../models/Users.js');
 
 // @route   GET api/items
 // @desc    Get all users
-// @access  Public
-router.get('/', (req,res) =>{
+// @access  Private
+router.get('/', auth, (req,res) =>{
     User.find()
     .sort({date: -1})
     .then(users => res.json(users))

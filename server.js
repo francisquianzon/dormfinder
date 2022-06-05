@@ -30,17 +30,18 @@ mongoose.connect(db, {
     console.log(`MongoDB Connected...`)
 )).catch((err) => console.log(err.message));
 
-//Serve static assets in production
-// if(process.env.NODE_ENV === 'production'){
-//     //set a static folder
-//     app.use(express.static('client/build'));
-//     app.get('*', (req,res) => {
-//         res.sendFile(path.resolve(_dirname, 'client', 'build', 'index'));
-//     });
-// }
 
 //Use Routes
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/establishments', estabs);
 app.use('/reviews', reviews);
+
+//Serve static assets in production
+// if(process.env.NODE_ENV === 'production'){
+//     //set a static folder
+//     app.use(express.static('client/build'));
+//     app.get('*', (req,res) => {
+//         res.sendFile(path.resolve(_dirname, 'client', 'build', 'index.html'));
+//     });
+// }

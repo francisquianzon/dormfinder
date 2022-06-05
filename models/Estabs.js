@@ -12,7 +12,9 @@ const EstabSchema = new Schema({
     mobile_info: String,
     email_info: String,
     review_ids: [],
-    pictures: []
+    pictures: [],
+    approved: Boolean,
+    protocol_approved: Boolean
 }, {timestamps:true});
 
 module.exports = Estab = mongoose.model('estab', EstabSchema);
