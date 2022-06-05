@@ -7,6 +7,7 @@ import {
     Container,
     Row,
     Col,
+    Nav
 } from 'react-bootstrap';
 
 import {
@@ -67,6 +68,14 @@ class Details extends Component{
                                     <MDBCardTitle><h4>Health and Safety</h4></MDBCardTitle>
                                     <h6>Certified for COVID-19 Health and Safety Practices</h6>
                                     <p>This establishment adheres to the COVID-19 Policies and Safety Practices set by the UPLB Office of Student Housing</p>
+                                    <br></br>
+                                    <p className="write-a-review">Learn more</p>
+                                    {/* <Row>
+                                        <Col>
+                                            <Nav.Link href='#'>Learn More</Nav.Link>
+                                        </Col>
+                                        <Col></Col>
+                                    </Row> */}
                                 </MDBCardBody>
                             </MDBCard> 
                         </Row>
