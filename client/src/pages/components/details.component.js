@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './components.css'
 import { connect } from 'react-redux';
 import {  getDetails } from '../../actions/establishmentActions';
+import Delayed from '../components/delayed'
 
 import {
     Container,
@@ -16,9 +17,88 @@ import {
     MDBCardTitle,
 } from 'mdb-react-ui-kit';
 
-
 import { ImMobile2 } from 'react-icons/im';
 import { HiOutlineMail } from 'react-icons/hi';
+import { BsStars } from 'react-icons/bs';
+import { AiOutlineIdcard } from 'react-icons/ai';
+import { GiWaterBottle } from 'react-icons/gi';
+import { FaTemperatureLow } from 'react-icons/fa';
+import { RiSurgicalMaskLine } from 'react-icons/ri';
+
+
+function OshGuidelines(){
+    return(
+        <Row>
+            <MDBCard className="d-flex justify-content-center">
+                <MDBCardBody>
+                    <MDBCardTitle><h4>Health and Safety</h4></MDBCardTitle>
+                    <h6>Certified for COVID-19 Health and Safety Practices</h6>
+                    <p>This establishment adheres to the COVID-19 Policies and Safety Practices set by the UPLB Office of Student Housing</p>
+                    <br></br>
+                    <p className="write-a-review">Learn more</p>
+                </MDBCardBody>
+            </MDBCard> 
+        </Row>
+    )
+}
+
+function ProtocolGuidlines(props){
+    console.log(props.state.protocol_check)
+    return(
+        <>
+        <Row>
+            <MDBCard>
+                <MDBCardBody>
+                    <MDBCardTitle><h4>Health and Safety</h4></MDBCardTitle>
+                    <h6>This establishment is following COVID-19 Health and Safety Practices to ensure that risk of exposure is reduced.</h6>
+                    <br></br>
+                    { props.state.protocol_check.guideline_1 && 
+                        <Col className="d-flex">
+                            <div className="">
+                                <AiOutlineIdcard/>
+                            </div>
+                            <p className="mx-3"> Tenants are required to present a vaccination card. </p>
+                        </Col>
+                    }
+                    { props.state.protocol_check.guideline_2 && 
+                        <Col className="d-flex">
+                            <div>
+                                <BsStars/>
+                            </div>
+                            <p className="mx-3"> Rooms and facilities undergo enhanced cleaning. </p>
+                        </Col>
+                    }
+                    { props.state.protocol_check.guideline_3 && 
+                        <Col className="d-flex">
+                            <div>
+                                <GiWaterBottle/>
+                            </div>
+                            <p className="mx-3"> Presence of hygiene and sanitation facilities within the establishment such as a hand washing station, soap and water or 70% Isopropyl Alcohol. </p>
+                        </Col>
+                    }
+                    { props.state.protocol_check.guideline_4 && 
+                        <Col className="d-flex">
+                            <div>
+                                <FaTemperatureLow/>
+                            </div>
+                            <p className="mx-3"> Presence of a screening area at the point/s-of-entry with non-contact temperature check. </p>
+                        </Col>
+                    }
+                    { props.state.protocol_check.guideline_5 && 
+                        <Col className="d-flex">
+                            <div>
+                                <RiSurgicalMaskLine/>
+                            </div>
+                            <p className="mx-3"> Visual cues or signages to communicate maintaining of physical distance, wearing of masks, proper hygiene etiquette, etc. </p>
+                        </Col>
+                    }
+
+                </MDBCardBody>
+            </MDBCard>
+        </Row>
+        </>
+    )
+}
 
 class Details extends Component{
     state = {
@@ -61,26 +141,11 @@ class Details extends Component{
                             </MDBCard>
                         {/* </Row> */}
                         <br></br>
-                        { this.props.item.protocol_approved &&
-                        <Row>
-                            <MDBCard className="d-flex justify-content-center">
-                                <MDBCardBody>
-                                    <MDBCardTitle><h4>Health and Safety</h4></MDBCardTitle>
-                                    <h6>Certified for COVID-19 Health and Safety Practices</h6>
-                                    <p>This establishment adheres to the COVID-19 Policies and Safety Practices set by the UPLB Office of Student Housing</p>
-                                    <br></br>
-                                    <p className="write-a-review">Learn more</p>
-                                    {/* <Row>
-                                        <Col>
-                                            <Nav.Link href='#'>Learn More</Nav.Link>
-                                        </Col>
-                                        <Col></Col>
-                                    </Row> */}
-                                </MDBCardBody>
-                            </MDBCard> 
-                        </Row>
-                        
-                        }
+                        {/* { this.props.item.protocol_approved && */}
+                        <Delayed waitBeforeShow={1000}>
+                            <ProtocolGuidlines state={{ protocol_check: this.props.item.safety_guidelines}}/>
+                        </Delayed>
+                        {/* } */}
                     </Col>
                 </Row>
             </Container>

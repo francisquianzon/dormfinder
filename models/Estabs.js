@@ -11,10 +11,18 @@ const EstabSchema = new Schema({
     original_poster: String,
     mobile_info: String,
     email_info: String,
+    landlord_check: Boolean,
     review_ids: [],
     pictures: [],
     approved: Boolean,
-    protocol_approved: Boolean
+    protocol_approved: Boolean,
+    safety_guidelines: {
+        guideline_1: Boolean,
+        guideline_2: Boolean,
+        guideline_3: Boolean,
+        guideline_4: Boolean,
+        guideline_5: Boolean
+    }
 }, {timestamps:true});
 
 module.exports = Estab = mongoose.model('estab', EstabSchema);

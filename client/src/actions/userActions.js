@@ -3,10 +3,10 @@ import { GET_USERS, ITEMS_LOADING } from '../actions/types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
-export const getUsers = () => dispatch => {
+export const getUsers = () => (dispatch, getState) => {
     dispatch(setItemsLoading());
     axios
-        .get('/users')
+        .get('/users', tokenConfig(getState))
         .then(res => 
             dispatch({
                 type: GET_USERS,

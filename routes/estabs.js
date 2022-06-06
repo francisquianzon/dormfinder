@@ -87,6 +87,9 @@ router.post('/', auth, async (req,res) =>{
         email_info: req.body.email_info,
         original_poster: req.body.original_poster,
         pictures: req.body.pictures,
+        safety_guidelines: req.body.safety_guidelines,
+        landlord_check: req.body.landlord_check,
+        protocol_approved: req.body.protocol_approved
     });
 
 

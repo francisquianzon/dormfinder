@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {
     Form,
-    Alert
+    Alert,
+    Row,
+    Col
 } from 'react-bootstrap';
 
 import { MDBCard, 
@@ -34,7 +36,12 @@ class PostCard extends Component{
             landlord_check: null,
             pictures: '',
             error_msg: null,
-            alert_type: ''
+            alert_type: '',
+            guideline_1: null,
+            guideline_2: null,
+            guideline_3: null,
+            guideline_4: null,
+            guideline_5: null
         }
     }
 
@@ -77,20 +84,20 @@ class PostCard extends Component{
     onSubmit = e => {
         e.preventDefault();
         
-        if(this.state.name == '' 
-        || this.state.location == '' 
-        || this.state.description == '' 
-        || this.state.price_min == 0
-        || this.state.price_max == 0
-        || this.state.mobile_info == ''
+        if(this.state.name === '' 
+        || this.state.location === '' 
+        || this.state.description === '' 
+        || this.state.price_min === 0
+        || this.state.price_max === 0
+        || this.state.mobile_info === ''
         ){
-            // alert("All fields are required");
             this.setState({
                 error_msg: "Please enter required fields",
                 alert_type: "danger"
             })
             return false
         }
+
         let pictures = []
 
         //creates a formData for file upload
@@ -103,6 +110,20 @@ class PostCard extends Component{
         }
 
         this.props.uploadImage(formData);
+        
+        const guideline_1 = this.state.guideline_1 === 'on' ? true : false;
+        const guideline_2 = this.state.guideline_2 === 'on' ? true : false;
+        const guideline_3 = this.state.guideline_3 === 'on' ? true : false;
+        const guideline_4 = this.state.guideline_4 === 'on' ? true : false;
+        const guideline_5 = this.state.guideline_5 === 'on' ? true : false;
+
+        const safety_guidelines = {
+            guideline_1,
+            guideline_2,
+            guideline_3,
+            guideline_4,
+            guideline_5
+        }
 
         //creates a json item
         const newItem = {
@@ -113,8 +134,11 @@ class PostCard extends Component{
             price_max: this.state.price_max,
             mobile_info: this.state.mobile_info,
             email_info: this.state.email_info,
+            landlord_check: this.state.landlord_check,
             original_poster: this.props.user.username,
-            pictures
+            pictures,
+            safety_guidelines,
+            protocol_approved: false
         }
 
         // console.log("newItem")
@@ -133,7 +157,12 @@ class PostCard extends Component{
             email_info: '',
             landlord_check: null,
             error_msg: "Successfully added!",
-            alert_type: "success"
+            alert_type: "success",
+            guideline_1: null,
+            guideline_2: null,
+            guideline_3: null,
+            guideline_4: null,
+            guideline_5: null
         });
 
         //reloads the window
@@ -157,6 +186,8 @@ class PostCard extends Component{
                         <MDBCard className="d-flex justify-content-center" style={{ width: '50rem' }}>
                             <MDBCardHeader><h3>Create a post</h3></MDBCardHeader>
                             <MDBCardBody>
+
+                                {/* ============================================================================= */}
                                 <MDBCardText><h4>Establishment details</h4></MDBCardText>
                                 <Form onSubmit={this.onSubmit}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -197,6 +228,8 @@ class PostCard extends Component{
                                         <Form.Text>If the establishment has a fixed price, just input the same price on both fields</Form.Text>
                                     </MDBRow>
                                     <br></br>
+
+                                    {/* ============================================================================= */}
                                     <MDBCardText><h4>Contact information</h4></MDBCardText>
                                         <MDBRow>
                                             <MDBCol>
@@ -209,7 +242,7 @@ class PostCard extends Component{
                                             <MDBCol>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Email</Form.Label>
-                                                    <Form.Control value={this.state.email_info} name="email_info" type="Text" onChange={this.onChange} className="form-background"/>
+                                                    <Form.Control value={this.state.email_info} placeholder="(Optional)" name="email_info" type="Text" onChange={this.onChange} className="form-background"/>
                                                 </Form.Group>
                                             </MDBCol>
                                         <Form.Text>For additional contact information, add them in the description field</Form.Text>
@@ -221,6 +254,30 @@ class PostCard extends Component{
                                             <MDBRadio checked={this.state.landlord_check} name='landlord_check' id='landlord_false' label='No, I am posting on behalf of the Landlord' />
                                         </div>
                                     <br></br>
+                                    {/* ============================================================================= */}
+                                    <MDBCardText><h4>COVID-19 Health and Safety Practices</h4></MDBCardText>
+                                    <p>description placeholder</p>
+                                    <div className="d-flex">
+                                        <Form.Check type="checkbox" name="guideline_1" label="" onChange={this.onChange}></Form.Check>
+                                        <p>Tenants are required to present a vaccination card.</p>
+                                    </div>
+                                    <div className="d-flex">
+                                        <Form.Check type="checkbox" name="guideline_2" label="" onChange={this.onChange}></Form.Check>
+                                        <p>Rooms and facilities undergo enhanced cleaning.</p>
+                                    </div>
+                                    <div className="d-flex">
+                                        <Form.Check type="checkbox" name="guideline_3" label="" onChange={this.onChange}></Form.Check>
+                                        <p>Presence of hygiene and sanitation facilities within the establishment such as a hand washing station, soap and water or 70% Isopropyl Alcohol.</p>
+                                    </div>
+                                    <div className='d-flex'>
+                                        <Form.Check type="checkbox" name="guideline_4" label="" onChange={this.onChange}></Form.Check>
+                                        <p>Presence of a screening area at the point/s-of-entry with non-contact temperature check.</p>
+                                    </div>
+                                    <div className="d-flex">
+                                        <Form.Check type="checkbox" name="guideline_5" label="" onChange={this.onChange}></Form.Check>
+                                        <p>Visual cues or signages to communicate maintaining of physical distance, wearing of masks, proper hygiene etiquette, etc.</p>
+                                    </div>
+
                                     { this.state.error_msg ? <Alert variant={this.state.alert_type}>{this.state.error_msg}</Alert> : null }
                                     <br></br>
                                     <MDBBtn variant="primary" type="submit">
