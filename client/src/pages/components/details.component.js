@@ -141,11 +141,11 @@ class Details extends Component{
                             </MDBCard>
                         {/* </Row> */}
                         <br></br>
-                        {/* { this.props.item.protocol_approved && */}
+                        { this.props.item.protocol_approved &&
                         <Delayed waitBeforeShow={1000}>
                             <ProtocolGuidlines state={{ protocol_check: this.props.item.safety_guidelines}}/>
                         </Delayed>
-                        {/* } */}
+                        } 
                     </Col>
                 </Row>
             </Container>

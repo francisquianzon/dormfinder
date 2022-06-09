@@ -28,7 +28,7 @@ class EstabCard extends Component{
             const { establishments } = this.props.establishment;
 
             return(
-                typeof establishments[0]._id !== 'undefined' ?
+                // typeof establishments[0]._id !== 'undefined' ?
                 <>
                     <br></br>
                         <Row xs={1} md={4} className="g-3">
@@ -36,7 +36,10 @@ class EstabCard extends Component{
                                 <Col key={estabs._id} className="dormcard">
                                     <MDBCard >
                                         {estabs.pictures.length > 0 ? 
-                                        <MDBCardImage position="top" src={`../../uploads/${estabs.pictures[0]}`} className="card-establishment-img"/>
+                                        <MDBCardImage position="top" 
+                                            src={`../../uploads/${estabs.pictures[0]}`} 
+                                            // src={estabs.pictures[0]}
+                                            className="card-establishment-img"/>
                                         :
                                         <MDBCardImage position="top" src="../../building_placeholder2.jpg" className="card-establishment-img"/>
                                         }
@@ -78,7 +81,7 @@ class EstabCard extends Component{
                             ))}
                         </Row>
                 </>
-                : <h1>test</h1>
+                // : <h1>test</h1>
             )
         }
 }

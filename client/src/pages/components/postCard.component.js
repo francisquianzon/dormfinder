@@ -37,11 +37,11 @@ class PostCard extends Component{
             pictures: '',
             error_msg: null,
             alert_type: '',
-            guideline_1: null,
-            guideline_2: null,
-            guideline_3: null,
-            guideline_4: null,
-            guideline_5: null
+            guideline_1: false,
+            guideline_2: false,
+            guideline_3: false,
+            guideline_4: false,
+            guideline_5: false
         }
     }
 
@@ -49,6 +49,7 @@ class PostCard extends Component{
     onChange = e =>{
         this.setState({[e.target.name]: e.target.value});
     }
+
 
     handleFileUpload = async (e) => {
         //retrieives the uploaded files
@@ -63,6 +64,7 @@ class PostCard extends Component{
         // console.log(file_base64);
         this.setState({
             pictures:file
+            // pictures: file_base64
         })
         // setPostImage({ ...postImage, myFile: base64 });
     };
@@ -84,6 +86,7 @@ class PostCard extends Component{
     onSubmit = e => {
         e.preventDefault();
         
+        //checks if necessary fields are entered=================
         if(this.state.name === '' 
         || this.state.location === '' 
         || this.state.description === '' 
@@ -98,8 +101,8 @@ class PostCard extends Component{
             return false
         }
 
+        //handles the image upload===============================
         let pictures = []
-
         //creates a formData for file upload
         const formData = new FormData();
         for(let j=0;j<this.state.pictures.length;j++){
@@ -108,14 +111,25 @@ class PostCard extends Component{
             formData.append('demo_images', this.state.pictures[j], newName)
             pictures.push(newName);
         }
-
         this.props.uploadImage(formData);
         
+        //checks for covid health and safety guidelines
+        let protocol_approved = false;
         const guideline_1 = this.state.guideline_1 === 'on' ? true : false;
         const guideline_2 = this.state.guideline_2 === 'on' ? true : false;
         const guideline_3 = this.state.guideline_3 === 'on' ? true : false;
         const guideline_4 = this.state.guideline_4 === 'on' ? true : false;
         const guideline_5 = this.state.guideline_5 === 'on' ? true : false;
+
+
+        if( guideline_1 === true
+        || guideline_2 === true
+        || guideline_3 === true
+        || guideline_4 === true
+        || guideline_5 === true
+        ){
+            protocol_approved = true;
+        }
 
         const safety_guidelines = {
             guideline_1,
@@ -136,9 +150,9 @@ class PostCard extends Component{
             email_info: this.state.email_info,
             landlord_check: this.state.landlord_check,
             original_poster: this.props.user.username,
-            pictures,
+            pictures: this.state.pictures,
             safety_guidelines,
-            protocol_approved: false
+            protocol_approved
         }
 
         // console.log("newItem")
@@ -256,7 +270,7 @@ class PostCard extends Component{
                                     <br></br>
                                     {/* ============================================================================= */}
                                     <MDBCardText><h4>COVID-19 Health and Safety Practices</h4></MDBCardText>
-                                    <p>description placeholder</p>
+                                    <p>Please provide any and all that applies regarding the health and safety protocols that your establishment practices. </p>
                                     <div className="d-flex">
                                         <Form.Check type="checkbox" name="guideline_1" label="" onChange={this.onChange}></Form.Check>
                                         <p>Tenants are required to present a vaccination card.</p>

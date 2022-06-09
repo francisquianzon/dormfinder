@@ -92,7 +92,7 @@ class RegisterCard extends Component{
             if(this.state.msg == null && this.props.isAuthenticated){
                 this.props.navigate('/');
             }
-        }, 1000);
+        }, 2000);
     }
     
     render(){
