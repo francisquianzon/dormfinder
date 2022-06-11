@@ -57,14 +57,14 @@ class PostCard extends Component{
         let file_base64 = [];
 
         //converts the uploaded files to base64 and puts in an array
-        // for(let i=0;i<file.length;i++){
-        //     file_base64.push(await this.convertToBase64(file[i]))
-        // }
+        for(let i=0;i<file.length;i++){
+            file_base64.push(await this.convertToBase64(file[i]))
+        }
 
         // console.log(file_base64);
         this.setState({
-            pictures:file
-            // pictures: file_base64
+            // pictures:file
+            pictures: file_base64
         })
         // setPostImage({ ...postImage, myFile: base64 });
     };
@@ -87,31 +87,31 @@ class PostCard extends Component{
         e.preventDefault();
         
         //checks if necessary fields are entered=================
-        if(this.state.name === '' 
-        || this.state.location === '' 
-        || this.state.description === '' 
-        || this.state.price_min === 0
-        || this.state.price_max === 0
-        || this.state.mobile_info === ''
-        ){
-            this.setState({
-                error_msg: "Please enter required fields",
-                alert_type: "danger"
-            })
-            return false
-        }
+        // if(this.state.name === '' 
+        // || this.state.location === '' 
+        // || this.state.description === '' 
+        // || this.state.price_min === 0
+        // || this.state.price_max === 0
+        // || this.state.mobile_info === ''
+        // ){
+        //     this.setState({
+        //         error_msg: "Please enter required fields",
+        //         alert_type: "danger"
+        //     })
+        //     return false
+        // }
 
         //handles the image upload===============================
-        let pictures = []
+        // let pictures = []
         //creates a formData for file upload
-        const formData = new FormData();
-        for(let j=0;j<this.state.pictures.length;j++){
-            //renames the pictures first
-            const newName = new Date().getTime() + this.state.pictures[j].name; 
-            formData.append('demo_images', this.state.pictures[j], newName)
-            pictures.push(newName);
-        }
-        this.props.uploadImage(formData);
+        // const formData = new FormData();
+        // for(let j=0;j<this.state.pictures.length;j++){
+        //     //renames the pictures first
+        //     const newName = new Date().getTime() + this.state.pictures[j].name; 
+        //     formData.append('demo_images', this.state.pictures[j], newName)
+        //     pictures.push(newName);
+        // }
+        // this.props.uploadImage(this.state.pictures);
         
         //checks for covid health and safety guidelines
         let protocol_approved = false;
@@ -156,28 +156,28 @@ class PostCard extends Component{
         }
 
         // console.log("newItem")
-        // console.log(newItem)
+        console.log(newItem)
 
         // add item via addEstablishment action
         this.props.addEstablishment(newItem);
         
-        this.setState({
-            name: '',
-            location: '',
-            description: '',
-            price_min: 0,
-            price_max: 0,
-            mobile_info: '',
-            email_info: '',
-            landlord_check: null,
-            error_msg: "Successfully added!",
-            alert_type: "success",
-            guideline_1: null,
-            guideline_2: null,
-            guideline_3: null,
-            guideline_4: null,
-            guideline_5: null
-        });
+        // this.setState({
+        //     name: '',
+        //     location: '',
+        //     description: '',
+        //     price_min: 0,
+        //     price_max: 0,
+        //     mobile_info: '',
+        //     email_info: '',
+        //     landlord_check: null,
+        //     error_msg: "Successfully added!",
+        //     alert_type: "success",
+        //     guideline_1: null,
+        //     guideline_2: null,
+        //     guideline_3: null,
+        //     guideline_4: null,
+        //     guideline_5: null
+        // });
 
         //reloads the window
         // window.location.reload(false);

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require('multer');
+const { cloudinary } = require('../config/cloudinary');
 
 //estabs Model 
 const Estab = require('../models/Estabs.js');
@@ -64,12 +65,32 @@ var storage = multer.diskStorage({
 
 const upload = multer({storage:storage});
 
-router.post("/image", upload.array("demo_images", 15), (req,res) => {
+// router.post("/image", upload.array("demo_images", 15), (req,res) => {
+//     try{
+//         res.send(req.files);
+//     }catch (error){
+//         console.log(error);
+//         res.send(400);
+//     }
+// })
+
+router.post("/image", async (req, res)=> {
     try{
-        res.send(req.files);
-    }catch (error){
-        console.log(error);
-        res.send(400);
+        const fileStr = req.body.data;
+        const uploadURL = [];
+        // console.log(fileStr.length);
+        for(let i=0;i<fileStr.length;i++){
+            const uploadResponse = await cloudinary.uploader.upload(fileStr[i], {
+                upload_preset: 'dev_folder',
+            });
+            uploadURL.push(uploadResponse.url);
+        }
+        // console.log("Images Uploaded");
+        // console.log(uploadURL);
+        res.send(uploadURL);
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ err: 'Something went wrong' });
     }
 })
 
@@ -77,23 +98,30 @@ router.post("/image", upload.array("demo_images", 15), (req,res) => {
 // @desc    create an establishment
 // @access  Private
 router.post('/', auth, async (req,res) =>{
-    const newEstab = new Estab({
-        name: req.body.name,
-        location: req.body.location,
-        description: req.body.description,
-        price_min: req.body.price_min,
-        price_max: req.body.price_max,
-        mobile_info: req.body.mobile_info,
-        email_info: req.body.email_info,
-        original_poster: req.body.original_poster,
-        pictures: req.body.pictures,
-        safety_guidelines: req.body.safety_guidelines,
-        landlord_check: req.body.landlord_check,
-        protocol_approved: req.body.protocol_approved
-    });
 
-
-    newEstab.save().then(estab => res.json(estab));
+    try{
+        // console.log(req.body);
+        const newEstab = new Estab({
+            name: req.body.data.name,
+            location: req.body.data.location,
+            description: req.body.data.description,
+            price_min: req.body.data.price_min,
+            price_max: req.body.data.price_max,
+            mobile_info: req.body.data.mobile_info,
+            email_info: req.body.data.email_info,
+            original_poster: req.body.data.original_poster,
+            pictures: req.body.images,
+            safety_guidelines: req.body.data.safety_guidelines,
+            landlord_check: req.body.data.landlord_check,
+            protocol_approved: req.body.data.protocol_approved
+        });
+        
+    
+        newEstab.save().then(estab => res.json(estab));
+    }catch(err){
+        console.log(err)
+        res.status(500).json({ err: 'Something went wrong '});
+    }
 
 });
 

@@ -40,10 +40,18 @@ export const getDetails = id => dispatch => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
-export const addEstablishment = estab => (dispatch, getState) => {
+export const addEstablishment = estab => async (dispatch, getState) => {
+
+    // console.log('Printing data...')
+    // console.log(estab)
+    // console.log(estab.pictures)
+
+    const imagesArray = await axios.post('/establishments/image', {data: estab.pictures});
+    console.log("printing images...")
+    console.log(imagesArray.data)
     
-    axios
-        .post('/establishments', estab, tokenConfig(getState))
+    await axios
+        .post('/establishments', {data: estab, images: imagesArray.data}, tokenConfig(getState))
         .then(res => 
             dispatch({
                 type: ADD_ITEMS,
@@ -54,10 +62,18 @@ export const addEstablishment = estab => (dispatch, getState) => {
         );
 };
 
-export const uploadImage = imageForm => (dispatch, getState) => {
-    axios
-        .post('/establishments/image', imageForm, {})
-
+export const uploadImage = imageForm => async (dispatch, getState) => {
+    // axios
+    //     .post('/establishments/image', imageForm, {})
+    // let imagesArray = []
+    // axios
+    //     .post('/establishments/image', {data: imageForm})
+    //     .then(res =>
+    //             imagesArray = res.data
+    //             )
+    const imagesArray = await axios.post('/establishments/image', {data: imageForm});
+    console.log("printing images...")
+    console.log(imagesArray.data)
 }
 
 export const deleteEstablishment = id => (dispatch, getState) => {
