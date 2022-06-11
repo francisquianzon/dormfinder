@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './components.css';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getEstablishments, deleteEstablishment } from '../../actions/establishmentActions';
 import { getUsers } from '../../actions/userActions';
 import Button from 'react-bootstrap/Button'
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getEstablishments, deleteEstablishment, getEstablishmentBySearch } from '../../actions/establishmentActions';
 
 import { 
     Container, 
     Stack,
+    Row,
+    Col,
+    Form,
+    InputGroup,
 } from 'react-bootstrap'
 
 import {
@@ -21,11 +28,56 @@ import {
 
 import Navbar from './navbar.component';
 import Delayed from './delayed';
+import Pagination from './pagination.component';
+
+function useQuery(){
+    return new URLSearchParams(useLocation().search)
+}
+
+function RenderTables(){
+     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const query = useQuery();
+    
+    const page = query.get('page') || 1;
+    const searchQuery = query.get('searchQuery');
+    const loaded = false;
+    
+    const { establishments } = useSelector((state) => state.establishment);
+    const { users } = useSelector((state) => state.users);
+
+    const [search, setSearch] = useState('');
+    const [currentId, setCurrentId] = useState(0);
+    const [ placeholder, setPlaceholder] = useState(true);
+
+    const submitQuery = () => {
+        if(search.trim()){
+            console.log("Submitting Query...");
+            console.log(search)
+            dispatch(getEstablishmentBySearch({search}));
+            navigate(`/browse.admin/search?searchQuery=${search}`)
+        }else{
+            dispatch(getEstablishments());
+        }
+    }
+
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+          submitQuery();
+        }
+      };
+    
+    useEffect(() => {
+        dispatch(getEstablishments());
+        dispatch(getUsers());
+
+    }, []);
 
 
-function RenderTables(props){
-    const { users } = props.state.users;
-    const { establishments } = props.state.establishments;
+    const onDeleteClickBtn = (id) => {
+        dispatch(deleteEstablishment(id));
+        window.location.reload(false);
+    }
 
     return(
         <>
@@ -34,7 +86,22 @@ function RenderTables(props){
             <br></br>
             <MDBCard>
                 <MDBCardBody>
-                    <h2>Establishments</h2>                        
+                    <Row>
+                        <Col><h2>Establishments</h2></Col>
+                        <Col xs={6} className="d-flex justify-content-center float-end">
+                            <InputGroup size="lg">
+                            <Form.Control
+                                name="search"
+                                placeholder="Search"
+                                className="search-bar"
+                                onKeyDown={handleKeyPress}
+                                onChange={(e) => setSearch(e.target.value)}
+                                
+                                />
+                            {/* <MDBBtn onClick={submitQuery}>Search</MDBBtn> */}
+                            </InputGroup>
+                        </Col>
+                    </Row>                        
                     <Stack gap={3}>
                         <Link to="/addestablishment">
                             <Button variant="primary">Add Establishment</Button>
@@ -65,7 +132,7 @@ function RenderTables(props){
                                         </Link>
                                     </td>
                                     <td>
-                                        <button type="button" className="btn btn-danger me-2 btn-sm" onClick={props.state.onDeleteClick.bind(this,estabs._id)}>
+                                        <button type="button" className="btn btn-danger me-2 btn-sm" onClick={onDeleteClickBtn.bind(this,estabs._id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
                                             <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
@@ -86,6 +153,14 @@ function RenderTables(props){
                     </Stack>
                 </MDBCardBody>
                 </MDBCard>
+                <br></br>
+                <Row>
+                    <Col></Col>
+                    <Col className="d-flex justify-content-center">
+                        <Pagination state={{page: page, type: 'browse.admin'}}/>
+                    </Col>
+                    <Col></Col>
+                </Row>
                 <br></br>
                 <MDBCard>
                     <MDBCardBody>
@@ -126,59 +201,67 @@ function ProtectedAccess(props){
     return(
         <>
             { access ? 
-                <RenderTables state={{
-                    users: props.state.users,
-                    establishments: props.state.establishments,
-                    onDeleteClick: props.state.onDeleteClick,
-                    user: props.state.user
-                }}/> 
+                <RenderTables/> 
             : <h2>Access restricted.</h2>}
         </>
     )
 }
 
-// export default function Card(){
-class AdminTable extends Component{
-        constructor(){
-            super();
-            this.state ={
-                user_id: ''
-            }
-        }    
+const AdminTable = () => {
+    const { user } = useSelector((state) => state.authentication);
 
-        componentDidMount() {
-            this.props.getEstablishments();
-            this.props.getUsers();
-        }
-        
-        onDeleteClick = (id) => {
-            this.props.deleteEstablishment(id);
-            window.location.reload(false);
-        }
-
-        render(){
-
-            return(
-                <> 
-                    <Delayed waitBeforeShow={1000}>
-                        <ProtectedAccess state={{
-                            users: this.props.users,
-                            establishments: this.props.establishment,
-                            onDeleteClick: this.onDeleteClick,
-                            user: this.props.user
-                        }}/>
-                    </Delayed>
-                </>
-            )
-           
-        }
+    return(
+        <>
+        <Delayed waitBeforeShow={1000}>
+            <ProtectedAccess state={{user: user}}/>
+        </Delayed>
+        </>
+    )
 }
 
-const mapStateToProps = (state) => ({
-    establishment: state.establishment,
-    users: state.users,
-    user: state.authentication.user
-});
+export default AdminTable;
+
+// class AdminTable extends Component{
+//         constructor(){
+//             super();
+//             this.state ={
+//                 user_id: ''
+//             }
+//         }    
+
+//         componentDidMount() {
+//             this.props.getEstablishments();
+//             this.props.getUsers();
+//         }
+        
+//         onDeleteClick = (id) => {
+//             this.props.deleteEstablishment(id);
+//             window.location.reload(false);
+//         }
+
+//         render(){
+
+//             return(
+//                 <> 
+                    // <Delayed waitBeforeShow={1000}>
+                    //     <ProtectedAccess state={{
+                    //         users: this.props.users,
+                    //         establishments: this.props.establishment,
+                    //         onDeleteClick: this.onDeleteClick,
+                    //         user: this.props.user
+                    //     }}/>
+                    // </Delayed>
+//                 </>
+//             )
+           
+//         }
+// }
+
+// const mapStateToProps = (state) => ({
+//     establishment: state.establishment,
+//     users: state.users,
+//     user: state.authentication.user
+// });
 
 
-export default connect(mapStateToProps, { getEstablishments, deleteEstablishment, getUsers })(AdminTable);
+// export default connect(mapStateToProps, { getEstablishments, deleteEstablishment, getUsers })(AdminTable);

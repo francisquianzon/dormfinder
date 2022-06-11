@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
+import './components/components.css';
 import {
     Container,
     Placeholder,
@@ -40,21 +41,30 @@ function useQuery(){
 }
 
 function CardPlaceholder(){
+    const cardLength = [1,2,3,4];
+
     return(
         <>
-        <MDBCard show={false} style={{ minWidth: '15rem', width: "20rem" }}>
-            <MDBCardImage position="top" variant="top" src="../../building_placeholder.jpg" className="card-establishment-img" />
-            <MDBCardBody>
-            <Placeholder as={Card.Title} animation="glow">
-                <Placeholder xs={6} />
-            </Placeholder>
-            <Placeholder as={Card.Text} animation="glow">
-                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-                <Placeholder xs={6} /> <Placeholder xs={8} />
-            </Placeholder>
-            <Placeholder.Button variant="primary" xs={6} />
-            </MDBCardBody>
-        </MDBCard>
+        <br></br>
+        <Row xs={1} md={4} className="g-3">
+            {cardLength.map((number)=> (
+            <Col className="dormcard">
+                <MDBCard style={{ minWidth: '15rem', width: "20rem" }}>
+                    <MDBCardImage position="top" variant="top" src="../../building_placeholder.jpg" className="card-establishment-img" />
+                    <MDBCardBody>
+                    <Placeholder as={Card.Title} animation="glow">
+                        <Placeholder xs={6} />
+                    </Placeholder>
+                    <Placeholder as={Card.Text} animation="glow">
+                        <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                        <Placeholder xs={6} /> <Placeholder xs={8} />
+                    </Placeholder>
+                    <Placeholder.Button variant="primary" xs={6} />
+                    </MDBCardBody>
+                </MDBCard>
+            </Col>
+            ))}
+        </Row>
 
         </>
     )
@@ -69,7 +79,7 @@ const Browse = () =>{
     const searchQuery = query.get('searchQuery');
     const loaded = false;
     
-    const { establishments } = useSelector((state) => state.establishment)
+    const { establishments, loading } = useSelector((state) => state.establishment);
     const [search, setSearch] = useState('');
     const [currentId, setCurrentId] = useState(0);
     const [ placeholder, setPlaceholder] = useState(true);
@@ -100,6 +110,7 @@ const Browse = () =>{
         return () => clearTimeout(timer);
     }, []);
     
+    console.log(loading)
     return(
         <>
             <Navbar/>
@@ -129,7 +140,7 @@ const Browse = () =>{
                     <Row>
                         <Col></Col>
                         <Col className="d-flex justify-content-center">
-                            <Pagination page={page}/>
+                            <Pagination state={{page: page, type: 'browse'}}/>
                         </Col>
                         <Col></Col>
                     </Row>

@@ -27,7 +27,8 @@ export default function(state = initialState, action){
         case ADD_ITEMS:
             return{
                 ...state,
-                establishments: [action.payload, ...state.establishments]
+                establishments: [action.payload, ...state.establishments],
+                loading: false
             }
         case CLEAR_ITEMS:
             return{

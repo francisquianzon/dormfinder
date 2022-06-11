@@ -46,6 +46,8 @@ export const addEstablishment = estab => async (dispatch, getState) => {
     // console.log(estab)
     // console.log(estab.pictures)
 
+    dispatch(setItemsLoading())
+    
     const imagesArray = await axios.post('/establishments/image', {data: estab.pictures});
     console.log("printing images...")
     console.log(imagesArray.data)

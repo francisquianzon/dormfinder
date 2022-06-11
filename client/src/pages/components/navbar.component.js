@@ -45,7 +45,9 @@ function LoggedIn(props){
         </Link>
       </MDBNavbarItem>
       <MDBNavbarItem>
-        <MDBNavbarLink className="nav-links">Learn more</MDBNavbarLink>
+        <Link to="/about">
+          <MDBNavbarLink className="nav-links">Learn more</MDBNavbarLink>
+        </Link>
       </MDBNavbarItem>
       <MDBNavbarItem>
         <MDBDropdown>
@@ -55,8 +57,14 @@ function LoggedIn(props){
         <MDBDropdownMenu>
           <MDBDropdownItem>
             {access === true
-              ? <MDBDropdownLink href='/browse.admin' >Admin</MDBDropdownLink>
-              : <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink>
+              ? 
+              <Link to="/browse.admin">
+                <MDBDropdownLink>Admin</MDBDropdownLink>
+              </Link>
+              : 
+              <Link to="/addestablishment">
+                <MDBDropdownLink>Create a post</MDBDropdownLink>
+              </Link>
             }
             {/* <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink> */}
             <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
@@ -127,7 +135,7 @@ function Navbar1(props) {
 
             <MDBCollapse navbar show={showNavRight}>
             <MDBNavbarNav right fullWidth={false} className='mb-2 mb-lg-0'>
-              {showStatus}
+              { props.state.isLoading ? null : <>{showStatus}</> }
             </MDBNavbarNav>
             </MDBCollapse>
         </MDBContainer>
@@ -154,13 +162,13 @@ class Navbar extends Component{
     }
 
     render(){
-        // console.log("Logged in?");
+        console.log(this.props.isLoading);
         const auth = this.props.isAuthenticated
         const user = this.props.user
         
         return(
             <>
-                <Navbar1 state={{auth: auth, user:user, logout: this.props.logout}}/>
+                <Navbar1 state={{auth: auth, user:user, logout: this.props.logout, isLoading: this.props.isLoading}}/>
             </>
         )
     }
@@ -168,7 +176,8 @@ class Navbar extends Component{
 
 const mapStateToProps = state => ({
     isAuthenticated: state.authentication.isAuthenticated,
-    user: state.authentication.user
+    user: state.authentication.user,
+    isLoading: state.authentication.isLoading
 });
 
 

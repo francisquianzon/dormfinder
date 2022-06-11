@@ -3,7 +3,8 @@ import {
     Form,
     Alert,
     Row,
-    Col
+    Col,
+    Spinner
 } from 'react-bootstrap';
 
 import { MDBCard, 
@@ -33,7 +34,7 @@ class PostCard extends Component{
             original_poster: {},
             mobile_info: '',
             email_info: '',
-            landlord_check: null,
+            landlord_check: true,
             pictures: '',
             error_msg: null,
             alert_type: '',
@@ -50,6 +51,9 @@ class PostCard extends Component{
         this.setState({[e.target.name]: e.target.value});
     }
 
+    onChangeValueRadio = e =>{
+        this.setState({landlord_check: e.target.value});
+    }
 
     handleFileUpload = async (e) => {
         //retrieives the uploaded files
@@ -100,33 +104,20 @@ class PostCard extends Component{
         //     })
         //     return false
         // }
-
-        //handles the image upload===============================
-        // let pictures = []
-        //creates a formData for file upload
-        // const formData = new FormData();
-        // for(let j=0;j<this.state.pictures.length;j++){
-        //     //renames the pictures first
-        //     const newName = new Date().getTime() + this.state.pictures[j].name; 
-        //     formData.append('demo_images', this.state.pictures[j], newName)
-        //     pictures.push(newName);
-        // }
-        // this.props.uploadImage(this.state.pictures);
         
         //checks for covid health and safety guidelines
         let protocol_approved = false;
-        const guideline_1 = this.state.guideline_1 === 'on' ? true : false;
-        const guideline_2 = this.state.guideline_2 === 'on' ? true : false;
-        const guideline_3 = this.state.guideline_3 === 'on' ? true : false;
-        const guideline_4 = this.state.guideline_4 === 'on' ? true : false;
-        const guideline_5 = this.state.guideline_5 === 'on' ? true : false;
+        const guideline_1 = this.state.guideline_1;
+        const guideline_2 = this.state.guideline_2;
+        const guideline_3 = this.state.guideline_3;
+        const guideline_4 = this.state.guideline_4;
+        const guideline_5 = this.state.guideline_5;
 
-
-        if( guideline_1 === true
-        || guideline_2 === true
-        || guideline_3 === true
-        || guideline_4 === true
-        || guideline_5 === true
+        if( this.state.guideline_1 === true
+        || this.state.guideline_2 === true
+        || this.state.guideline_3 === true
+        || this.state.guideline_4 === true
+        || this.state.guideline_5 === true
         ){
             protocol_approved = true;
         }
@@ -148,7 +139,7 @@ class PostCard extends Component{
             price_max: this.state.price_max,
             mobile_info: this.state.mobile_info,
             email_info: this.state.email_info,
-            landlord_check: this.state.landlord_check,
+            landlord_check: this.state.landlord_check === 'true' ? true : false,
             original_poster: this.props.user.username,
             pictures: this.state.pictures,
             safety_guidelines,
@@ -156,38 +147,49 @@ class PostCard extends Component{
         }
 
         // console.log("newItem")
-        console.log(newItem)
+        // console.log(newItem)
 
         // add item via addEstablishment action
         this.props.addEstablishment(newItem);
         
-        // this.setState({
-        //     name: '',
-        //     location: '',
-        //     description: '',
-        //     price_min: 0,
-        //     price_max: 0,
-        //     mobile_info: '',
-        //     email_info: '',
-        //     landlord_check: null,
-        //     error_msg: "Successfully added!",
-        //     alert_type: "success",
-        //     guideline_1: null,
-        //     guideline_2: null,
-        //     guideline_3: null,
-        //     guideline_4: null,
-        //     guideline_5: null
-        // });
+        this.setState({
+            name: '',
+            location: '',
+            description: '',
+            price_min: 0,
+            price_max: 0,
+            mobile_info: '',
+            email_info: '',
+            landlord_check: null,
+            error_msg: "Successfully added!",
+            alert_type: "success",
+            guideline_1: false,
+            guideline_2: false,
+            guideline_3: false,
+            guideline_4: false,
+            guideline_5: false
+        });
 
         //reloads the window
-        // window.location.reload(false);
+        // setTimeout(() =>{
+            //     if(this.props.isLoading === false){
+        //         this.setState({
+        //             error_msg: "Successfully added!",
+        //             alert_type: "success",
+        //         })
+        //     }
+        // }, 2000);
+        
+        // setTimeout(() =>{
+        //     window.location.reload(false);
+            // this.props.navigate('/browse');
+        // }, 20000);
+        
     }
 
     render(){
-        // console.log(this.props.user._id)
         return(
             <>
-                {/* <PostCard state={{ onSubmit: this.onSubmit, onChange: this.onChange}}/> */}
             <MDBContainer>
                 <MDBRow>
                     <MDBCol className="col-md-1"></MDBCol>
@@ -263,36 +265,71 @@ class PostCard extends Component{
                                         </MDBRow>
                                         <br></br>
                                         <MDBCardText><h5>Are you posting as the Landlord?</h5></MDBCardText>
-                                        <div>
-                                            <MDBRadio checked={this.state.landlord_check} name='landlord_check' id='landlord_true' label='Yes, I am the Landlord' />
-                                            <MDBRadio checked={this.state.landlord_check} name='landlord_check' id='landlord_false' label='No, I am posting on behalf of the Landlord' />
+                                        <div onChange={this.onChangeValueRadio}>
+                                            <MDBRadio value={true} name='landlord_check' id='landlord_true' label='Yes, I am the Landlord' />
+                                            <MDBRadio value={false} name='landlord_check' id='landlord_false' label='No, I am posting on behalf of the Landlord' />
                                         </div>
                                     <br></br>
                                     {/* ============================================================================= */}
                                     <MDBCardText><h4>COVID-19 Health and Safety Practices</h4></MDBCardText>
                                     <p>Please provide any and all that applies regarding the health and safety protocols that your establishment practices. </p>
                                     <div className="d-flex">
-                                        <Form.Check type="checkbox" name="guideline_1" label="" onChange={this.onChange}></Form.Check>
+                                        <Form.Check type="checkbox" name="guideline_1" checked={this.state.guideline_1} label="" 
+                                        onChange={(event) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ guideline_1: !this.state.guideline_1 });
+                                        }}
+                                        ></Form.Check>
                                         <p>Tenants are required to present a vaccination card.</p>
                                     </div>
                                     <div className="d-flex">
-                                        <Form.Check type="checkbox" name="guideline_2" label="" onChange={this.onChange}></Form.Check>
+                                        <Form.Check type="checkbox" name="guideline_2" label="" checked={this.state.guideline_2}
+                                        onChange={(event) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ guideline_2: !this.state.guideline_2 });
+                                        }}
+                                        ></Form.Check>
                                         <p>Rooms and facilities undergo enhanced cleaning.</p>
                                     </div>
                                     <div className="d-flex">
-                                        <Form.Check type="checkbox" name="guideline_3" label="" onChange={this.onChange}></Form.Check>
+                                        <Form.Check type="checkbox" name="guideline_3" label="" checked={this.state.guideline_3}
+                                        onChange={(event) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ guideline_3: !this.state.guideline_3 });
+                                        }}
+                                        ></Form.Check>
                                         <p>Presence of hygiene and sanitation facilities within the establishment such as a hand washing station, soap and water or 70% Isopropyl Alcohol.</p>
                                     </div>
                                     <div className='d-flex'>
-                                        <Form.Check type="checkbox" name="guideline_4" label="" onChange={this.onChange}></Form.Check>
+                                        <Form.Check type="checkbox" name="guideline_4" label="" checked={this.state.guideline_4}
+                                        onChange={(event) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ guideline_4: !this.state.guideline_4 });
+                                        }}
+                                        ></Form.Check>
                                         <p>Presence of a screening area at the point/s-of-entry with non-contact temperature check.</p>
                                     </div>
                                     <div className="d-flex">
-                                        <Form.Check type="checkbox" name="guideline_5" label="" onChange={this.onChange}></Form.Check>
+                                        <Form.Check type="checkbox" name="guideline_5" label="" checked={this.state.guideline_5}
+                                        onChange={(event) => {
+                                            // this.setValue(newValue);
+                                            this.setState({ guideline_5: !this.state.guideline_5 });
+                                        }}
+                                        ></Form.Check>
                                         <p>Visual cues or signages to communicate maintaining of physical distance, wearing of masks, proper hygiene etiquette, etc.</p>
                                     </div>
 
-                                    { this.state.error_msg ? <Alert variant={this.state.alert_type}>{this.state.error_msg}</Alert> : null }
+                                    { this.props.isLoading ? 
+                                        <Spinner animation="border" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </Spinner>
+                                    :
+                                    <>
+                                        { this.state.error_msg ? 
+                                        <Alert variant={this.state.alert_type}>{this.state.error_msg}</Alert> 
+                                        : null }
+                                    </>
+                                    }
                                     <br></br>
                                     <MDBBtn variant="primary" type="submit">
                                         Post
@@ -311,10 +348,10 @@ class PostCard extends Component{
 }
 
 const mapStateToProps = state => ({
-    establishment: state.establishment,
     isAuthenticated: state.authentication.isAuthenticated,
     user: state.authentication.user,
-    error: state.error
+    error: state.error,
+    isLoading: state.establishment.loading
 })
 
 export default connect(mapStateToProps, { addEstablishment, uploadImage })(PostCard);

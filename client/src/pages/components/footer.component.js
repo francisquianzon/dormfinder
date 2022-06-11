@@ -45,7 +45,7 @@ export default class Footer extends Component{
                         <img src="../../dormfinder_logo.svg" alt="..." height="60"></img>
                         <p>Developed by Francis Quianzon</p>
                     </h6>
-                        <a href='/aboutus' className="">About Us</a>
+                        <a href='/about' className="">About Us</a>
                     </div>
                 </div>
 

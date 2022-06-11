@@ -36,6 +36,11 @@ export const loadUser = () => (dispatch, getState) => {
 
 //Register User
 export const register = ({ name, username, email, password }) => dispatch => {
+
+    dispatch({
+        type: USER_LOADING
+    });
+    
     //Headers
     const config = {
         headers: {
@@ -62,6 +67,10 @@ export const register = ({ name, username, email, password }) => dispatch => {
 
 //Login User
 export const login = ({email, password }) => dispatch => {
+    dispatch({
+        type: USER_LOADING
+    });
+
     //Headers
     const config = {
         headers: {
@@ -88,6 +97,10 @@ export const login = ({email, password }) => dispatch => {
 
 //Logout User
 export const logout = () => {
+    // dispatch({
+    //     type: USER_LOADING
+    // });
+
     console.log("LOGGING OUT...")
     return {
         type: LOGOUT_SUCCESS

@@ -37,8 +37,8 @@ class EstabCard extends Component{
                                     <MDBCard >
                                         {estabs.pictures.length > 0 ? 
                                         <MDBCardImage position="top" 
-                                            src={`../../uploads/${estabs.pictures[0]}`} 
-                                            // src={estabs.pictures[0]}
+                                            // src={`../../uploads/${estabs.pictures[0]}`} 
+                                            src={estabs.pictures[0]}
                                             className="card-establishment-img"/>
                                         :
                                         <MDBCardImage position="top" src="../../building_placeholder2.jpg" className="card-establishment-img"/>

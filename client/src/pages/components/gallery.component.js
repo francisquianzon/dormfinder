@@ -51,10 +51,14 @@ class Gallery extends Component{
                         <div className="bg-image hover-overlay ripple shadow-1-strong rounded" data-mdb-ripple-color="light">
                             <img 
                             className='w-100 gallery-img1'
-                            src={`../../uploads/${this.props.pictures[0]}`}
+                            // src={`../../uploads/${this.props.pictures[0]}`}
+                            src={this.props.pictures[0]}
                             alt="dorm view"
                             />
-                            <a onClick={()=>window.open(`../../uploads/${this.props.pictures[0]}`)}>
+                            <a 
+                            // onClick={()=>window.open(`../../uploads/${this.props.pictures[0]}`)}
+                            onClick={()=>window.open(`${this.props.pictures[0]}`)}
+                            >
                                 <div className="mask" style={{backgroundColor: 'rgba(251, 251, 251, 0.2)'}}></div>
                             </a>
                         </div>
@@ -73,10 +77,11 @@ class Gallery extends Component{
                             <div className="bg-image hover-overlay ripple shadow-1-strong rounded" data-mdb-ripple-color="light">
                                 <img 
                                     className='w-100 gallery-img2'
-                                    src={`../../uploads/${this.props.pictures[1]}`}
+                                    // src={`../../uploads/${this.props.pictures[1]}`}
+                                    src={this.props.pictures[1]}
                                     alt="dorm view"
                                 />
-                                <a onClick={()=>window.open(`../../uploads/${this.props.pictures[1]}`)}>
+                                <a onClick={()=>window.open(`${this.props.pictures[1]}`)}>
                                     <div className="mask" style={{backgroundColor: 'rgba(251, 251, 251, 0.2)'}}></div>
                                 </a>
                             </div>
@@ -93,7 +98,8 @@ class Gallery extends Component{
                             <div class="bg-image ripple" data-mdb-ripple-color="light">
                                 <img 
                                     className='w-100 gallery-img2'
-                                    src={`../../uploads/${this.props.pictures[2]}`}
+                                    // src={`../../uploads/${this.props.pictures[2]}`}
+                                    src={this.props.pictures[2]}
                                     alt="dorm view"
                                 />
                                 <a onClick={this.toggleImage}>
@@ -120,12 +126,13 @@ class Gallery extends Component{
                                                     <div className="bg-image hover-overlay ripple shadow-1-strong rounded" data-mdb-ripple-color="light">  
                                                         <ImageListItem>
                                                             <img
-                                                                src={`../../uploads/${pics}`}
+                                                                // src={`../../uploads/${pics}`}
+                                                                src={pics}
                                                                 loading="lazy"
                                                                 className="gallery-img"
                                                                 alt="dorm view"
                                                             />
-                                                            <a onClick={()=>window.open(`../../uploads/${pics}`)}>
+                                                            <a onClick={()=>window.open(`${pics}`)}>
                                                                 <div className="mask" style={{backgroundColor: 'rgba(251, 251, 251, 0.2)'}}></div>
                                                             </a>
                                                         </ImageListItem>
@@ -138,12 +145,13 @@ class Gallery extends Component{
                                                     <div className="bg-image hover-overlay ripple shadow-1-strong rounded" data-mdb-ripple-color="light">  
                                                         <ImageListItem>
                                                             <img
-                                                                src={`../../uploads/${pics}`}
+                                                                // src={`../../uploads/${pics}`}
+                                                                src={pics}
                                                                 loading="lazy"
                                                                 className="gallery-img"
                                                                 alt="dorm view"
                                                             />
-                                                            <a onClick={()=>window.open(`../../uploads/${pics}`)}>
+                                                            <a onClick={()=>window.open(`${pics}`)}>
                                                                 <div className="mask" style={{backgroundColor: 'rgba(251, 251, 251, 0.2)'}}></div>
                                                             </a>
                                                         </ImageListItem>

@@ -15,8 +15,9 @@ const useStyles = makeStyles({
     }
 })
 
-const Paginate = ({page}) => {
+const Paginate = (props) => {
     const classes_ = useStyles();
+    const page = props.state.page;
 
     const { numberOfPages } = useSelector((state) => state.establishment);
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Paginate = ({page}) => {
             page={Number(page) || 1}
             shape="rounded"
             renderItem={(item) => (
-                <PaginationItem {...item} component={Link} to={`/browse?page=${item.page}`}/>
+                <PaginationItem {...item} component={Link} to={`/${props.state.type}?page=${item.page}`}/>
             )}
         />
     )
