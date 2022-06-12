@@ -91,19 +91,19 @@ class PostCard extends Component{
         e.preventDefault();
         
         //checks if necessary fields are entered=================
-        // if(this.state.name === '' 
-        // || this.state.location === '' 
-        // || this.state.description === '' 
-        // || this.state.price_min === 0
-        // || this.state.price_max === 0
-        // || this.state.mobile_info === ''
-        // ){
-        //     this.setState({
-        //         error_msg: "Please enter required fields",
-        //         alert_type: "danger"
-        //     })
-        //     return false
-        // }
+        if(this.state.name === '' 
+        || this.state.location === '' 
+        || this.state.description === '' 
+        || this.state.price_min === 0
+        || this.state.price_max === 0
+        || this.state.mobile_info === ''
+        ){
+            this.setState({
+                error_msg: "Please enter required fields",
+                alert_type: "danger"
+            })
+            return false
+        }
         
         //checks for covid health and safety guidelines
         let protocol_approved = false;

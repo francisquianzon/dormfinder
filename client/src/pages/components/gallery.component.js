@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 import {
+    Row,
+    Col
+} from 'react-bootstrap'
+import {
     MDBRow,
     MDBCol,
     MDBBtn,
@@ -38,8 +42,8 @@ class Gallery extends Component{
         return(
             <>
             <div className="my-5">
-            <MDBRow>
-                <MDBCol className='col-md-8'>
+            <Row>
+                <Col className='col-md-8'>
                     { this.props.pictures.length < 1 ?
                             <img
                             className="w-100 gallery-img1"
@@ -64,9 +68,9 @@ class Gallery extends Component{
                         </div>
                     }
                     
-                </MDBCol>
-                <MDBCol className='col-md-4'>
-                    <MDBRow className="mb-4">
+                </Col>
+                <Col className='col-md-4'>
+                    <Row className="mb-4">
                         { this.props.pictures.length < 2 ?
                             <img
                                 className="w-100 gallery-img2"
@@ -86,8 +90,8 @@ class Gallery extends Component{
                                 </a>
                             </div>
                         }
-                    </MDBRow>
-                    <MDBRow>
+                    </Row>
+                    <Row>
                         { this.props.pictures.length < 3 ?
                             <img
                                 className="w-100 gallery-img2"
@@ -165,9 +169,9 @@ class Gallery extends Component{
                                 </MDBModal>
                             </div>
                         }
-                    </MDBRow>
-                </MDBCol>
-            </MDBRow>
+                    </Row>
+                </Col>
+            </Row>
             </div>
 
             </>

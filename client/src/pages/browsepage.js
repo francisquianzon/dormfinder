@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './components/components.css';
 import {
     Container,
@@ -6,30 +6,20 @@ import {
     Card,
     Form,
     InputGroup,
-    Button,
     Row,
     Col,
-    CloseButton
 } from 'react-bootstrap';
 
 import {
     MDBCard, 
     MDBCardBody, 
     MDBCardImage,
-    MDBBtn,
 } from 'mdb-react-ui-kit';
 
-import {
-    Paper,
-    TextField
-} from '@mui/material';
-import { BiSearch } from 'react-icons/bi';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getEstablishments, deleteEstablishment, getEstablishmentBySearch } from '../actions/establishmentActions';
-import { connect } from 'react-redux';
+import { getEstablishments, getEstablishmentBySearch } from '../actions/establishmentActions';
 
 import Navbar from './components/navbar.component';
 import DormCards from './components/dormCards.component';
@@ -77,9 +67,8 @@ const Browse = () =>{
     
     const page = query.get('page') || 1;
     const searchQuery = query.get('searchQuery');
-    const loaded = false;
     
-    const { establishments, loading } = useSelector((state) => state.establishment);
+    const { loading } = useSelector((state) => state.establishment);
     const [search, setSearch] = useState('');
     const [currentId, setCurrentId] = useState(0);
     const [ placeholder, setPlaceholder] = useState(true);
@@ -87,8 +76,6 @@ const Browse = () =>{
 
     const submitQuery = () => {
         if(search.trim()){
-            console.log("Submitting Query...");
-            console.log(search)
             dispatch(getEstablishmentBySearch({search}));
             navigate(`/browse/search?searchQuery=${search}`)
         }else{
@@ -103,9 +90,8 @@ const Browse = () =>{
       };
     
     useEffect(() => {
-        dispatch(getEstablishments());
+        // dispatch(getEstablishments());
 
-        
         const timer = setTimeout(() => setPlaceholder(false), 1500);
         return () => clearTimeout(timer);
     }, []);
@@ -138,11 +124,13 @@ const Browse = () =>{
                     <DormCards/>
                     <br></br>
                     <Row>
-                        <Col></Col>
-                        <Col className="d-flex justify-content-center">
-                            <Pagination state={{page: page, type: 'browse'}}/>
-                        </Col>
-                        <Col></Col>
+                        {/* <Col></Col> */}
+                        {!searchQuery && 
+                            <Col className="d-flex justify-content-center">
+                                <Pagination state={{page: page, type: 'browse'}}/>
+                            </Col>
+                        }
+                        {/* <Col></Col> */}
                     </Row>
                     <br></br>
                 </div>

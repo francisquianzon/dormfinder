@@ -47,7 +47,7 @@
 }
 
 .headline {
-    background-image: url(./resources/headline.jpg);
+    background-image: url(./resources/headline.png);
     background-repeat: no-repeat;
     background-size: cover;
     width:100vw;
@@ -105,7 +105,7 @@
 
 .gallery-img2{
     width: 300px;
-    max-height: 163px;
+    height: 163px;
     object-fit: cover;
 }
 
@@ -250,4 +250,12 @@
 
 .about-info{
     text-align: justify !important;
+}
+
+.headline-text{
+    color:rgb(238, 238, 238);
+}
+
+.headline-search{
+    margin-top: 150px;
 }

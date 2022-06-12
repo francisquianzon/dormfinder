@@ -97,7 +97,9 @@ function NotLogged(){
         </Link>
       </MDBNavbarItem>
       <MDBNavbarItem>
-        <MDBNavbarLink  className="nav-links">Learn more</MDBNavbarLink>
+        <Link to="/about">
+          <MDBNavbarLink  className="nav-links">Learn more</MDBNavbarLink>
+        </Link>
       </MDBNavbarItem>
     </>
   )

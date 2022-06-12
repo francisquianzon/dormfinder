@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import { loadUser } from '../actions/authActions';
-import { connect } from 'react-redux';
 import './components/components.css';
 import {
     Row,

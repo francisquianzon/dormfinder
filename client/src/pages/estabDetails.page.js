@@ -3,12 +3,12 @@ import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {  getDetails } from '../actions/establishmentActions';
 import { getReviews } from '../actions/reviewActions';
-// import PropTypes from 'prop-types';
-// import { useSelector } from 'react-redux';
-// import Button from 'react-bootstrap/Button'
 
 import {
-  Spinner
+  Spinner,
+  Row,
+  Col,
+  Placeholder
 } from 'react-bootstrap';
 
 import Container from 'react-bootstrap/Container'
@@ -25,15 +25,76 @@ function locationHook(Component) {
     }
   }
 
-function ContentPlaceholder(){
+function GalleryPlaceholder(){
   return(
       <>
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        {/* <Row className="mt-2 d-flex justify-content-center">
+          <Col></Col>
+          <Col>
+          <Spinner animation="grow" style={{ width: '10rem', height: '10rem' }}/>
+          </Col>
+          <Col></Col>
+        </Row> */}
+        <div className="my-5">
+        <Row>
+          <Col className='col-md-8'>
+            <Placeholder animation="glow">
+              <Placeholder className="w-100 gallery-img1"/>
+            </Placeholder>
+          </Col>
+          <Col className='col-md-4'>
+            <Row className="mb-4">
+            <Placeholder animation="glow">
+              <Placeholder className="w-100 gallery-img2"/>
+            </Placeholder>
+            </Row>
+            <Row>
+            <Placeholder animation="glow">
+              <Placeholder className="w-100 gallery-img2"/>
+            </Placeholder>
+            </Row>
+          </Col>
+        </Row>
+        </div>
       </>
   )
 }
+
+function PageLoading(){
+  return(
+    <>
+    <Container>
+      <br></br>
+      <Row>
+        <Col xs={12} md={8}>
+          <Row>
+            <Placeholder animation="glow">
+              <Placeholder xs={12}/>
+            </Placeholder>
+          </Row>
+          <Row>
+            <Placeholder animation="glow">
+              <Placeholder xs={4}/>
+            </Placeholder>
+          </Row>
+          <Row>
+            <Placeholder animation="glow">
+              <Placeholder xs={4}/>
+            </Placeholder>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+    {/* <Row className="mt-5">
+      <Col></Col>
+      <Col className="d-flex justify-content-center">
+      <Spinner animation="grow" style={{ width: '10rem', height: '10rem' }}/>
+      </Col>
+      <Col></Col>
+    </Row> */}
+    </>
+  )
+} 
 
 class EstabDetails extends Component{
 // function EstabDetails(){
@@ -70,27 +131,32 @@ class EstabDetails extends Component{
 
         setTimeout(() =>{
             this.showPlaceholder()
-        }, 2000);
+        }, 3000);
 
         return(
             <>
             <Navbar/>
               <Container> 
-                <Delayed waitBeforeShow={1000}>
-                  <Gallery pictures={this.props.item.pictures}/>
-                </Delayed>
-                <Details/>
-                <br></br>
-                <Reviews establishment_id={establishmentitem._id}/>
-                <br></br>
+                { this.state.placeholder ? <GalleryPlaceholder/> :
+                  <Gallery pictures={establishmentitem.pictures}/>
+                }
+                { this.props.isLoading ? <PageLoading/> :
+                  <>
+                    <Details/>
+                    <br></br>
+                    <Reviews establishment_id={establishmentitem._id}/>
+                    <br></br>
+                  </>
+                }
               </Container>
-            </>
+          </>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-  item: state.establishment.item
+  item: state.establishment.item,
+  isLoading: state.establishment.loading
 });
 
 // export default locationHook(EstabDetails);
