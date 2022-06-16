@@ -143,7 +143,7 @@ class Reviews extends Component{
                                     </Row>
                                     <Row>
                                         <Col>
-                                        Amenaties
+                                        Amenities
                                         </Col>
                                         <Col>
                                         <Rating className=" mt-1" name="half-rating-read" defaultValue={average_score_amenaties} precision={0.5} readOnly />

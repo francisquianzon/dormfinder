@@ -129,7 +129,8 @@ class Details extends Component{
                         {/* <Row> */}
                             <MDBCard>
                                 <MDBCardBody>
-                                    <MDBCardTitle>Posted by {this.props.item.original_poster}</MDBCardTitle>
+                                    <MDBCardTitle>Posted by {this.props.item.original_poster} {this.props.item.landlord_check && <p>(Landlord)</p>}</MDBCardTitle>
+                                    
                                     <br></br>
                                     <h4>Contact Information</h4>
                                     <h6><ImMobile2/> {this.props.item.mobile_info}</h6>
