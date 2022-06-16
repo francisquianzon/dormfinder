@@ -155,7 +155,10 @@ router.put('/r/:id', (req,res)=>{
 router.put('/:id', (req,res)=>{
     var conditions = {_id: req.params.id};
 
-    Estab.update(conditions, req.body)
+    console.log(conditions)
+    console.log(req.body)
+
+    Estab.updateOne(conditions, req.body)
     .then(doc =>{
         if(!doc) { return res.status(404).end();}
         return res.status(200).json(doc);

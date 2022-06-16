@@ -19,7 +19,7 @@ import { MDBCard,
 } from 'mdb-react-ui-kit';
 
 import { connect } from 'react-redux';
-import { addEstablishment, uploadImage } from '../../actions/establishmentActions';
+import { addEstablishment, uploadImage, updateEstablishment } from '../../actions/establishmentActions';
 
 class PostCard extends Component{
     //initialize state attributes
@@ -50,42 +50,6 @@ class PostCard extends Component{
     onChange = e =>{
         this.setState({[e.target.name]: e.target.value});
     }
-
-    onChangeValueRadio = e =>{
-        this.setState({landlord_check: e.target.value});
-    }
-
-    handleFileUpload = async (e) => {
-        //retrieives the uploaded files
-        const file = e.target.files;
-        let file_base64 = [];
-
-        //converts the uploaded files to base64 and puts in an array
-        for(let i=0;i<file.length;i++){
-            file_base64.push(await this.convertToBase64(file[i]))
-        }
-
-        // console.log(file_base64);
-        this.setState({
-            // pictures:file
-            pictures: file_base64
-        })
-        // setPostImage({ ...postImage, myFile: base64 });
-    };
-
-    convertToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = () => {
-            resolve(fileReader.result);
-            };
-            fileReader.onerror = (error) => {
-            reject(error);
-            };
-        });
-    };
-
 
     onSubmit = e => {
         e.preventDefault();
@@ -139,9 +103,7 @@ class PostCard extends Component{
             price_max: this.state.price_max,
             mobile_info: this.state.mobile_info,
             email_info: this.state.email_info,
-            landlord_check: this.state.landlord_check === 'true' ? true : false,
             original_poster: this.props.user.username,
-            pictures: this.state.pictures,
             safety_guidelines,
             protocol_approved
         }
@@ -150,7 +112,7 @@ class PostCard extends Component{
         // console.log(newItem)
 
         // add item via addEstablishment action
-        this.props.addEstablishment(newItem);
+        this.props.updateEstablishment(newItem, this.props.establishment._id);
         
         this.setState({
             name: '',
@@ -161,7 +123,7 @@ class PostCard extends Component{
             mobile_info: '',
             email_info: '',
             landlord_check: null,
-            error_msg: "Successfully added!",
+            error_msg: "Successfully updated!",
             alert_type: "success",
             guideline_1: false,
             guideline_2: false,
@@ -187,6 +149,18 @@ class PostCard extends Component{
         
     }
 
+    componentDidMount(){
+        this.setState({
+            name: this.props.establishment.name,
+            location: this.props.establishment.location,
+            description: this.props.establishment.description,
+            price_max: this.props.establishment.price_max,
+            price_min: this.props.establishment.price_min,
+            mobile_info: this.props.establishment.mobile_info,
+            email_info: this.props.establishment.email_info
+        })
+    }
+
     render(){
         return(
             <>
@@ -200,7 +174,7 @@ class PostCard extends Component{
                     <MDBCol></MDBCol>
                     <MDBCol className="d-flex justify-content-center">
                         <MDBCard className="d-flex justify-content-center" style={{ width: '50rem' }}>
-                            <MDBCardHeader><h3>Create a post</h3></MDBCardHeader>
+                            <MDBCardHeader><h3>Edit a post</h3></MDBCardHeader>
                             <MDBCardBody>
 
                                 {/* ============================================================================= */}
@@ -221,11 +195,6 @@ class PostCard extends Component{
                                         <Form.Label><h5>Description</h5></Form.Label>
                                         <Form.Control value={this.state.description} name="description" as="textarea" rows="5" type="Text" onChange={this.onChange} className="form-background"/>
                                         <Form.Text>Add the establishment's description e.g. no. of bedrooms, amenaties, etc.</Form.Text>
-                                    </Form.Group>
-                                    <Form.Group controlId="formFileMultiple" className="mb-3">
-                                        <Form.Label><h5>Images</h5></Form.Label>
-                                        <Form.Control name="pictures" type="file" onChange={(e) => this.handleFileUpload(e)} multiple className="form-background"/>
-                                        <Form.Text>Add pictures to your establishment</Form.Text>
                                     </Form.Group>
                                     <MDBRow>
                                         <MDBCol>
@@ -264,11 +233,6 @@ class PostCard extends Component{
                                         <Form.Text>For additional contact information, add them in the description field</Form.Text>
                                         </MDBRow>
                                         <br></br>
-                                        <MDBCardText><h5>Are you posting as the Landlord?</h5></MDBCardText>
-                                        <div onChange={this.onChangeValueRadio}>
-                                            <MDBRadio value={true} name='landlord_check' id='landlord_true' label='Yes, I am the Landlord' />
-                                            <MDBRadio value={false} name='landlord_check' id='landlord_false' label='No, I am posting on behalf of the Landlord' />
-                                        </div>
                                     <br></br>
                                     {/* ============================================================================= */}
                                     <MDBCardText><h4>COVID-19 Health and Safety Practices</h4></MDBCardText>
@@ -348,10 +312,11 @@ class PostCard extends Component{
 }
 
 const mapStateToProps = state => ({
+    establishment: state.establishment.item,
     isAuthenticated: state.authentication.isAuthenticated,
     user: state.authentication.user,
     error: state.error,
     isLoading: state.establishment.loading
 })
 
-export default connect(mapStateToProps, { addEstablishment, uploadImage })(PostCard);
+export default connect(mapStateToProps, { addEstablishment, uploadImage, updateEstablishment })(PostCard);

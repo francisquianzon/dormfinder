@@ -25,6 +25,7 @@ import EstabDetails from './pages/estabDetails.page';
 import AdminView from './pages/components/adminview.component';
 import Register from './pages/registration.page';
 import LearnMore from './pages/learnmore.page';
+import EditEstablishment from './pages/editEstablishment.page';
 import store from './store';
 
 export default class App extends Component{
@@ -41,6 +42,7 @@ export default class App extends Component{
             <Route path="browse" exact element={<Browse/>}/>
             <Route path="/browse/search" exact element={<Browse/>}/>
             <Route path='/addestablishment' exact element={<AddEstab/>} />
+            <Route path='/editestablishment' exact element={<EditEstablishment/>} />
             <Route path='/browse/:id' exact element={<EstabDetails/>}/>
             <Route path='/browse.admin' exact element={<AdminView/>}/>
             <Route path="/browse.admin/search" exact element={<AdminView/>}/>

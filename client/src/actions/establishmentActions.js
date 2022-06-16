@@ -27,6 +27,17 @@ export const getEstablishmentBySearch = (searchQuery) => async dispatch => {
         )
 }
 
+export const updateEstablishment = (estab, id) => async (dispatch, getState) => {
+
+    // dispatch(setItemsLoading())
+    console.log(id)
+    console.log(estab)
+    
+    axios
+        .put(`/establishments/${id}`, estab)
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+}
+
 export const getDetails = id => dispatch => {
     dispatch(setItemsLoading());
     axios

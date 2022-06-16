@@ -74,7 +74,7 @@ class Gallery extends Component{
                         { this.props.pictures.length < 2 ?
                             <img
                                 className="w-100 gallery-img2"
-                                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                src="https://img.freepik.com/free-vector/student-dormitory-room-with-bunk-bed-laptop-desk-office-chair-bookshelf-vector-cartoon-interior-empty-dorm-bedroom-hostel-apartment-with-wooden-furniture-backpack_107791-9928.jpg?t=st=1655136290~exp=1655136890~hmac=c0e08f60368108ce3b777c339aedee3bd6e7e6bdd16debe4c722f77226dd94cf&w=740"
                                 alt="dorm view"
                                 />
                             :
