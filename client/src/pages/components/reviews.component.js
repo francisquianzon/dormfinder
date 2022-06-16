@@ -89,7 +89,6 @@ class Reviews extends Component{
                                         <FaUserCircle size={40} />
                                         <Row>
                                             <h6 className="mx-3 review-name">{revs.username}</h6>
-                                            {/* <p className="mx-2 review-date-text">May 2022</p> */}
                                             <Rating size="small" className="star-ratings" defaultValue={revs.score} readOnly />
                                         </Row>
                                         <Row>

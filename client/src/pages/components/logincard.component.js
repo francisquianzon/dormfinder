@@ -92,19 +92,15 @@ class LoginCard extends Component{
             <br></br>
             <MDBContainer>
                 <MDBRow className="row-bottom-margin">
-                    {/* <MDBCol></MDBCol> */}
                     <MDBCol className="d-flex justify-content-center">
                         <h3 className="login-title-text">Login to </h3>
                         <img className="mt-1 mx-2" src="../../dormfinder_logo_text.svg" alt="..." height="22"></img>
                         </MDBCol>
-                    {/* <MDBCol></MDBCol> */}
                 </MDBRow>
                 <MDBRow>
-                    {/* <MDBCol></MDBCol> */}
                     <MDBCol className="d-flex justify-content-center">
                         <MDBCard style={{ width: '25rem' }}>
                             <MDBCardBody>
-                                {/* <MDBCardTitle>Login</MDBCardTitle> */}
                                 <br></br>
                                 { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
                                 <Form onSubmit={this.onSubmit}>
@@ -129,7 +125,6 @@ class LoginCard extends Component{
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
-                    {/* <MDBCol></MDBCol> */}
                 </MDBRow>
             </MDBContainer>
             </>

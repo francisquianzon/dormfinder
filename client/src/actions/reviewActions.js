@@ -14,7 +14,6 @@ export const getReviews = id => dispatch => {
             })
             
         )
-        // .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 };
 
 export const addReview = review => (dispatch, getState) => {
@@ -27,7 +26,6 @@ export const addReview = review => (dispatch, getState) => {
                 payload: res.data
             })
         )
-        // .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
 

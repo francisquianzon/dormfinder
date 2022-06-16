@@ -25,7 +25,6 @@ class EditEstablishment extends Component{
       }
 
     render(){
-        console.log(this.props)
         return(
             <>
             <Navbar/>

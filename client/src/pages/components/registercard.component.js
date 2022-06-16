@@ -84,9 +84,6 @@ class RegisterCard extends Component{
         //attempt to register user
         this.props.register(newUser);
 
-        console.log(this.state.msg);
-        console.log(this.props.isAuthenticated)
-
         //if there are no errors, redirect to homepage
         setTimeout(() =>{
             if(this.state.msg == null && this.props.isAuthenticated){
@@ -116,12 +113,10 @@ class RegisterCard extends Component{
                                     { this.state.msg ? <Alert variant="danger">{this.state.msg}</Alert> : null }
                                     <Form onSubmit={this.onSubmit}>
                                         <Form.Group className="form-margins" controlId="formBasicEmail">
-                                            {/* <Form.Label size="sm">Name</Form.Label> */}
                                             <Form.Control size="lg" name="name" placeholder='Name' type="Text" onChange={this.onChange} className="sg-form-background" />
                                         </Form.Group>
 
                                         <Form.Group className="form-margins" controlId="formBasicEmail">
-                                            {/* <Form.Label size="sm">Username</Form.Label> */}
                                             <Form.Control size="lg" name="username" placeholder='Username' type="Text"  onChange={this.onChange} className="sg-form-background"/>
                                             <Form.Text className="text-muted">
                                             This will serve as your display name in postings and reviews.
@@ -129,7 +124,6 @@ class RegisterCard extends Component{
                                         </Form.Group>
 
                                         <Form.Group className="form-margins" controlId="formBasicEmail">
-                                            {/* <Form.Label size="sm">Email</Form.Label> */}
                                             <Form.Control size="lg" name="email" type="email" placeholder='Email'onChange={this.onChange} className="sg-form-background"/>
                                             <Form.Text className="text-muted">
                                             We'll never share your email with anyone else.
@@ -137,12 +131,10 @@ class RegisterCard extends Component{
                                         </Form.Group>
 
                                         <Form.Group className="form-margins" controlId="formBasicEmail">
-                                            {/* <Form.Label size="sm">Password</Form.Label> */}
                                             <Form.Control size="lg" name="password" type="password" placeholder='Password' onChange={this.onChange} className="sg-form-background"/>
                                         </Form.Group>
 
                                         <Form.Group className="form-margins" controlId="formBasicEmail">
-                                            {/* <Form.Label size="sm">Confirm Password</Form.Label> */}
                                             <Form.Control size="lg" name="confirm_password" type="password" placeholder='Confirm Password' onChange={this.onChange} className="sg-form-background"/>
                                             <Form.Text className="text-muted">
                                             Please confirm your password.

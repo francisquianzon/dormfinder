@@ -41,30 +41,7 @@ class SeeAllReviews extends Component{
         this.setState({
             modal: !this.state.modal
         });
-        console.log("Clicked!")
     }
-
-    // onChange = e =>{
-    //     this.setState({
-    //         [e.target.name]: e.target.value
-    //     });
-    // }
-
-    // onSubmit = e => {
-    //     e.preventDefault();
-
-    //     const newReview = {
-    //         username: this.props.state.user.username,
-    //         dorm_id: this.props.state.establishment_id,
-    //         score: this.state.score,
-    //         review: this.state.review
-    //     }
-
-    //     // add review via addreview action
-    //     this.props.addReview(newReview);
-    //     //close modal
-    //     this.toggle();
-    // }
 
     setValue(newValue) {
         this.setState({
@@ -95,7 +72,6 @@ class SeeAllReviews extends Component{
                                             <FaUserCircle size={40} />
                                             <Row>
                                                 <h6 className="mx-3 review-name">{revs.username}</h6>
-                                                {/* <p className="mx-2 review-date-text">May 2022</p> */}
                                                 <Rating size="small" className="star-ratings" defaultValue={revs.score} readOnly />
                                             </Row>
                                             <Row>

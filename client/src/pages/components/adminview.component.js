@@ -52,8 +52,6 @@ function RenderTables(){
 
     const submitQuery = () => {
         if(search.trim()){
-            console.log("Submitting Query...");
-            console.log(search)
             dispatch(getEstablishmentBySearch({search}));
             navigate(`/browse.admin/search?searchQuery=${search}`)
         }else{
@@ -98,7 +96,6 @@ function RenderTables(){
                                 onChange={(e) => setSearch(e.target.value)}
                                 
                                 />
-                            {/* <MDBBtn onClick={submitQuery}>Search</MDBBtn> */}
                             </InputGroup>
                         </Col>
                     </Row>                        
@@ -227,48 +224,3 @@ const AdminTable = () => {
 }
 
 export default AdminTable;
-
-// class AdminTable extends Component{
-//         constructor(){
-//             super();
-//             this.state ={
-//                 user_id: ''
-//             }
-//         }    
-
-//         componentDidMount() {
-//             this.props.getEstablishments();
-//             this.props.getUsers();
-//         }
-        
-//         onDeleteClick = (id) => {
-//             this.props.deleteEstablishment(id);
-//             window.location.reload(false);
-//         }
-
-//         render(){
-
-//             return(
-//                 <> 
-                    // <Delayed waitBeforeShow={1000}>
-                    //     <ProtectedAccess state={{
-                    //         users: this.props.users,
-                    //         establishments: this.props.establishment,
-                    //         onDeleteClick: this.onDeleteClick,
-                    //         user: this.props.user
-                    //     }}/>
-                    // </Delayed>
-//                 </>
-//             )
-           
-//         }
-// }
-
-// const mapStateToProps = (state) => ({
-//     establishment: state.establishment,
-//     users: state.users,
-//     user: state.authentication.user
-// });
-
-
-// export default connect(mapStateToProps, { getEstablishments, deleteEstablishment, getUsers })(AdminTable);

@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import auth from '../../../middleware/auth';
 import { returnErrors } from './errorActions';
 
 import {
@@ -97,11 +96,7 @@ export const login = ({email, password }) => dispatch => {
 
 //Logout User
 export const logout = () => {
-    // dispatch({
-    //     type: USER_LOADING
-    // });
 
-    console.log("LOGGING OUT...")
     return {
         type: LOGOUT_SUCCESS
     }

@@ -17,16 +17,6 @@ export const getUsers = () => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 };
 
-// export const deleteEstablishment = id => (dispatch, getState) => {
-//     axios.delete(`/establishments/${id}`, tokenConfig(getState)).then(res => 
-//         dispatch({
-//             type: DELETE_ITEM,
-//             payload: id
-//         })
-//     )
-//     .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
-// };
-
 export const setItemsLoading = () => {
     return {
         type: ITEMS_LOADING

@@ -7,7 +7,6 @@ import Delayed from './components/delayed';
 
 class AddEstablishment extends Component{
     render(){
-        // console.log(this.props.user._id)
         return(
             <>
             <Navbar/>
@@ -31,5 +30,4 @@ const mapStateToProps = state => ({
     isLoading: state.establishment.loading
 })
 
-// export default AddEstablishment;
 export default connect(mapStateToProps, { })(AddEstablishment);

@@ -66,7 +66,6 @@ function LoggedIn(props){
                 <MDBDropdownLink>Create a post</MDBDropdownLink>
               </Link>
             }
-            {/* <MDBDropdownLink href='/addestablishment' >Create a post</MDBDropdownLink> */}
             <MDBDropdownLink href='/' onClick={props.state.logout}>Logout</MDBDropdownLink>
           </MDBDropdownItem>
         </MDBDropdownMenu>
@@ -164,7 +163,6 @@ class Navbar extends Component{
     }
 
     render(){
-        console.log(this.props.isLoading);
         const auth = this.props.isAuthenticated
         const user = this.props.user
         

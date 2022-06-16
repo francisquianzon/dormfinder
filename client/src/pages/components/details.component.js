@@ -43,7 +43,6 @@ function OshGuidelines(){
 }
 
 function ProtocolGuidlines(props){
-    console.log(props.state.protocol_check)
     return(
         <>
         <Row>

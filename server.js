@@ -14,11 +14,9 @@ const cors = require("cors");
 app.use(cors());
 
 //BodyParser Middleware
-// app.use(express.bodyParser({limit: '50mb'}))
 app.use(express.json({limit: '50mb'}));
 
 //DB Config
-// const db = require('./config/keys.js').mongoURI;
 const db = config.get('mongoURI');
 const PORT = process.env.PORT || 5000;
 

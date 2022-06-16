@@ -30,7 +30,6 @@ const Paginate = (props) => {
 
     return(
         <Pagination
-            // classes={{ ul: classes_.ul}}
             count={numberOfPages}
             page={Number(page) || 1}
             shape="rounded"

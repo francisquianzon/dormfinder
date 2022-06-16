@@ -44,7 +44,6 @@ class AddReview extends Component{
         this.setState({
             modal: !this.state.modal
         });
-        console.log("Clicked!")
     }
 
     onChange = e =>{
@@ -84,16 +83,7 @@ class AddReview extends Component{
         this.toggle();
     }
 
-    // setValue(newValue) {
-    //     this.setState({
-    //         score: newValue
-    //     })
-    // }
-
-
     render(){
-        // console.log(this.state);
-
         return(
             <>  
                 { this.props.isAuthenticated && <Nav.Link onClick={this.toggle} className="write-a-review nav-links">Write a Review</Nav.Link>}
@@ -114,7 +104,6 @@ class AddReview extends Component{
                                     <Row>
                                         <Col className="d-flex">
                                             <h6>Overall Rating</h6>
-                                            {/* <h6 className="text-muted mx-2"> (Rate your overall experience with the dorm) </h6> */}
                                         </Col>
                                         <Rating
                                             className='mx-2'
@@ -135,7 +124,7 @@ class AddReview extends Component{
                                             name="simple-controlled"
                                             value={this.state.score_cleanliness}
                                             onChange={(event, newValue) => {
-                                                // this.setValue(newValue);
+
                                                 this.setState({ score_cleanliness: newValue });
                                             }}
                                         />
@@ -149,7 +138,7 @@ class AddReview extends Component{
                                             name="simple-controlled"
                                             value={this.state.score_price_value}
                                             onChange={(event, newValue) => {
-                                                // this.setValue(newValue);
+
                                                 this.setState({ score_price_value: newValue });
                                             }}
                                         />
@@ -164,7 +153,6 @@ class AddReview extends Component{
                                         name="simple-controlled"
                                         value={this.state.score_location}
                                         onChange={(event, newValue) => {
-                                            // this.setValue(newValue);
                                             this.setState({ score_location: newValue });
                                         }}
                                         />
@@ -178,7 +166,6 @@ class AddReview extends Component{
                                         name="simple-controlled"
                                         value={this.state.score_amenaties}
                                         onChange={(event, newValue) => {
-                                            // this.setValue(newValue);
                                             this.setState({ score_amenaties: newValue });
                                         }}
                                         />
@@ -192,7 +179,6 @@ class AddReview extends Component{
                                         name="simple-controlled"
                                         value={this.state.score_security}
                                         onChange={(event, newValue) => {
-                                            // this.setValue(newValue);
                                             this.setState({ score_security: newValue });
                                         }}
                                     />

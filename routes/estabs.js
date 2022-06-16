@@ -13,10 +13,6 @@ const Estab = require('../models/Estabs.js');
 router.get('/', async (req,res) =>{
     const { page } = req.query;
 
-    // Estab.find()
-    // .sort({date: -1})
-    // .then(estabs => res.json(estabs))
-
     try{
         const LIMIT = 8;
         const startIndex = (Number(page) - 1) * LIMIT;
@@ -64,15 +60,6 @@ var storage = multer.diskStorage({
  });
 
 const upload = multer({storage:storage});
-
-// router.post("/image", upload.array("demo_images", 15), (req,res) => {
-//     try{
-//         res.send(req.files);
-//     }catch (error){
-//         console.log(error);
-//         res.send(400);
-//     }
-// })
 
 router.post("/image", async (req, res)=> {
     try{

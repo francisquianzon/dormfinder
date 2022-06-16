@@ -28,11 +28,6 @@ export const getEstablishmentBySearch = (searchQuery) => async dispatch => {
 }
 
 export const updateEstablishment = (estab, id) => async (dispatch, getState) => {
-
-    // dispatch(setItemsLoading())
-    console.log(id)
-    console.log(estab)
-    
     axios
         .put(`/establishments/${id}`, estab)
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
@@ -53,15 +48,9 @@ export const getDetails = id => dispatch => {
 
 export const addEstablishment = estab => async (dispatch, getState) => {
 
-    // console.log('Printing data...')
-    // console.log(estab)
-    // console.log(estab.pictures)
-
     dispatch(setItemsLoading())
     
     const imagesArray = await axios.post('/establishments/image', {data: estab.pictures});
-    console.log("printing images...")
-    console.log(imagesArray.data)
     
     await axios
         .post('/establishments', {data: estab, images: imagesArray.data}, tokenConfig(getState))
@@ -76,17 +65,8 @@ export const addEstablishment = estab => async (dispatch, getState) => {
 };
 
 export const uploadImage = imageForm => async (dispatch, getState) => {
-    // axios
-    //     .post('/establishments/image', imageForm, {})
-    // let imagesArray = []
-    // axios
-    //     .post('/establishments/image', {data: imageForm})
-    //     .then(res =>
-    //             imagesArray = res.data
-    //             )
+    
     const imagesArray = await axios.post('/establishments/image', {data: imageForm});
-    console.log("printing images...")
-    console.log(imagesArray.data)
 }
 
 export const deleteEstablishment = id => (dispatch, getState) => {

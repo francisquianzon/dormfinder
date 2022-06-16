@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {
     Form,
     Alert,
-    Row,
-    Col,
     Spinner
 } from 'react-bootstrap';
 
@@ -15,7 +13,6 @@ import { MDBCard,
     MDBRow, 
     MDBCol,
     MDBContainer,
-    MDBRadio
 } from 'mdb-react-ui-kit';
 
 import { connect } from 'react-redux';
@@ -108,9 +105,6 @@ class PostCard extends Component{
             protocol_approved
         }
 
-        // console.log("newItem")
-        // console.log(newItem)
-
         // add item via addEstablishment action
         this.props.updateEstablishment(newItem, this.props.establishment._id);
         
@@ -131,21 +125,6 @@ class PostCard extends Component{
             guideline_4: false,
             guideline_5: false
         });
-
-        //reloads the window
-        // setTimeout(() =>{
-            //     if(this.props.isLoading === false){
-        //         this.setState({
-        //             error_msg: "Successfully added!",
-        //             alert_type: "success",
-        //         })
-        //     }
-        // }, 2000);
-        
-        // setTimeout(() =>{
-        //     window.location.reload(false);
-            // this.props.navigate('/browse');
-        // }, 20000);
         
     }
 
@@ -240,7 +219,6 @@ class PostCard extends Component{
                                     <div className="d-flex">
                                         <Form.Check type="checkbox" name="guideline_1" checked={this.state.guideline_1} label="" 
                                         onChange={(event) => {
-                                            // this.setValue(newValue);
                                             this.setState({ guideline_1: !this.state.guideline_1 });
                                         }}
                                         ></Form.Check>
@@ -249,7 +227,6 @@ class PostCard extends Component{
                                     <div className="d-flex">
                                         <Form.Check type="checkbox" name="guideline_2" label="" checked={this.state.guideline_2}
                                         onChange={(event) => {
-                                            // this.setValue(newValue);
                                             this.setState({ guideline_2: !this.state.guideline_2 });
                                         }}
                                         ></Form.Check>
@@ -258,7 +235,6 @@ class PostCard extends Component{
                                     <div className="d-flex">
                                         <Form.Check type="checkbox" name="guideline_3" label="" checked={this.state.guideline_3}
                                         onChange={(event) => {
-                                            // this.setValue(newValue);
                                             this.setState({ guideline_3: !this.state.guideline_3 });
                                         }}
                                         ></Form.Check>
@@ -267,7 +243,6 @@ class PostCard extends Component{
                                     <div className='d-flex'>
                                         <Form.Check type="checkbox" name="guideline_4" label="" checked={this.state.guideline_4}
                                         onChange={(event) => {
-                                            // this.setValue(newValue);
                                             this.setState({ guideline_4: !this.state.guideline_4 });
                                         }}
                                         ></Form.Check>
@@ -276,7 +251,6 @@ class PostCard extends Component{
                                     <div className="d-flex">
                                         <Form.Check type="checkbox" name="guideline_5" label="" checked={this.state.guideline_5}
                                         onChange={(event) => {
-                                            // this.setValue(newValue);
                                             this.setState({ guideline_5: !this.state.guideline_5 });
                                         }}
                                         ></Form.Check>

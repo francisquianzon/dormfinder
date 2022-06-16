@@ -90,13 +90,11 @@ const Browse = () =>{
       };
     
     useEffect(() => {
-        // dispatch(getEstablishments());
 
         const timer = setTimeout(() => setPlaceholder(false), 1500);
         return () => clearTimeout(timer);
     }, []);
     
-    console.log(loading)
     return(
         <>
             <Navbar/>
@@ -114,23 +112,19 @@ const Browse = () =>{
                             onChange={(e) => setSearch(e.target.value)}
                             
                             />
-                        {/* <MDBBtn onClick={submitQuery}>Search</MDBBtn> */}
                         </InputGroup>
                     </Col>
                 </Row>
-                {/* <br></br> */}
                 {placeholder ? <CardPlaceholder/> :
                 <div>
                     <DormCards/>
                     <br></br>
                     <Row>
-                        {/* <Col></Col> */}
                         {!searchQuery && 
                             <Col className="d-flex justify-content-center">
                                 <Pagination state={{page: page, type: 'browse'}}/>
                             </Col>
                         }
-                        {/* <Col></Col> */}
                     </Row>
                     <br></br>
                 </div>

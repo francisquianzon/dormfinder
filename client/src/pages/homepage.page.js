@@ -35,9 +35,6 @@ const Homepage = () =>{
             dispatch(getEstablishmentBySearch({search}));
             navigate(`/browse/search?searchQuery=${search}`);
         }
-        // else{
-        //     dispatch(getEstablishments());
-        // }
     }
 
     const handleKeyPress = (e) => {

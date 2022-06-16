@@ -28,13 +28,6 @@ function locationHook(Component) {
 function GalleryPlaceholder(){
   return(
       <>
-        {/* <Row className="mt-2 d-flex justify-content-center">
-          <Col></Col>
-          <Col>
-          <Spinner animation="grow" style={{ width: '10rem', height: '10rem' }}/>
-          </Col>
-          <Col></Col>
-        </Row> */}
         <div className="my-5">
         <Row>
           <Col className='col-md-8'>
@@ -85,19 +78,11 @@ function PageLoading(){
         </Col>
       </Row>
     </Container>
-    {/* <Row className="mt-5">
-      <Col></Col>
-      <Col className="d-flex justify-content-center">
-      <Spinner animation="grow" style={{ width: '10rem', height: '10rem' }}/>
-      </Col>
-      <Col></Col>
-    </Row> */}
     </>
   )
 } 
 
 class EstabDetails extends Component{
-// function EstabDetails(){
     state = {
       loading: true,
       isMounted: false,
@@ -126,7 +111,6 @@ class EstabDetails extends Component{
 
 
     render(){
-        // this.getEstablishmentDetails(this.props.estab.state.estab_id)
         const establishmentitem  = this.props.item;
 
         setTimeout(() =>{
@@ -159,7 +143,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.establishment.loading
 });
 
-// export default locationHook(EstabDetails);
-
 export default connect(mapStateToProps, { getDetails, getReviews })(locationHook(EstabDetails));
-// export default EstabDetails;
