@@ -1,3 +1,7 @@
+# DormFinder - A Peer-Based Online Information and Rating System for Student Dormitories in UPLB
+Abstract/General Summary:
+	The limited mobility imposed by lockdown restrictions due to COVID-19 have made it difficult for UPLB students to scout for dormitories and lodging in Los Baños, Laguna. This study has developed a web application to give an avenue to students and those seeking lodging to find dormitories in Los Baños. It also serves as a platform for landlords and dorm owners to advertise their establishments. Information regarding COVID-19 Health and Safety practices that an establishment adheres to is provided in the website, and given at the discretion of the landlord/dorm owner. The usability of the web application was evaluated using a System Usability Scale. With ten (10) respondents, the test garnered an average SUS score of 81.5%.
+
 # Development Set-up
 ## Prerequisites
 * Node.js Package Manager
@@ -16,3 +20,7 @@
 `npm run client-install`
 3. Run the following command to use the program:
 `npm run dev`
+
+
+
+
